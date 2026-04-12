@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="google-site-verification" content="Oz-mSFiSV1mePMCUtC3CtHSRN177F0hZpB-zWTZZ9qo">
+        <meta name="baidu-site-verification" content="codeva-X8Yyq0xwxG" />
+        <meta name="yandex-verification" content="1cca56021b243027" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="robots" content="noindex, nofollow" />
+
+
+    <title> @yield('title')</title>
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="Pokhara Yoga School">
+    <meta property="og:title" content=" @yield('title')">
+    <meta property="og:description" content=" @yield('desc')">
+    <meta property="og:image" content="{{ asset('uploads/' . $setting->logo) }}">
+    <meta name="author" content="pokhara yoga school">
+    <meta name="description" content="@yield('desc')">
+    <meta name="keywords" content=" @yield('keyword')">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    <!--Bootstrap CSS-->
+    <link rel="icon" href="{{ asset('favicon-small.png') }}?v=20250730 type="image/png" hreflang="en">
+
+    @yield('page-css')
+
+    <!--loader-->
+       <!-- <
+    <style>
+        .loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7); /* Add a semi-transparent background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; /* Ensure it appears above other content */
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Add a spinning animation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+    </style> -->
+
+   <!-- <script>
+  // Wait for the page to fully load
+  window.addEventListener('load', function () {
+    // Get the loader element
+    const loader = document.querySelector('.loader-container');
+
+    // Hide the loader
+    loader.style.display = 'none';
+  });
+</script> -->
+
+
+
+
+    <!--Font Awesome CSS-->
+    <!--Main CSS-->
+
+
+ <!--Owl Carousel-->
+
+
+
+        {{-- hreflang="en"> --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+                <link href="{{asset('google-font.css')}}?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href="{{asset('front/css/lightbox2.min.css')}}?v=20250730"
+        hreflang="en">
+
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PHJSC73');</script>
+<!-- End Google Tag Manager -->
+
+<!-- schema -->
+    <script type="application/ld+json">
+        { "@context": "http://schema.org",
+        "@type": "Product",
+        "name": " Pokhara Yoga School and Retreat Center",
+        "aggregateRating":
+        {"@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "79"
+        }
+        }
+    </script>
+<!-- end schema -->
+    <!-- google translate  css -->
+  <!-- faq schema start -->
+
+    @if(isset($faqSchema))
+        <script type="application/ld+json">
+        {!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+    @endif
+  <!-- faq schema end -->
+
+ <link rel="stylesheet"   href="{{asset('front/css/all.min.css')}}?v=20260109">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <link rel="preload" as="style" href="{{ asset('front/font-awesome/css/font-awesome.min.css') }}?v=20250730" onload="this.onload=null;this.rel='stylesheet'">
+
+
+    <!--<link rel="stylesheet"  href="{{asset('front/font-awesome/css/font-awesome.min.css')}}?v=20250730">-->
+
+<link rel="preload" href="{{asset('front/css/slick.css')}}?v=20250730" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    @yield('external-css')
+
+</head>
+
+<body>
+
+<!--   <div class="loader-container">-->
+<!--  <div class="loader"></div>-->
+<!--</div>-->
+
+    <div id="fb-root"></div>
+    <!--<script type="text/javascript" defer crossorigin=" anonymous"-->
+    <!--    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>-->
+
+    <header>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8 header-left">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-mobile" aria-hidden="true"></i>
+                                    {{ $setting->number }}</a></li>
+                            <li><a href="mailto:{{ $setting->email }}"><i class="fa fa-envelope"></i>
+                                    {{ $setting->email }}</a></li>
+                        </ul>
+                        <div class="social-buttons mt-1 text-md-left text-center">
+                            <a href="https://wa.me/{{ $setting->whats_app }}"><i class="fa fa-whatsapp"></i></a>
+                            <a href="{{ $setting->instragram }}"><i class="fa fa-instagram"></i></a>
+                            <a href="{{ $setting->youtube }}"><i class="fa fa-youtube"></i></a>
+                            <a href="{{ $setting->facebook }}"><i class="fa fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 ">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                <div id="google_translate_element"></div>
+
+<!--                                <select id="">-->
+<!--  <option value="es">Spanish</option>-->
+<!--  <option value="fr">French</option>-->
+  <!-- Add more language options as needed -->
+<!--</select>-->
+
+                                <button class="btn btn-success language-button" id="target-country">Google Translate</button>
+
+
+
+                                <ul class="navbar-nav ml-auto pl-3">
+                                    <li class="nav-item dropdown ">
+                                        <a class="nav-link" href="#"
+                                            style="padding:1px; line-height:30px; color:#fff">Language</a>
+                                        <ul>
+
+                                            <li><a href="https://pokharayogaschoolandretreatcenter.com/">En</a></li>
+                                            <li><a href="https://sp.pokharayogaschoolandretreatcenter.com/">Sp</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li style="margin-left:19px;" id="google_translate_element"></li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                    </div>
+               {{--     <div class="col-12 col-sm-12 col-md-2 col-lg-2 header-right">
+                        <ul class="wow shake" data-wow-delay="0.3s"
+                            style="visibility: visible; animation-delay: 0.3s; animation-name: shake; ">
+
+                            <!--<li><a href="{{ Route('customer.refer.page') }}" class="applys mt-3"-->
+                            <!--        hreflang="en">Refer & Earn 100 Euro<i class="fa fa-money"-->
+                            <!--            aria-hidden="true"></i></a></li>-->
+                        </ul>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+        <div class="menu-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 ">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="{{ action('Front\FrontController@index') }}">
+                                <img width="180px" height="104px" src="{{ asset('uploads/' . $setting->logo) }}" alt="Yoga school in Nepal"></a>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link"
+                                            href="{{ action('Front\FrontController@index') }}">Home</a>
+                                    </li>
+                                    <li class="nav-item dropdown ">
+                                        <a class="nav-link" href="#">Teacher Trainings </a>
+                                        <ul>
+                                            @foreach ($yogaClass as $class)
+                                                <li><a
+                                                        href="{{ action('Front\FrontController@yogaClass', $class->slug) }}">{{ $class->title }}</a>
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+                                    </li>
+
+                                    {{-- <li class="nav-item dropdown ">
+                                            <a class="nav-link" href="#">Yoga Courses</a>
+                                            <ul>
+                                            @foreach ($yogaClass as $class)
+                                            <li><a href="{{ action('Front\FrontController@yogaClass',$class->slug) }}">{{$class->title}}</a></li>
+                                            @endforeach
+
+                                            </ul>
+                                        </li> --}}
+                                        @foreach ($allPages as $page)
+                                        @if ($page->slug != 'privacy-policy')
+                                            <li class="nav-item ">
+                                                <a class="nav-link"
+                                                    href="{{ action('Front\FrontController@singlePage', $page->slug) }}">{{ $page->title }}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link"
+                                            href="{{ action('Front\FrontController@curriculam') }}">Curriculum</a>
+                                    </li>
+
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link"
+                                            href="{{ action('Front\FrontController@blogs') }}">Blog</a>
+                                    </li>
+
+
+
+                                    {{-- <li class="nav-item ">
+                                            <a class="nav-link" href="{{action('Front\FrontController@photoList')}}">Gallery</a>
+                                        </li> --}}
+                                     <li class="nav-item ">
+                                        <a class="nav-link"
+                                            href="{{ action('Front\FrontController@aboutUs') }}">About us</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link"
+                                            href="{{ action('Front\FrontController@contactUs') }}">Contact us</a>
+                                    </li>
+
+
+                                    @if (session()->has('User'))
+                                        <li class="nav-item dropdown ">
+                                            <a class="nav-link" href="#"><img
+                                                    src="{{ asset('uploads/pp.jpg') }}" width="60px" height="30px"
+                                                    alt=""></a>
+                                            <ul>
+                                                <li><a
+                                                        href="{{ action('Front\FrontController@userprofile_dashboard') }}">{{ session('name') }}
+                                                        Dashboard</a></li>
+                                                <li><a href="{{ action('Front\FrontController@register_yoga') }}">Join
+                                                        Yoga</a></li>
+                                                <li><a href="{{ action('Front\FrontController@logout') }}">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li class="nav-item dropdown ">
+                                            @php
+                                                $user = auth('customer')->user();
+                                            @endphp
+
+                                            @if (!$user)
+                                                <a class="nav-link" href="{{ route('customer.register') }}">Join us</a>
+                                                <ul>
+                                                    <!--<li><a href="{{ route('customer.register') }}">Register</a></li>-->
+
+                                                    {{-- <li><a href="{{ action('Front\FrontController@yoga_package')}}">Yoga package</a></li> --}}
+                                                </ul>
+                                            @else
+                                                <a class="nav-link" href="#">Dashboard</a>
+                                                <ul>
+                                                    <li><a href="{{ route('customer.booking.index') }}">My
+                                                            Bookings</a></li>
+
+                                                    <li><a href="{{ route('booking') }}">Book Now</a></li>
+
+                                                    <!--<li><a href="{{ route('customer.refer.page') }}">Refer & Earn 100-->
+                                                    <!--        Euro</a></li>-->
+
+
+                                                    <li>
+                                                        <a href="#"
+                                                            onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
+                                                            class="icon-menu"> <i
+                                                                class="icon-power"></i>Logout</a>
+                                                    </li>
+                                                    <form id="frm-logout" action="{{ route('logout') }}"
+                                                        method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                    </form>
+
+                                        </li>
+
+                                        {{-- <li><a href="{{ action('Front\FrontController@yoga_package')}}">Yoga package</a></li> --}}
+                                </ul>
+                                @endif
+                                </li>
+
+                                @endif
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="mobile-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12">
+                                        <span class="clickmenus" onclick="openNav()">&#9776; </span>
+                                        <div id="mySidenav" class="sidenav">
+                                            <a href="javascript:void(0)" class="closebtn"
+                                                onclick="closeNav()">&times;</a>
+                                            <div class="mobile-menus">
+                                                <ul>
+                                                    <li><a href="{{ action('Front\FrontController@index') }}">Home</a>
+                                                    </li>
+                                                    <li><a
+                                                            href="{{ action('Front\FrontController@curriculam') }}">Curriculum</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" type="text" data-toggle="collapse"
+                                                            data-target="#multiCollapseExample2" aria-expanded="false"
+                                                            aria-controls="multiCollapseExample2">Yoga Courses <i
+                                                                class="wsmenu-arrow fa fa-angle-down "></i> </a>
+                                                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                                            <div class="card card-body">
+                                                                <ul>
+                                                                    @foreach ($yogaClass as $class)
+                                                                        <li><a
+                                                                                href="{{ action('Front\FrontController@yogaClass', $class->slug) }}">{{ $class->title }}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    @foreach ($allPages as $page)
+                                                        <li class=" ">
+                                                            <a class=""
+                                                                href="{{ action('Front\FrontController@singlePage', $page->slug) }}">{{ $page->title }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                    <li class=" ">
+                                                        <a class=""
+                                                            href="{{ action('Front\FrontController@blogs') }}">Blog</a>
+                                                    </li>
+                                                    <li class=" ">
+                                                        <a class=""
+                                                            href="{{ action('Front\FrontController@photoList') }}">Gallery</a>
+                                                    </li>
+
+                                                    <!--<li class="">-->
+                                                    <!--    <a class=""-->
+                                                    <!--        href="{{ route('customer.refer.page') }}">Refer & Earn 100-->
+                                                    <!--        Euro</a>-->
+                                                    <!--</li>-->
+                                                    <li class="nav-item dropdown " >
+                                                        <a class="nav-link" href="#">Language</a>
+                                                        <ul>
+                                                          <li><a href="https://pokharayogaschoolandretreatcenter.com/">En</a></li>
+                                                          <li><a href="https://sp.pokharayogaschoolandretreatcenter.com/">Sp</a></li>
+                                                        </ul>
+                                                      </li>
+                                                    <li><a href="{{action('Front\FrontController@aboutUs')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> About us</a></li>
+
+                                                    @if (!$user)
+                                                        <li>
+                                                            <a href="#" type="text" data-toggle="collapse"
+                                                                data-target="#multiCollapseExample3"
+                                                                aria-expanded="false"
+                                                                aria-controls="multiCollapseExample3">Join us <i
+                                                                    class="wsmenu-arrow fa fa-angle-down "></i> </a>
+                                                            <div class="collapse multi-collapse"
+                                                                id="multiCollapseExample3">
+                                                                <div class="card card-body">
+                                                                    <ul>
+                                                                        <li><a
+                                                                                href="{{ route('customer.register') }}">Register</a>
+                                                                        </li>
+
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @else
+                                                        <li>
+                                                            <a href="#" type="text" data-toggle="collapse"
+                                                                data-target="#multiCollapseExample3"
+                                                                aria-expanded="false"
+                                                                aria-controls="multiCollapseExample3">Dashboard <i
+                                                                    class="wsmenu-arrow fa fa-angle-down "></i> </a>
+                                                            <div class="collapse multi-collapse"
+                                                                id="multiCollapseExample3">
+                                                                <div class="card card-body">
+                                                                    <ul>
+                                                                        <li><a
+                                                                                href="{{ route('customer.booking.index') }}">My
+                                                                                Bookings</a></li>
+
+                                                                        <li><a href="{{ route('booking') }}">Book
+                                                                                Now</a></li>
+
+                                                                        <!--<li><a-->
+                                                                        <!--        href="{{ route('customer.refer.page') }}">Refer-->
+                                                                        <!--        and Earn 100 Euro</a></li>-->
+
+                                                                        <!--<li>-->
+                                                                            <a href="#"
+                                                                                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
+                                                                                class="icon-menu"> <i
+                                                                                    class="icon-power"></i>Logout</a>
+                                                                        </li>
+                                                                        <form id="frm-logout"
+                                                                            action="{{ route('logout') }}"
+                                                                            method="POST" style="display: none;">
+                                                                            {{ csrf_field() }}
+                                                                        </form>
+
+
+
+                                                                        {{-- <li><a href="{{ action('Front\FrontController@yoga_package')}}">Yoga package</a></li> --}}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                <div class="menu-adds">
+                    {{-- <p><i class="fa fa-phone-volume"></i> +977-1-1234567</p>
+       {{-- <p><i class="fa fa-envelope"></i> info@pokharayogaschoolandretreatcenter.com</p> --}}
+                </div>
+            </div>
+            <div class="col-12 col-sm-12">
+                <div class="menu-adds-mobile">
+                    {{-- <p><i class="fa fa-phone-volume"></i> +977-1-1234567</p> --}}
+                    {{-- <p><i class="fa fa-envelope"></i> info@pokharayogaschoolandretreatcenter.com</p> --}}
+                </div>
+            </div>
+        </div>
+    </header>
+
