@@ -39,7 +39,7 @@
                                     <td>{{ $information->title }}</td>
                                     <td>{!! $information->content !!}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/' . $information->image) }}" style="height: 200px" alt="{!! $information->image !!}">
+                                        <img src="{{ asset('/uploads/' . $information->image) }}" style="height: 200px" alt="{!! $information->image !!}">
                                     </td>
                                     <td>
 
