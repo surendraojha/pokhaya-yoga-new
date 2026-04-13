@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Testimonial;
-use Image;
+use App\Models\Testimonial;
+use Intervention\Image\Laravel\Facades\Image;
 // use Intervention\Image\ImageManager;
 
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 
 class TestimonialController extends Controller
@@ -20,7 +20,7 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $informations = \App\Testimonial::orderBY('created_at', 'desc')->get();
+        $informations = Testimonial::orderBY('created_at', 'desc')->get();
         return view('admin.testimonial.index', compact('informations'));
     }
 
@@ -43,12 +43,10 @@ class TestimonialController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name' => 'required|',
-            'content' => 'required|',
-            'image'=>'mimes:jpeg,png,jpg,webp'
-
-
+        $request->validate([
+            'name' => 'required',
+            'content' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,webp'
         ]);
 
         $information = new Testimonial;
@@ -57,32 +55,26 @@ class TestimonialController extends Controller
 
             $file = $request->file('image');
             $filename = date('ymdhis') . $file->getClientOriginalName();
-            $image = Image::make($request->file('image')->getRealPath());
+            $image = Image::read($request->file('image'));
             // $path = public_path() . 'uploads/';
-            $originalPath = public_path() . 'uploads/testimonials/';
+            $originalPath = public_path('uploads/testimonials/');
             $image_name = time() . $file->getClientOriginalName();
-            $image->resize(null, 600, function ($constraint) {
-                $constraint->aspectRatio();
-                // $constraint->upsize();
-            });
+            $image->scale(height: 600);
 
             $image->save($originalPath . $image_name);
             $information->image = $image_name;
 
             // upload thumbnail
-            $originalPath = public_path() . 'uploads/testimonials/thumbnails/';
-            $thumbnail = Image::make($request->file('image')->getRealPath());
-            $thumbnail->resize(250, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $originalPath = public_path('uploads/testimonials/thumbnails/');
+            $thumbnail = Image::read($request->file('image'));
+            $thumbnail->scale(width: 250);
 
             $thumbnail->save($originalPath . $image_name);
-
         }
 
         $information->name = $request->name;
         $information->content = $request->content;
-       
+
         $information->save();
 
         return redirect('admin/testimonial')->with('msg', 'Testimonial Added');
@@ -93,7 +85,7 @@ class TestimonialController extends Controller
     }
     public function edit($id)
     {
-        $information = \App\Testimonial::find($id);
+        $information = Testimonial::find($id);
         return view('admin.testimonial.edit', compact('information'));
     }
 
@@ -106,14 +98,12 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $information = \App\Testimonial::find($id);
-        $this->validate($request, [
-            'name' => 'required|',
-            'content' => 'required|',
-            'image'=>'mimes:jpeg,png,jpg,webp'
-
-
+        $information = Testimonial::find($id);
+        $request->validate([
+            'name' => 'required',
+            'content' => 'required',
         ]);
+
         $oldfile = $information->image;
 
         //file upload
@@ -124,31 +114,26 @@ class TestimonialController extends Controller
             $filename = date('ymdhis') . $file->getClientOriginalName();
 
             //thumbnail
-            $image = Image::make($request->file('image')->getRealPath());
-            $originalPath = public_path() . 'uploads/testimonials/';
+            $image = Image::read($request->file('image'));
+            $originalPath = public_path('uploads/testimonials/');
             $image_name = time() . $file->getClientOriginalName();
-            $image->resize(null, 600, function ($constraint) {
-                $constraint->aspectRatio();
-                // $constraint->upsize();
-            });
+            $image->scale(height: 600);
             $image->save($originalPath . $image_name);
             $information->image = $image_name;
 
             // upload thumbnail
-            $originalPath = public_path() . 'uploads/testimonials/thumbnails/';
-            $thumbnail = Image::make($request->file('image')->getRealPath());
-            $thumbnail->resize(250, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $originalPath = public_path('uploads/testimonials/thumbnails/');
+            $thumbnail = Image::read($request->file('image'));
+            $thumbnail->scale(width: 250);
 
             // $file->move($originalPath, $filename);
 
-            $oldthumbnails = public_path() . 'uploads/testimonials/thumbnails/' . $oldfile;
+            $oldthumbnails = public_path('uploads/testimonials/thumbnails/') . $oldfile;
             if (File::exists($oldthumbnails)) {
                 File::delete($oldthumbnails);
             }
 
-            $oldfile = public_path() . 'uploads/testimonials/' . $oldfile;
+            $oldfile = public_path('uploads/testimonials/') . $oldfile;
             if (File::exists($oldfile)) {
                 File::delete($oldfile);
             }
@@ -170,8 +155,8 @@ class TestimonialController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\Testimonial::find($id);
-        $path = public_path() . 'uploads/' . $information->image;
+        $information = Testimonial::find($id);
+        $path = public_path('uploads/testimonials/' . $information->image);
         if (File::exists($path)) {
             File::delete($path);
         }

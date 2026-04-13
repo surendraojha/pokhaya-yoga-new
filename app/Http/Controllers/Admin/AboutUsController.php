@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
-use File;
+use Illuminate\Support\Facades\File;
 
 class AboutUsController extends Controller
 {
@@ -94,32 +94,37 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $information = AboutUs::findOrFail($id);
 
-        $information = AboutUs::find($id);
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-
+            'image' => 'nullable|mimes:jpeg,png,jpg,webp'
         ]);
-        $oldfile = $information->image;
-        //file upload
-        $information->image = $oldfile;
+
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = public_path() . 'uploads/';
-            $filename = date('ymdhis') . $file->getClientOriginalName();
-            $file->move($path, $filename);
-            $oldfile = public_path() . 'uploads/' . $oldfile;
-            if (File::exists($oldfile)) {
-                File::delete($oldfile);
+            // Delete old image if exists
+            $oldPath = public_path('uploads/' . $information->image);
+            if (File::exists($oldPath)) {
+                File::delete($oldPath);
             }
+
+            // Save new image
+            $file = $request->file('image');
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads/'), $filename);
             $information->image = $filename;
         }
+
+        // No new image = existing image stays untouched
+
         $information->title = $request->title;
         $information->content = $request->content;
         $information->save();
-        return redirect('admin/aboutus')->with('msg', 'Information Upload');
+
+        return redirect('admin/aboutus')->with('msg', 'Information Updated');
     }
+
 
     /**
      * Remove the specified resource from storage.
