@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Slider;
-use File;
+use App\Models\Slider;
+use Illuminate\Support\Facades\File;
 
 class SliderController extends Controller
 {
@@ -16,7 +16,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $informations = \App\Slider::all();
+        $informations = Slider::all();
         return view('admin.slider.index', compact('informations'));
     }
 
@@ -38,25 +38,24 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-         $slider = new \App\Slider;
-       
-       $slider->image = '';
+        $slider = new Slider;
 
-       
-                if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-         $path = public_path().'uploads';
-         $filename = date('ymdhis').$file->getClientOriginalName();
-         $file->move($path, $filename);
-         $slider->image = $filename;
-      }
-     
-    $slider->title = $request->title;
-    $slider->content = $request->content;
+        $slider->image = '';
+
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = public_path() . 'uploads';
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $slider->image = $filename;
+        }
+
+        $slider->title = $request->title;
+        $slider->content = $request->content;
         $slider->save();
 
-        return redirect('admin/slider')->with('msg','slider Added');
+        return redirect('admin/slider')->with('msg', 'slider Added');
 
     }
 
@@ -79,7 +78,7 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-         $slider = \App\Slider::find($id);
+        $slider = Slider::find($id);
         return view('admin.slider.edit', compact('slider'));
     }
 
@@ -92,32 +91,30 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $slider= \App\Slider::find($id);
-        
-       
-       $oldfile = $slider->image;
-      //file upload
-      $slider->image = $oldfile;
-      if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-         $path = public_path().'uploads/';
-         $filename = date('ymdhis').$file->getClientOriginalName();
-         $file->move($path, $filename);
-         $oldfile = public_path().'uploads/'.$oldfile;
-         if(File::exists($oldfile))
-         {
-            File::delete($oldfile);
-         }
-         $slider->image = $filename;
-      }
-     
-    $slider->title = $request->title;
-    $slider->content = $request->content;
+        $slider = Slider::find($id);
+
+
+        $oldfile = $slider->image;
+        //file upload
+        $slider->image = $oldfile;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = public_path() . 'uploads/';
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $oldfile = public_path() . 'uploads/' . $oldfile;
+            if (File::exists($oldfile)) {
+                File::delete($oldfile);
+            }
+            $slider->image = $filename;
+        }
+
+        $slider->title = $request->title;
+        $slider->content = $request->content;
 
         $slider->save();
 
-        return redirect('admin/slider')->with('msg','slider Edited');
+        return redirect('admin/slider')->with('msg', 'slider Edited');
     }
 
     /**
@@ -128,16 +125,15 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-         $slider = \App\Slider::find($id);
-       $path = public_path().'uploads/'.$slider->image;
-      if(File::exists($path))
-      {
-         File::delete($path);
-      }
+        $slider = Slider::find($id);
+        $path = public_path() . 'uploads/' . $slider->image;
+        if (File::exists($path)) {
+            File::delete($path);
+        }
 
         $slider->delete();
 
-        
+
 
         return redirect('admin/slider')->with('msg', 'Slider Deleted');
     }

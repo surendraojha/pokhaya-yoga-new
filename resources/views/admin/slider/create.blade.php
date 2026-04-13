@@ -20,7 +20,7 @@
                     <div class="panel-title">
                         
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\SliderController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'slider.store', 'files' => true]) }}
                         @include('admin.slider.form')
                         {{ Form::close() }}
                 </div>

@@ -68,10 +68,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-left">
-                    <h1>Namaste and Welcome to Pokhara Yoga School and Retreat Center</h1>
-                    {!! $aboutUs->content !!}
+                    <h1>{{$aboutUs->title ?? 'Namaste and Welcome to Pokhara Yoga School and Retreat Center'}}</h1>
 
-                    <a href="{{ route('front.about') }}" class="btn btn-view">View Details</a>
+                    {!! $aboutUs->content !!}
+                    
+                    <a href="{{ route('front.about') }}" class="btn btn-view mt-2">View Details</a>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">
                     @if ($aboutUs && $aboutUs->image)
