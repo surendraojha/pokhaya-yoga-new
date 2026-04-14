@@ -55,7 +55,7 @@ class YogaClassController extends Controller
       {
          $file = $request->file('image');
 
-        $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+        $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
         $information->image = $image_name;
 
       }
@@ -119,9 +119,9 @@ class YogaClassController extends Controller
       if($request->hasFile('image'))
       {
          $file = $request->file('image');
-         $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+         $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
 
-         $oldfile = public_path().'uploads/'.$oldfile;
+         $oldfile = public_path().'/uploads/'.$oldfile;
          if(File::exists($oldfile))
          {
             File::delete($oldfile);
@@ -154,7 +154,7 @@ class YogaClassController extends Controller
     public function destroy($id)
     {
         $information = YogaClass::find($id);
-      $path = public_path().'uploads/'.$information->image;
+      $path = public_path().'/uploads/'.$information->image;
       if(File::exists($path))
       {
          File::delete($path);

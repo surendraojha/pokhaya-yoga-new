@@ -86,7 +86,7 @@ WELCOME SECTION
                             gift of an immersive and transformative spiritual journey with our Yoga Specialists.
                         </p>
                     @endif
-
+                    <br>
                     <a href="{{ route('front.about') }}" class="btn btn-view mt-2">View Details</a>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">

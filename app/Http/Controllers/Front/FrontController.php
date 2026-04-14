@@ -40,6 +40,8 @@ use App\Models\Announcement;
 use App\Helpers\Helper;
 use App\Models\ContactUs;
 use App\Models\Welcome;
+use app\Models\FeeList;
+use App\Models\BookRoom;
 class FrontController extends Controller
 {
 
@@ -120,7 +122,7 @@ class FrontController extends Controller
     }
 
     // public function ourTeam(){
-    // 	$categories = \App\TeamCategory::all();
+    // 	$categories = TeamCategory::all();
     //  	return view('front.our-team', compact('categories'));
 
     // }
@@ -321,7 +323,7 @@ class FrontController extends Controller
             'check_out' => 'required',
         ]);
 
-        $information = new \App\BookRoom;
+        $information = new BookRoom;
         $information->name = $request->name;
         $information->email = $request->email;
         $information->address = $request->address;
@@ -536,7 +538,7 @@ class FrontController extends Controller
     // }
     public function set_price($id, $numberOfAttendants)
     {
-        $result = \App\FeeList::find($id);
+        $result = FeeList::find($id);
 
         // referer discount type percentage
 
@@ -549,9 +551,9 @@ class FrontController extends Controller
 
     public function discounted_price($id, $numberOfAttendants, $token, $room_type)
     {
-        $result = \App\FeeList::find($id);
+        $result = FeeList::find($id);
         $refer_setting = ReferSetting::first();
-        $customer = \App\Customer::where('referral_token', $token)->first();
+        $customer = Customer::where('referral_token', $token)->first();
         // referer discount type percentage
 
         // $result * 100/amount
@@ -660,18 +662,18 @@ class FrontController extends Controller
 
     public function register_yoga($token = '')
     {
-        // $results = \App\FeeList::all();
+        // $results = FeeList::all();
         // $user = session('User_id');
 
         // if ($token == '') {
         // 	return view('front.yoga_register', compact('results'));
         // } else {
-        // 	$customer = \App\Customer::find($user);
+        // 	$customer = Customer::find($user);
         // 	return view('front.yoga_register', compact('results', 'customer', 'token'));
         // }
 
-        $results = \App\FeeList::all();
-        $valid_token = \App\Customer::where('referral_token', session('refer_id'))->first();
+        $results = FeeList::all();
+        $valid_token = Customer::where('referral_token', session('refer_id'))->first();
         //$user = session('User_id');
 
         if (session('refer_id') == '') {
@@ -686,7 +688,7 @@ class FrontController extends Controller
                     session()->flash('msg', 'Success Token Received');
                     return view('front.yoga_package', compact('results', 'referral_name', 'token'));
                 }
-                //$compare = \App\Customer::find('name')->get();
+                //$compare = Customer::find('name')->get();
 
 
             } else {
@@ -728,8 +730,8 @@ class FrontController extends Controller
 
     // public function yoga_package($token = '')
     // {
-    // 	$results = \App\FeeList::all();
-    // 	$valid_token = \App\Customer::where('referral_token', session('refer_id'))->first();
+    // 	$results = FeeList::all();
+    // 	$valid_token = Customer::where('referral_token', session('refer_id'))->first();
     // 	//$user = session('User_id');
 
     // 	if (session('refer_id')== '') {
@@ -737,7 +739,7 @@ class FrontController extends Controller
     // 		return view('front.yoga_package', compact('results'));
     // 	} else {
     // 		if ($valid_token) {
-    // 			//$compare = \App\Customer::find('name')->get();
+    // 			//$compare = Customer::find('name')->get();
     // 			$referral_name = $valid_token->name;
     // 			session()->flash('message', 'Success');
     // 			return view('front.yoga_package', compact('results', 'referral_name', 'token'));
@@ -868,10 +870,10 @@ class FrontController extends Controller
     public function userprofile_dashboard($token = '')
     {
         $user = session('User_id');
-        // $bookings = \App\Booking::where('customer_id', $user)->select("customer_id")->get();
-        // $bookings = \App\Booking::find($user);
+        // $bookings = Booking::where('customer_id', $user)->select("customer_id")->get();
+        // $bookings = Booking::find($user);
         // $id = $bookings->customer_id;
-        $customer = \App\Customer::find($user);
+        $customer = Customer::find($user);
         return view(
             'front.userprofile_dashboard',
             compact('customer', 'token')

@@ -26,7 +26,7 @@
     <link rel="canonical" href="{{ url()->current() }}" />
 
     <!--Bootstrap CSS-->
-    <link rel="icon" href="{{ asset('favicon-small.png') }}?v=20250730 type="image/png" hreflang="en">
+    <link rel="icon" href="{{ asset('favicon-small.png') }}?v=20250730" type="image/png" hreflang="en">
 
     @yield('page-css')
 
@@ -284,6 +284,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                             href="{{ action('Front\FrontController@contactUs') }}">Contact us</a>
                                     </li>
 
+                                    @php
+                                        // Hoist the user variable so both desktop & mobile logic can use it
+                                        $user = auth('customer')->user();
+                                    @endphp
 
                                     @if (session()->has('User'))
                                         <li class="nav-item dropdown ">
@@ -302,10 +306,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         </li>
                                     @else
                                         <li class="nav-item dropdown ">
-                                            @php
-                                                $user = auth('customer')->user();
-                                            @endphp
-
                                             @if (!$user)
                                                 <a class="nav-link" href="{{ route('customer.register') }}">Join us</a>
                                                 <ul>
@@ -336,14 +336,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                                         {{ csrf_field() }}
                                                     </form>
 
+                                                </ul>
+                                            @endif
                                         </li>
 
-                                        {{-- <li><a href="{{ action('Front\FrontController@yoga_package')}}">Yoga package</a></li> --}}
-                                </ul>
-                                @endif
-                                </li>
-
-                                @endif
+                                    @endif
                                 </ul>
                             </div>
                         </nav>
@@ -484,8 +481,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                 <div class="menu-adds">
-                    {{-- <p><i class="fa fa-phone-volume"></i> +977-1-1234567</p>
-       {{-- <p><i class="fa fa-envelope"></i> info@pokharayogaschoolandretreatcenter.com</p> --}}
+                    {{-- <p><i class="fa fa-phone-volume"></i> +977-1-1234567</p> --}}
+                    {{-- <p><i class="fa fa-envelope"></i> info@pokharayogaschoolandretreatcenter.com</p> --}}
                 </div>
             </div>
             <div class="col-12 col-sm-12">
@@ -496,4 +493,3 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
         </div>
     </header>
-
