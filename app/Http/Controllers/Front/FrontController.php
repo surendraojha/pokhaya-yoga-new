@@ -39,7 +39,7 @@ use App\Models\PhotoList;
 use App\Models\Announcement;
 use App\Helpers\Helper;
 use App\Models\ContactUs;
-
+use App\Models\Welcome;
 class FrontController extends Controller
 {
 
@@ -69,6 +69,7 @@ class FrontController extends Controller
 
            $data =  [
                 'sliders'        => Slider::all(),
+                'welcome'        => Welcome::first(),
                 'aboutUs'        => AboutUs::first(),
                 'testimonials'   => Testimonial::latest()->take(3)->get(),
                 'videoTestimonials' => VideoTestimonial::latest()->take(3)->get(), // ADD THIS

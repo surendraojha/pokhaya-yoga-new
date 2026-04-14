@@ -54,6 +54,7 @@ use App\Http\Controllers\LandingOutcomeController;
 use App\Http\Controllers\KeyPointsController;
 use App\Http\Controllers\LandingWhyChooseController;
 use App\Http\Controllers\LandingCourseController;
+use App\Http\Controllers\WelcomeController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 // header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -120,6 +121,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::resource('aboutus', AboutUsController::class);
+    Route::resource('welcome', WelcomeController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('video-testimonial', VideoTestimonialController::class);
     Route::resource('slider', SliderController::class);

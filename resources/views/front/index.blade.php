@@ -63,44 +63,67 @@ BANNER / SLIDER
 {{-- ══════════════════════════════════════
 WELCOME SECTION
 ══════════════════════════════════════ --}}
-<div class="welcome-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-left">
-                <h1>{{$aboutUs->title ?? 'Namaste and Welcome to Pokhara Yoga School and Retreat Center'}}</h1>
+@if($welcome)
+    <div class="welcome-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-left">
+                    <h1>{{$welcome->title ?? 'Namaste and Welcome to Pokhara Yoga School and Retreat Center'}}</h1>
 
-                @if(!empty($aboutUs?->content))
-                    {!! $aboutUs->content !!}
-                @else
-                    <p>
-                        Yoga is a way of life. Whether you aspire to be a certified Yoga teacher or desire to learn Yoga
-                        in-depth to adopt it in your life and tap its optimum benefits, the best Yoga School in Nepal
-                        welcomes passionate learners like you with open arms. Visit Pokhara Yoga School and Retreat Center
-                        for a unique and soul-enriching experience.
-                    </p>
-                    <p>
-                        Founded in 2019 in Pokhara with a vision to empower Yoga learners and enrich their lives with
-                        in-depth learning and profound practice, our Yoga School provides 200-hours, 300-hours, and
-                        500-hours Yoga Teacher Training in Nepal from talented and experienced teachers. Give yourself the
-                        gift of an immersive and transformative spiritual journey with our Yoga Specialists.
-                    </p>
-                @endif
+                    @if(!empty($welcome?->content))
+                        {!! $welcome->content !!}
+                    @else
+                        <p>
+                            Yoga is a way of life. Whether you aspire to be a certified Yoga teacher or desire to learn Yoga
+                            in-depth to adopt it in your life and tap its optimum benefits, the best Yoga School in Nepal
+                            welcomes passionate learners like you with open arms. Visit Pokhara Yoga School and Retreat Center
+                            for a unique and soul-enriching experience.
+                        </p>
+                        <p>
+                            Founded in 2019 in Pokhara with a vision to empower Yoga learners and enrich their lives with
+                            in-depth learning and profound practice, our Yoga School provides 200-hours, 300-hours, and
+                            500-hours Yoga Teacher Training in Nepal from talented and experienced teachers. Give yourself the
+                            gift of an immersive and transformative spiritual journey with our Yoga Specialists.
+                        </p>
+                    @endif
 
-                <a href="{{ route('front.about') }}" class="btn btn-view mt-2">View Details</a>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">
-                @if ($aboutUs && $aboutUs->image)
-                    <img src="{{ asset('uploads/' . $aboutUs->image) }}" alt="Pokhara Yoga School">
-                @else
-                    <img src="{{ asset('images/img.jpg') }}" alt="Pokhara Yoga School">
-                @endif
-                <a href="#" class="play" data-toggle="modal" data-target="#welcomeVideoModal">
-                    <i class="fa fa-play"></i>
-                </a>
+                    <a href="{{ route('front.about') }}" class="btn btn-view mt-2">View Details</a>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">
+                    @php
+                        preg_match(
+                            '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+                            $welcome->video,
+                            $matches,
+                        );
+                        $videoId = $matches[1] ?? null;
+                        $thumbnail = $videoId
+                            ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
+                            : asset('images/train4.jpg');
+                        $embedUrl = $videoId
+                            ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
+                            : $welcome->video;
+                    @endphp
+                    <div class="play yt-thumb-wrap" data-embed="{{ $welcome->video }}" onclick="openYtLightbox(this)">
+                        <img src="{{ $thumbnail }}" alt="{{ $welcome->title }}"
+                            style="width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s;"
+                            onmouseover="this.style.opacity='.6'" onmouseout="this.style.opacity='.85'"
+                            onerror="this.src='{{ asset('images/train4.jpg') }}'">
+                        <div
+                            style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+                            <svg viewBox="0 0 68 48" width="52" height="36" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.8.9 34 .9 34 .9S12.2.9 7.5 1.7a8.5 8.5 0 0 0-6 6C.7 12.4.7 24 .7 24s0 11.6.8 16.3a8.5 8.5 0 0 0 6 6c4.7.8 26.5.8 26.5.8s21.8 0 26.5-.8a8.5 8.5 0 0 0 6-6c.8-4.7.8-16.3.8-16.3s0-11.6-.8-16.3z"
+                                    fill="red" />
+                                <path d="M27.1 34.6l17.6-10.6-17.6-10.6v21.2z" fill="#fff" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 {{-- Welcome video popup --}}
 <div class="modal fade welcome-popup" id="welcomeVideoModal" tabindex="-1" role="dialog" aria-hidden="true">

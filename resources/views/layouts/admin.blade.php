@@ -235,6 +235,7 @@
                             class="nav-item has-treeview
             {{ 'admin/about-us' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/slider' == request()->path() ? 'menu-open' : '' }}
+            {{ 'admin/welcome' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/testimonial' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/why-choose-us' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/feature' == request()->path() ? 'menu-open' : '' }}
@@ -260,6 +261,12 @@
                                         class="nav-link {{ 'admin/slider' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Sliders</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('welcome.index') }}" class="nav-link {{ 'admin/welcome' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Welcome</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -660,16 +667,16 @@
                     '<td> {{ Form::textarea('day[]', null, ['class' => 'form-control', 'rows' => '5', 'onkeyup' => 'setId(event)']) }} </td>';
                 html +=
                     '<td>{{ Form::textarea('title[]', null, [
-                        'class' => 'form-control rate',
-                        'rows' => '5',
-                        'onkeyup' => 'getTotal(event)',
-                    ]) }}</td>';
+    'class' => 'form-control rate',
+    'rows' => '5',
+    'onkeyup' => 'getTotal(event)',
+]) }}</td>';
                 html +=
                     '<td> {{ Form::textarea('content[]', null, [
-                        'class' => 'form-control qty',
-                        'id' => 'summernote',
-                        'onkeyup' => 'getTotal(event)',
-                    ]) }} </td>';
+    'class' => 'form-control qty',
+    'id' => 'summernote',
+    'onkeyup' => 'getTotal(event)',
+]) }} </td>';
                 html +=
                     '<td> <button type ="button" name="button" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"> </span> x  </button> </td> </tr>';
                 $('#item_table').append(html);
