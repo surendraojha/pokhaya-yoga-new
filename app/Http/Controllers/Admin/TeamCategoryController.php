@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\TeamCategory;
+use App\Models\TeamCategory;
 class TeamCategoryController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class TeamCategoryController extends Controller
      */
     public function index()
     {
-        $informations = \App\TeamCategory::all();
+        $informations = TeamCategory::all();
         return view('admin.team-category.index', compact('informations'));
     }
 
@@ -39,7 +39,7 @@ class TeamCategoryController extends Controller
         $this->validate($request, [
           'name' => 'required|min:3|unique:team_categories',
         ]);
-        $information = new \App\TeamCategory;
+        $information = new TeamCategory;
         $information->name = $request->name;
         $information->save();
         return redirect('admin/team-category')->with('msg', 'Information Added');
@@ -64,7 +64,7 @@ class TeamCategoryController extends Controller
      */
     public function edit($id)
     {
-        $information = \App\TeamCategory::find($id);
+        $information = TeamCategory::find($id);
         return view('admin.team-category.edit', compact('information'));
     }
 
@@ -80,7 +80,7 @@ class TeamCategoryController extends Controller
         $this->validate($request, [
           'name' => 'required|min:3',
         ]);
-        $information = \App\TeamCategory::find($id);
+        $information = TeamCategory::find($id);
         $information->name = $request->name;
         $information->save();
         return redirect('admin/team-category')->with('msg', 'Information Updated');
@@ -94,7 +94,7 @@ class TeamCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\TeamCategory::find($id);
+        $information = TeamCategory::find($id);
         $information->delete();
         return redirect('admin/team-category')->with('msg', 'Information Deleted');
     }

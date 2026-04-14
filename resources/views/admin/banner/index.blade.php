@@ -2,19 +2,21 @@
 @section('content')
 
 
-<div class="content">
-    <div class="page-header">
-        <div class="breadcrumb-line">
-            <ul class="breadcrumb">
-                <li> Banner Image</li>
-            </ul>
+    <div class="content">
+        <div class="page-header">
+            <div class="breadcrumb-line">
+                <ul class="breadcrumb">
+                    <li> Banner Image</li>
+                </ul>
 
-            <ul class="breadcrumb-elements">
-                <a href="{{ action('Admin\BannerController@create') }} " class="btn btn-success">Create </a>
-            </ul>
+                <ul class="breadcrumb-elements">
+                    <a href="{{ route('banner.create') }} " class="btn btn-success">Create </a>
+                </ul>
 
-            <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a><a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a></div>
-    </div>
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a><a
+                    class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+            </div>
+        </div>
 
 
         <div class="content">
@@ -37,8 +39,9 @@
                                                         style="height: 100px; width:100px;"></td>
 
                                                 <td>
-                                                    {{ Form::open(['method' => 'delete', 'action' => ['Admin\BannerController@destroy', $information->id]]) }}
-                                                    <a href="{{ action('Admin\BannerController@edit', $information->id) }}"
+                                                    {{ Form::open(['method' => 'delete', 'route' =>
+                                                    ['banner.destroy', $information->id]]) }}
+                                                    <a href="{{ route('banner.edit', $information->id) }}"
                                                         class="btn btn-primary btn-sm">Edit</a>
                                                     <button type="submit" class="btn btn-danger btn-sm delete"
                                                         onclick="return confirm('You Want to Delete?');">Delete</button>
@@ -56,6 +59,6 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 @endsection

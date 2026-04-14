@@ -16,6 +16,6 @@ class YogaClass extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('uploads/' . $this->image): asset('uploads/IMG20191103125404.jpg');
+        return $this->image ? asset('/uploads/' . $this->image): asset('/uploads/IMG20191103125404.jpg');
     }
 }

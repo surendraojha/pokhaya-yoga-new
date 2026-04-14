@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SeoMeta;
+use App\Models\SeoMeta;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SeoMetaController extends Controller

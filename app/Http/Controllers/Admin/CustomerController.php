@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Customer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $informations = \App\Customer::orderBy('created_at', 'desc')->get();
+        $informations = Customer::orderBy('created_at', 'desc')->get();
         return view('admin.customer.index', compact('informations'));
     }
 
@@ -140,7 +140,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\Customer::find($id);
+        $information = Customer::find($id);
         $information->delete();
         return redirect('admin/customers')->with('information Deleted');
     }
@@ -156,7 +156,7 @@ class CustomerController extends Controller
 
     public function set_actual_price($id, $numberOfAttendants)
     {
-        $result = \App\FeeList::find($id);
+        $result = FeeList::find($id);
 
         // referer discount type percentage
 

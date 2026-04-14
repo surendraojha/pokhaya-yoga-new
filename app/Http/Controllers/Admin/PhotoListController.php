@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\PhotoList;
+use App\Models\PhotoList;
 use File;
 use Image;
 class PhotoListController extends Controller
@@ -16,7 +16,7 @@ class PhotoListController extends Controller
      */
     public function index()
     {
-        $informations = \App\PhotoList::orderBy('id','desc')->get();
+        $informations = PhotoList::orderBy('id','desc')->get();
         return view('admin.photo-list.index', compact('informations'));
     }
 
@@ -27,7 +27,7 @@ class PhotoListController extends Controller
      */
     public function create()
     {
-        $categories = \App\PhotoCategory::all()->pluck('name', 'id')->toArray();
+        $categories = PhotoCategory::all()->pluck('name', 'id')->toArray();
         return view('admin.photo-list.create', compact('categories'));
 
     }
@@ -52,7 +52,7 @@ class PhotoListController extends Controller
         // print_r($filename);
         // die;
             // $file->move($path, $filename);
-            $information = new \App\PhotoList;
+            $information = new PhotoList;
             //
 
             $image = Image::make($file->getRealPath());
@@ -107,9 +107,9 @@ class PhotoListController extends Controller
      */
     public function edit($id)
     {
-        $categories = \App\PhotoCategory::all()->pluck('name', 'id')->toArray();
+        $categories = PhotoCategory::all()->pluck('name', 'id')->toArray();
 
-        $information = \App\PhotoList::find($id);
+        $information = PhotoList::find($id);
       
         return view('admin.photo-list.edit', compact('information', 'categories'));
     }
@@ -123,7 +123,7 @@ class PhotoListController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $information= \App\PhotoList::find($id);
+       $information= PhotoList::find($id);
 
 
        $oldfile = $information->image;
@@ -192,7 +192,7 @@ class PhotoListController extends Controller
      */
     public function destroy($id)
     {
-       $information = \App\PhotoList::find($id);
+       $information = PhotoList::find($id);
        $path = public_path().'uploads/'.$information->image;
       if(File::exists($path))
       {

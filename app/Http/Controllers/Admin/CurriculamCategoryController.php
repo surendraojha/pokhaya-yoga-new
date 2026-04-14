@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\CurriculamCategory;
+use App\Models\CurriculamCategory;
 
 class CurriculamCategoryController extends Controller
 {

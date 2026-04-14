@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\AllPage;
 use File;
-use App\Retreats;
+use App\Models\Retreats;
 
 class RetreatPageController extends Controller
 {
@@ -17,7 +17,7 @@ class RetreatPageController extends Controller
      */
     public function index()
     {
-        $informations = \App\Retreats::orderBy('created_at', 'desc')->get();
+        $informations = Retreats::orderBy('created_at', 'desc')->get();
         
         return view('admin.retreat.index', compact('informations'));
     }
@@ -40,7 +40,7 @@ class RetreatPageController extends Controller
      */
     public function store(Request $request)
     {
-         $information = new \App\Retreats;
+         $information = new Retreats;
 
          $information->from = $request->from;
          $information->to = $request->to;
@@ -83,7 +83,7 @@ class RetreatPageController extends Controller
      */
     public function edit($id)
     {
-        $information = \App\Retreats::find($id);
+        $information = Retreats::find($id);
         return view('admin.retreat.edit', compact('information'));
     }
 
@@ -96,7 +96,7 @@ class RetreatPageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $information = \App\Retreats::find($id);
+        $information = Retreats::find($id);
 
       $information->from = $request->from;
       $information->to = $request->to;
@@ -121,7 +121,7 @@ class RetreatPageController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\Retreats::find($id);
+        $information = Retreats::find($id);
       $path = public_path().'uploads/'.$information->image;
       if(File::exists($path))
       {

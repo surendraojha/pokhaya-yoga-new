@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Banner;
+use App\Models\Banner;
 use File;
 
 class BannerController extends Controller

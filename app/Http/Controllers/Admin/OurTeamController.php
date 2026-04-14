@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\OurTeam;
+use App\Models\OurTeam;
 use App\TeamCategory;
 use File;
 use Image;
@@ -18,7 +18,7 @@ class OurTeamController extends Controller
      */
     public function index()
     {
-        $informations = \App\OurTeam::orderBy('created_at', 'desc')->paginate(15);
+        $informations = OurTeam::orderBy('created_at', 'desc')->paginate(15);
         // dd($informations);
         return view('admin.our-team.index', compact('informations'));
     }
@@ -30,7 +30,7 @@ class OurTeamController extends Controller
      */
     public function create()
     {
-        $categories = \App\TeamCategory::get()->pluck('name', 'id')->toarray();
+        $categories = TeamCategory::get()->pluck('name', 'id')->toarray();
         return view('admin.our-team.create', compact('categories'));
     }
 
@@ -105,8 +105,8 @@ class OurTeamController extends Controller
      */
     public function edit($id)
     {
-        $categories = \App\TeamCategory::get()->pluck('name', 'id')->toarray();
-        $information = \App\OurTeam::find($id);
+        $categories = TeamCategory::get()->pluck('name', 'id')->toarray();
+        $information = OurTeam::find($id);
         return view('admin.our-team.edit', compact('information', 'categories'));
     }
 
@@ -119,7 +119,7 @@ class OurTeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $information = \App\OurTeam::find($id);
+        $information = OurTeam::find($id);
         $this->validate($request, [
             'name' => 'required|',
         ]);
@@ -195,7 +195,7 @@ class OurTeamController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\OurTeam::find($id);
+        $information = OurTeam::find($id);
         $path = public_path() . 'uploads/' . $information->image;
         if (File::exists($path)) {
             File::delete($path);
@@ -210,7 +210,7 @@ class OurTeamController extends Controller
 
     public function delete($id)
     {
-        $information = \App\OurTeam::find($id);
+        $information = OurTeam::find($id);
         $path = public_path() . 'uploads/' . $information->image;
         if (File::exists($path)) {
             File::delete($path);

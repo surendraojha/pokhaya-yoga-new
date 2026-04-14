@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Blog;
+use App\Models\Blog;
 use App\BlogUsers;
 use App\Helpers\Helper;
 use File;
@@ -24,7 +24,7 @@ class BlogController extends Controller
     public function index()
     {
 
-        $informations = \App\Blog::orderBy('created_at', 'desc')->paginate(50);
+        $informations = Blog::orderBy('created_at', 'desc')->paginate(50);
 
         return view('admin.blog.index', compact('informations'));
     }
@@ -36,7 +36,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $blogUsers = \App\BlogUsers::pluck('name', 'id');
+        $blogUsers = BlogUsers::pluck('name', 'id');
         return view('admin.blog.create',compact('blogUsers'));
     }
 
@@ -115,7 +115,7 @@ class BlogController extends Controller
     public function edit($id)
     {
         $information = Blog::find($id);
-        $blogUsers = \App\BlogUsers::pluck('name', 'id');
+        $blogUsers = BlogUsers::pluck('name', 'id');
 
         return view('admin.blog.edit', compact('information','blogUsers'));
     }

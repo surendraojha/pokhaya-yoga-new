@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\YogaClass;
+use App\Models\YogaClass;
 use File;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Cache;
@@ -18,7 +18,7 @@ class YogaClassController extends Controller
      */
     public function index()
     {
-        $informations = \App\YogaClass::paginate(10);
+        $informations = YogaClass::paginate(10);
         return view('admin.yoga-class.index', compact('informations'));
     }
 

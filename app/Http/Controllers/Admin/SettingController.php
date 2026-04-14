@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Setting;
+use App\Models\Setting;
 use File;
 
 class SettingController extends Controller
@@ -16,7 +16,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $information = \App\Setting::first();
+        $information = Setting::first();
         return view('admin.setting.index', compact('information'));
     }
 

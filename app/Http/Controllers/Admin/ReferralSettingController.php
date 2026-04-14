@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\ReferSetting;
+use App\Models\ReferSetting;
 
 class ReferralSettingController extends Controller
 {

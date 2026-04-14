@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\BlogUsers;
+use App\Models\BlogUsers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
@@ -19,7 +19,7 @@ class BlogUsersController extends Controller
     public function index()
     {
         //
-        $informations = \App\BlogUsers::orderBy('created_at', 'desc')->paginate(15);
+        $informations = BlogUsers::orderBy('created_at', 'desc')->paginate(15);
         
         return view('admin.blog-users.index', compact('informations'));
     }
@@ -77,7 +77,7 @@ class BlogUsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\BlogUsers  $blogUsers
+     * @param  BlogUsers  $blogUsers
      * @return \Illuminate\Http\Response
      */
     public function show(BlogUsers $blogUsers)
@@ -88,7 +88,7 @@ class BlogUsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BlogUsers  $blogUsers
+     * @param  BlogUsers  $blogUsers
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -102,7 +102,7 @@ class BlogUsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BlogUsers  $blogUsers
+     * @param  BlogUsers  $blogUsers
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -145,7 +145,7 @@ class BlogUsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BlogUsers  $blogUsers
+     * @param  BlogUsers  $blogUsers
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

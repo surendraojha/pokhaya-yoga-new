@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CurriculamList extends Model
 {
     public function category(){
-    	return $this->belongsTo('\App\CurriculamCategory', 'category_id', 'id');
+    	return $this->belongsTo('\App\Models\CurriculamCategory', 'category_id', 'id');
     }
 }

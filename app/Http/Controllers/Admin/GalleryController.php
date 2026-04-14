@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\PhotoCategory;
+use App\Models\PhotoCategory;
 
 class GalleryController extends Controller
 {
@@ -15,7 +15,7 @@ class GalleryController extends Controller
      */
     public function index()
     {   
-         $informations = \App\PhotoCategory::all();
+         $informations = PhotoCategory::all();
         return view('admin.gallery.index', compact('informations'));
     }
 
@@ -37,7 +37,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-         $information = new \App\PhotoCategory;
+         $information = new PhotoCategory;
         $this->validate($request, [
            'name' => 'required|unique:photo_categories'
         ]);
@@ -65,7 +65,7 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $information = \App\PhotoCategory::find($id);
+        $information = PhotoCategory::find($id);
         return view('admin.gallery.edit', compact('information'));
     }
 
@@ -78,7 +78,7 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $information = \App\PhotoCategory::find($id);
+       $information = PhotoCategory::find($id);
         $this->validate($request, [
            'name' => 'required'
         ]);
@@ -95,7 +95,7 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\PhotoCategory::find($id);
+        $information = PhotoCategory::find($id);
 
         $information->delete();
         return redirect('admin/gallery')->with('msg', 'Information Deleted');

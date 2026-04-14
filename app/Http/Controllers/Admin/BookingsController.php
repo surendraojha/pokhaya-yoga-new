@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Booking;
-use App\Customer;
-use App\FeeCategory;
+use App\Models\Booking;
+use App\Models\Customer;
+use App\Models\FeeCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\ReferSetting;
+use App\Models\ReferSetting;
 
 class BookingsController extends Controller
 {
@@ -18,7 +18,7 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        $informations = \App\Booking::select('*',
+        $informations = Booking::select('*',
                         'bookings.id as id',
                         'bookings.name as name',
                         'bookings.email as email',
@@ -41,8 +41,8 @@ class BookingsController extends Controller
     public function create()
     {
         $fee_categories = FeeCategory::pluck('title','id');
-        $results = \App\FeeList::all();
-        $customer_id = \App\Customer::all();
+        $results = FeeList::all();
+        $customer_id = Customer::all();
         return view('admin.bookings.create', compact('results', 'customer_id','fee_categories'));
     }
 
@@ -113,8 +113,8 @@ class BookingsController extends Controller
 
         $information = Booking::find($id);
 
-        $results = \App\FeeList::all();
-        $customer_id = \App\Customer::all();
+        $results = FeeList::all();
+        $customer_id = Customer::all();
 
         // dd($information);
         return view('admin.bookings.edit', compact('information',
@@ -178,7 +178,7 @@ class BookingsController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\Booking::find($id);
+        $information = Booking::find($id);
         $information->delete();
         return redirect('admin/bookings')->with('information Deleted');
     }
@@ -219,7 +219,7 @@ class BookingsController extends Controller
 
     public function set_price($id, $numberOfAttendants)
     {
-        $result = \App\FeeList::find($id);
+        $result = FeeList::find($id);
 
         // referer discount type percentage
 

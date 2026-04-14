@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VideoTestimonial;
+use App\Models\VideoTestimonial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +17,7 @@ class VideoTestimonialController extends Controller
     public function index()
     {
         //
-        $informations = \App\VideoTestimonial::orderBY('created_at', 'desc')->get();
+        $informations = VideoTestimonial::orderBY('created_at', 'desc')->get();
 
         return view('admin.video-testimonial.index',compact('informations'));
 
@@ -64,7 +64,7 @@ class VideoTestimonialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\VideoTestimonial  $videoTestimonial
+     * @param  VideoTestimonial  $videoTestimonial
      * @return \Illuminate\Http\Response
      */
     public function show(VideoTestimonial $videoTestimonial)
@@ -75,13 +75,13 @@ class VideoTestimonialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\VideoTestimonial  $videoTestimonial
+     * @param  VideoTestimonial  $videoTestimonial
      * @return \Illuminate\Http\Response
      */
     public function edit( $id)
     {
         //
-        $information = \App\VideoTestimonial::find($id);
+        $information = VideoTestimonial::find($id);
         return view('admin.video-testimonial.edit', compact('information'));
 
     }
@@ -90,13 +90,13 @@ class VideoTestimonialController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\VideoTestimonial  $videoTestimonial
+     * @param  VideoTestimonial  $videoTestimonial
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,  $id)
     {
         //
-        $information = \App\VideoTestimonial::find($id);
+        $information = VideoTestimonial::find($id);
 
         $this->validate($request, [
             'title' => 'required|',
@@ -116,13 +116,13 @@ class VideoTestimonialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\VideoTestimonial  $videoTestimonial
+     * @param  VideoTestimonial  $videoTestimonial
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id)
     {
         //
-        $information = \App\VideoTestimonial::find($id);
+        $information = VideoTestimonial::find($id);
 
         $information->delete();
         return redirect('admin/video-testimonial')->with('msg', 'Video Testimonial Deleted');

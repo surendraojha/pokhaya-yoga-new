@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Image;
+use App\Models\Qr;
 use Illuminate\Support\Facades\File;
 
 class QrCodeController extends Controller
@@ -17,7 +18,7 @@ class QrCodeController extends Controller
      */
     public function index()
     {   
-         $informations = \App\Qr::all();
+         $informations = Qr::all();
         return view('admin.qr-code.index', compact('informations'));
     }
 
@@ -40,7 +41,7 @@ class QrCodeController extends Controller
      */
     public function store(Request $request)
     {
-         $information = new \App\Qr;
+         $information = new Qr;
         $this->validate($request, [
            'title' => 'required',
            'url' => 'required',
@@ -75,7 +76,7 @@ class QrCodeController extends Controller
      */
     public function edit($id)
     {
-        $information = \App\Qr::find($id);
+        $information = Qr::find($id);
         return view('admin.qr-code.edit', compact('information'));
     }
 
@@ -88,7 +89,7 @@ class QrCodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $information = \App\Qr::find($id);
+       $information = Qr::find($id);
         $this->validate($request, [
            'title' => 'required',
            'url' => 'required',
@@ -122,7 +123,7 @@ class QrCodeController extends Controller
      */
     public function destroy($id)
     {
-        $information = \App\Qr::find($id);
+        $information = Qr::find($id);
         
         $path = public_path() . 'uploads/qr/' .$information->image;
          

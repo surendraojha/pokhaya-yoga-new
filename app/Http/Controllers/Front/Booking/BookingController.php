@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Front\Booking;
 
-use App\Booking;
-use App\Customer;
-use App\FeeCategory;
-use App\FeeList;
+use App\Models\Booking;
+use App\Models\Customer;
+use App\Models\FeeCategory;
+use App\Models\FeeList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\ReferSetting;
+use App\Models\ReferSetting;
 use Illuminate\Support\Str;
 use Session;
 
@@ -45,7 +45,7 @@ class BookingController extends Controller
 
     public function set_price($id, $numberOfAttendants)
 	{
-		$result = \App\FeeList::find($id);
+		$result = FeeList::find($id);
 
 		// referer discount type percentage
 
@@ -60,9 +60,9 @@ class BookingController extends Controller
 	{
 
 
-		$result = \App\FeeList::find($id);
+		$result = FeeList::find($id);
 		$refer_setting = ReferSetting::first();
-		$customer = \App\Customer::where('referral_token', $token)->first();
+		$customer = Customer::where('referral_token', $token)->first();
 		// referer discount type percentage
 
 		// $result * 100/amount
@@ -119,19 +119,19 @@ class BookingController extends Controller
 
     public function register_yoga($token = '')
 	{
-		// $results = \App\FeeList::all();
+		// $results = FeeList::all();
 		// $user = session('User_id');
 
 		// if ($token == '') {
 		// 	return view('front.yoga_register', compact('results'));
 		// } else {
-		// 	$customer = \App\Customer::find($user);
+		// 	$customer = Customer::find($user);
 		// 	return view('front.yoga_register', compact('results', 'customer', 'token'));
 		// }
 
-		$results = \App\FeeList::all();
+		$results = FeeList::all();
         $fee_categories = FeeCategory::pluck('title','id');
-		$valid_token = \App\Customer::where('referral_token',$token)->first();
+		$valid_token = Customer::where('referral_token',$token)->first();
 
 		//$user = session('User_id');
 
@@ -151,7 +151,7 @@ class BookingController extends Controller
 
 					session()->flash('msg', 'Success Token Received');
 				}
-				//$compare = \App\Customer::find('name')->get();
+				//$compare = Customer::find('name')->get();
 
 
 			} else {
@@ -282,7 +282,7 @@ class BookingController extends Controller
 	{
 		$user = session('User_id');
 
-		$customer = \App\Customer::find($user);
+		$customer = Customer::find($user);
 		return view('front.userprofile_dashboard',
          compact('customer', 'token'));
 	}
