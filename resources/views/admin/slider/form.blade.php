@@ -10,12 +10,14 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('link', 'Link') }}
+    {{ Form::text('link', null, ['class' => 'form-control', 'required']) }}
+</div>
+
+<div class="form-group">
     {{ Form::label('image', 'Image') }}
     {{ Form::file('image', null, ['class' => 'form-control']) }}
 </div>
-
-
-
 
 <div class="form-group">
     <button type="submit" class="btn btn-success">Save</button>

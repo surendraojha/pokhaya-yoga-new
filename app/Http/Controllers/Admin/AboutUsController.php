@@ -50,7 +50,7 @@ class AboutUsController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $path = public_path() . 'uploads';
+            $path = public_path( 'uploads/');
             $filename = date('ymdhis') . $file->getClientOriginalName();
             $file->move($path, $filename);
             $information->image = $filename;
@@ -104,7 +104,7 @@ class AboutUsController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            $oldPath = public_path('uploads/' . $information->image);
+            $oldPath = public_path('uploads/') . $information->image;
             if (File::exists($oldPath)) {
                 File::delete($oldPath);
             }

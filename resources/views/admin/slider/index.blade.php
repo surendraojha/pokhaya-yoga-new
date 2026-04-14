@@ -26,9 +26,10 @@
                                     <table class="table table-striped">
                                         <tr>
 
-
                                             <th>Sn.</th>
                                             <th>Title</th>
+                                            <th>Content</th>
+                                            <th>Link</th>
                                             <th>Image</th>
 
                                             <th>Action</th>
@@ -38,6 +39,8 @@
                                             <tr>
                                                 <td>{{$sn++}}</td>
                                                 <td>{{$information->title}}</td>
+                                                <td>{{$information->content}}</td>
+                                                <td>{{$information->link}}</td>
 
 
                                                 <td> <img height='100px' src="{{ asset('/uploads/' . $information->image) }}" /></td>

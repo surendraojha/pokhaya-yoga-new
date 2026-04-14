@@ -51,7 +51,7 @@
                                                         Edit
                                                     </a>
 
-                                                    <button type="submit" class="btn btn-danger btn-sm delete">
+                                                    <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('You Want to Delete?');">
                                                         Delete
                                                     </button>
 

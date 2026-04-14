@@ -156,10 +156,17 @@ class TestimonialController extends Controller
     public function destroy($id)
     {
         $information = Testimonial::find($id);
-        $path = public_path('uploads/testimonials/' . $information->image);
+        $path = public_path('uploads/testimonials/') . $information->image;
+        $thumbnailPath = public_path('uploads/testimonials/thumbnails/') . $information->image;
+
         if (File::exists($path)) {
             File::delete($path);
         }
+
+        if (File::exists($thumbnailPath)) {
+            File::delete($thumbnailPath);
+        }
+
 
         $information->delete();
 
