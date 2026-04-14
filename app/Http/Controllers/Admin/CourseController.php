@@ -195,13 +195,24 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $information = Course::find($id);
-        $path = public_path() . 'uploads/' . $information->image;
-        if (File::exists($path)) {
-            File::delete($path);
+        $information = Course::findOrFail($id);
+
+        // paths
+        $imagePath = public_path('uploads/course/' . $information->image);
+        $thumbnailPath = public_path('uploads/course/thumbnails/' . $information->image);
+
+        // delete main image
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
+        // delete thumbnail
+        if (File::exists($thumbnailPath)) {
+            File::delete($thumbnailPath);
         }
 
         $information->delete();
+
         return redirect('admin/course')->with('msg', 'Information Deleted');
     }
 }
