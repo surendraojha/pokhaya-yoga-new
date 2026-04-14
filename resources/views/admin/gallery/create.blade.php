@@ -20,7 +20,7 @@
                     <div class="panel-title">
                         
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\GalleryController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'gallery.store', 'files' => true]) }}
                         @include('admin.gallery.form')
                         {{ Form::close() }}
                 </div>

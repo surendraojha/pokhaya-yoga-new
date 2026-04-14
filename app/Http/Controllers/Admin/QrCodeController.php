@@ -42,7 +42,7 @@ class QrCodeController extends Controller
     public function store(Request $request)
     {
          $information = new Qr;
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'url' => 'required',
         ]);
@@ -90,7 +90,7 @@ class QrCodeController extends Controller
     public function update(Request $request, $id)
     {
        $information = Qr::find($id);
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'url' => 'required',
            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',

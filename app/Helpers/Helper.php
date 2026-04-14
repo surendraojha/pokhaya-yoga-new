@@ -1,4 +1,4 @@
-<?php // Code within app\Helpers\Helper.php
+<?php
 
 namespace App\Helpers;
 
@@ -15,7 +15,7 @@ use App\Models\JsTraining;
 use App\Models\JsWorkingExperience;
 use Exception;
 use Illuminate\Http\Request;
-use Image;
+use Intervention\Image\Laravel\Facades\Image;
 
 class Helper
 {
@@ -42,10 +42,10 @@ class Helper
         }
 
 
-        $thumbnail = Image::make($file->getRealPath());
+        $thumbnail = Image::read($file->getRealPath());
          $thumbnail->resize($width, $height, function ($constraint) {
              $constraint->aspectRatio();
-         })->encode('webp', 85);;
+         })->toWebp(85);
 
         $thumbnail->save($path . $image_name);
 

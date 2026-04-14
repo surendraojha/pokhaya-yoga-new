@@ -41,7 +41,7 @@ class FeeListController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'from' => 'required',
             'to' => 'required',
             'place' => 'required',
@@ -95,7 +95,7 @@ class FeeListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'from' => 'required',
             'to' => 'required',
             'place' => 'required',

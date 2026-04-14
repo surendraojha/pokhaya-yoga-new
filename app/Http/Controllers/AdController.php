@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\LandingAd;
 use Session;
-use File;
-
+use Illuminate\Support\Facades\File;
 
 class AdController extends Controller
 {

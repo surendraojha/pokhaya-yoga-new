@@ -36,7 +36,7 @@ class TeamCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
           'name' => 'required|min:3|unique:team_categories',
         ]);
         $information = new TeamCategory;
@@ -77,7 +77,7 @@ class TeamCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
           'name' => 'required|min:3',
         ]);
         $information = TeamCategory::find($id);

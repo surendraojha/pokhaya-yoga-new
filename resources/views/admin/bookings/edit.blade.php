@@ -23,7 +23,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                         </div>
-                        {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\BookingsController@update', $information->id],'files' => true]) }}
+                        {{ Form::model($information, ['method' => 'patch', 'route' => ['bookings.update', $information->id],'files' => true]) }}
                             @include('admin.bookings.form')
                         {{ Form::close() }}
                     </div>

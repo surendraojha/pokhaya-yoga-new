@@ -90,7 +90,7 @@ class ChapterController extends Controller
 
     public function checked(Request $request, $id)
 	{
-		$data = $this->validate($request, [
+        $request->validate([
             'checked' => 'required',
         ]);
 

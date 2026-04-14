@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\AllPage;
-use File;
+use Illuminate\Support\Facades\File;
 use App\Models\Retreats;
 
 class RetreatPageController extends Controller

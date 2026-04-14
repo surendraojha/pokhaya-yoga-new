@@ -20,7 +20,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\AnnouncementController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'announcements.store', 'files' => true]) }}
                         @include('admin.announcement.form')
                         {{ Form::close() }}
                 </div>

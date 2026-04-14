@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use File;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -25,10 +25,7 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-       
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +35,7 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required',
             'email' => 'required',
             'number' => 'required',
@@ -46,37 +43,33 @@ class SettingController extends Controller
 
         ]);
 
-         $information = new Setting;
+        $information = new Setting;
 
-          $information->logo = '';
-
-       
-                if($request->hasFile('logo'))
-      {
-         $file = $request->file('logo');
-         $path = public_path().'uploads';
-         $filename = date('ymdhis').$file->getClientOriginalName();
-         $file->move($path, $filename);
-         $information->logo = $filename;
-      }
-
-      $information->title = $request->title;
-      $information->email = $request->email;
-      $information->number = $request->number;
-      $information->address = $request->address;
-      $information->desc = $request->desc;
-      $information->visit_us = $request->visit_us;
-      $information->contact_info = $request->contact_info;
-      $information->facebook = $request->facebook;
-      $information->instragram = $request->instragram;
-      $information->twitter = $request->twitter;
-      $information->youtube = $request->youtube;
-      $information->save();
-
-      return back()->with('msg', 'Information Saved');
+        $information->logo = '';
 
 
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $path = public_path() . 'uploads';
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $information->logo = $filename;
+        }
 
+        $information->title = $request->title;
+        $information->email = $request->email;
+        $information->number = $request->number;
+        $information->address = $request->address;
+        $information->desc = $request->desc;
+        $information->visit_us = $request->visit_us;
+        $information->contact_info = $request->contact_info;
+        $information->facebook = $request->facebook;
+        $information->instragram = $request->instragram;
+        $information->twitter = $request->twitter;
+        $information->youtube = $request->youtube;
+        $information->save();
+
+        return back()->with('msg', 'Information Saved');
     }
 
     /**
@@ -110,7 +103,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
- $this->validate($request, [
+        $request->validate([
             'title' => 'required',
             'email' => 'required',
             'number' => 'required',
@@ -119,37 +112,35 @@ class SettingController extends Controller
         ]);
 
         $information = Setting::find($id);
-         $oldfile = $information->logo;
-      //file upload
-      $information->logo = $oldfile;
-      if($request->hasFile('logo'))
-      {
-         $file = $request->file('logo');
-         $path = public_path().'uploads/';
-         $filename = date('ymdhis').$file->getClientOriginalName();
-         $file->move($path, $filename);
-         $oldfile = public_path().'uploads/'.$oldfile;
-         if(File::exists($oldfile))
-         {
-            File::delete($oldfile);
-         }
-         $information->logo = $filename;
-      }
+        $oldfile = $information->logo;
+        //file upload
+        $information->logo = $oldfile;
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $path = public_path() . 'uploads/';
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $oldfile = public_path() . 'uploads/' . $oldfile;
+            if (File::exists($oldfile)) {
+                File::delete($oldfile);
+            }
+            $information->logo = $filename;
+        }
 
-      $information->title = $request->title;
-      $information->email = $request->email;
-      $information->number = $request->number;
-      $information->address = $request->address;
-      $information->desc = $request->desc;
-      $information->visit_us = $request->visit_us;
-      $information->contact_info = $request->contact_info;
-      $information->facebook = $request->facebook;
-      $information->instragram = $request->instragram;
-      $information->twitter = $request->twitter;
-      $information->youtube = $request->youtube;
-      $information->save();
+        $information->title = $request->title;
+        $information->email = $request->email;
+        $information->number = $request->number;
+        $information->address = $request->address;
+        $information->desc = $request->desc;
+        $information->visit_us = $request->visit_us;
+        $information->contact_info = $request->contact_info;
+        $information->facebook = $request->facebook;
+        $information->instragram = $request->instragram;
+        $information->twitter = $request->twitter;
+        $information->youtube = $request->youtube;
+        $information->save();
 
-      return back()->with('msg', 'Information Updated');
+        return back()->with('msg', 'Information Updated');
     }
 
     /**

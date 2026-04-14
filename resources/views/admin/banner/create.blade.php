@@ -20,7 +20,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\BannerController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'banner.store', 'files' => true]) }}
                         @include('admin.banner.form')
                         {{ Form::close() }}
                 </div>

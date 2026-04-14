@@ -22,7 +22,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\BlogUsersController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['blog-users.update', $information->id],'files' => true]) }}
                         @include('admin.blog-users.form')
 
                         {{ Form::close() }}

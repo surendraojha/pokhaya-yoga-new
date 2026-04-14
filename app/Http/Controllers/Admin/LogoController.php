@@ -38,7 +38,7 @@ class LogoController extends Controller
     public function store(Request $request)
     {
       $information = new \App\Logo;
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            
 

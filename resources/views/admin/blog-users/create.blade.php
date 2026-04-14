@@ -21,7 +21,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\BlogUsersController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'blog-users.store', 'files' => true]) }}
                         @include('admin.blog-users.form')
                         {{ Form::close() }}
                 </div>

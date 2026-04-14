@@ -21,7 +21,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\YogaClassController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'yoga-class.store', 'files' => true]) }}
                         @include('admin.yoga-class.form')
 
                         {{-- <div class="form-group row">

@@ -22,7 +22,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\AnnouncementController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['announcements.update', $information->id],'files' => true]) }}
                         @include('admin.announcement.form')
 
                         {{ Form::close() }}

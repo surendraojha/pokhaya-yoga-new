@@ -22,7 +22,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\YogaClassController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['yoga-class.update', $information->id],'files' => true]) }}
                         @include('admin.yoga-class.form')
 
                         <div class="form-group row">

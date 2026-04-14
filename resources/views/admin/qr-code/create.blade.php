@@ -20,7 +20,7 @@
                     <div class="panel-title">
                         
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\QrCodeController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'qr.store', 'files' => true]) }}
                         @include('admin.qr-code.form')
                         {{ Form::close() }}
                 </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CurriculamList;
-use App\CurriculamCategory;
+use App\Models\CurriculamCategory;
 
 class CurriculamListController extends Controller
 {
@@ -41,7 +41,7 @@ class CurriculamListController extends Controller
     public function store(Request $request)
     {
         $information = new CurriculamList;
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 
@@ -89,7 +89,7 @@ class CurriculamListController extends Controller
     public function update(Request $request, $id)
     {
         $information = CurriculamList::find($id);
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 

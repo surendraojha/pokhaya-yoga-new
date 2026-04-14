@@ -22,7 +22,7 @@
                     <div class="panel-title">
                        
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\CurriculamListController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['curriculam-list.update', $information->id],'files' => true]) }}
                         @include('admin.curriculam-list.form')
                        
                         {{ Form::close() }}

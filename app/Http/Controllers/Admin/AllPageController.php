@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AllPage;
 use App\Helpers\Helper;
-use File;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AllPageController extends Controller
 {
@@ -39,23 +40,22 @@ class AllPageController extends Controller
      */
     public function store(Request $request)
     {
-         $information = new AllPage;
-        $this->validate($request, [
-           'title' => 'required',
-           'content' => 'required',
+        $information = new AllPage;
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
 
         ]);
-  $slug = str_slug($request->title, '-');
+        $slug = Str::slug($request->title, '-');
+        
+        $information->image = '';
 
-       $information->image = '';
 
-
-        if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-        $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
-        $information->image = $image_name;
-      }
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+            $information->image = $image_name;
+        }
 
         $information->title = $request->title;
         $information->content = $request->content;
@@ -104,30 +104,28 @@ class AllPageController extends Controller
     public function update(Request $request, $id)
     {
         $information = AllPage::find($id);
-        $this->validate($request, [
-           'title' => 'required',
-           'content' => 'required',
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
 
         ]);
-  $slug = str_slug($request->title, '-');
+        $slug = str_slug($request->title, '-');
 
         $oldfile = $information->image;
-      //file upload
-      $information->image = $oldfile;
-      if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-        $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+        //file upload
+        $information->image = $oldfile;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image_name = Helper::uploadImage($file, public_path() . 'uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
 
 
 
-         $oldfile = public_path().'uploads/'.$oldfile;
-         if(File::exists($oldfile))
-         {
-            File::delete($oldfile);
-         }
-         $information->image = $image_name;
-      }
+            $oldfile = public_path() . 'uploads/' . $oldfile;
+            if (File::exists($oldfile)) {
+                File::delete($oldfile);
+            }
+            $information->image = $image_name;
+        }
         $information->title = $request->title;
         $information->content = $request->content;
         $information->slug = strtolower($slug);
@@ -151,11 +149,10 @@ class AllPageController extends Controller
     public function destroy($id)
     {
         $information = AllPage::find($id);
-      $path = public_path().'uploads/'.$information->image;
-      if(File::exists($path))
-      {
-         File::delete($path);
-      }
+        $path = public_path() . 'uploads/' . $information->image;
+        if (File::exists($path)) {
+            File::delete($path);
+        }
 
         $information->delete();
         return redirect('admin/all-page')->with('msg', 'Information Deleted');

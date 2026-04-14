@@ -20,7 +20,7 @@
                     <div class="panel-title">
                         
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\CurriculamCategoryController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'curriculam-category.store', 'files' => true]) }}
                         @include('admin.curriculam-category.form')
                         {{ Form::close() }}
                 </div>

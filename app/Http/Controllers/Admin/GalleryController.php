@@ -38,7 +38,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
          $information = new PhotoCategory;
-        $this->validate($request, [
+        $request->validate([
            'name' => 'required|unique:photo_categories'
         ]);
         $information->name = $request->name;
@@ -79,7 +79,7 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
        $information = PhotoCategory::find($id);
-        $this->validate($request, [
+        $request->validate([
            'name' => 'required'
         ]);
         $information->name = $request->name;

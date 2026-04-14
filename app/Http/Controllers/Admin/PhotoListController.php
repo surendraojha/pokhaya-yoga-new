@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PhotoList;
-use File;
+use App\Models\PhotoCategory;
+
+use Illuminate\Support\Facades\File;
 use Image;
 class PhotoListController extends Controller
 {

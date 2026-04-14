@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\YogaClass;
-use File;
+use Illuminate\Support\Facades\File;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Cache;
 
@@ -40,7 +40,7 @@ class YogaClassController extends Controller
      */
     public function store(Request $request)
     {
-          $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 
@@ -104,7 +104,7 @@ class YogaClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 

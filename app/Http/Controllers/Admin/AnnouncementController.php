@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
-use File;
+use Illuminate\Support\Facades\File;
 
 
 class AnnouncementController extends Controller
@@ -42,19 +42,18 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $information = new Announcement;
-        $this->validate($request, [
-           'content' => 'required',
+        $request->validate([
+            'content' => 'required',
 
         ]);
 
 
-       $information->image = '';
+        $information->image = '';
 
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $path = public_path().'uploads';
-            $filename = date('ymdhis').$file->getClientOriginalName();
+            $path = public_path( 'uploads/');
+            $filename = date('ymdhis') . $file->getClientOriginalName();
             $file->move($path, $filename);
             $information->image = $filename;
         }
@@ -98,25 +97,23 @@ class AnnouncementController extends Controller
     {
 
         $information = Announcement::find($id);
-        $this->validate($request, [
-           'content' => 'required',
+        $request->validate([
+            'content' => 'required',
         ]);
         $oldfile = $information->image;
-      //file upload
-      $information->image = $oldfile;
-      if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-         $path = public_path().'uploads/';
-         $filename = date('ymdhis').$file->getClientOriginalName();
-         $file->move($path, $filename);
-         $oldfile = public_path().'uploads/'.$oldfile;
-         if(File::exists($oldfile))
-         {
-            File::delete($oldfile);
-         }
-         $information->image = $filename;
-      }
+        //file upload
+        $information->image = $oldfile;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = public_path( 'uploads/');
+            $filename = date('ymdhis') . $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $oldfile = public_path( 'uploads/' ). $oldfile;
+            if (File::exists($oldfile)) {
+                File::delete($oldfile);
+            }
+            $information->image = $filename;
+        }
         $information->content = $request->content;
         $information->save();
         return redirect('admin/announcements')->with('msg', 'Information Upload');
@@ -130,12 +127,11 @@ class AnnouncementController extends Controller
      */
     public function destroy($id)
     {
-       $information = Announcement::find($id);
-      $path = public_path().'uploads/'.$information->image;
-      if(File::exists($path))
-      {
-         File::delete($path);
-      }
+        $information = Announcement::find($id);
+        $path = public_path('uploads/') . $information->image;
+        if (File::exists($path)) {
+            File::delete($path);
+        }
 
         $information->delete();
         return redirect('admin/announcements')->with('msg', 'Information Deleted');

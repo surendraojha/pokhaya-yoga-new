@@ -22,7 +22,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\PhotoListController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'photo-list.store', 'files' => true]) }}
                 @csrf
             @include('admin.photo-list.form')
                         {{ Form::close() }}

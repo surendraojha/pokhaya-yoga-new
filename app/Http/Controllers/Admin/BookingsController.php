@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\FeeCategory;
+use App\Models\FeeList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ReferSetting;

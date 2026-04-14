@@ -19,7 +19,7 @@
               </div>  
             </div>
             <div class="card-body">
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\OurTeamController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'routes' => 'our-team.store', 'files' => true]) }}
                         @include('admin.our-team.form')
                         {{ Form::close() }}
                 </div>

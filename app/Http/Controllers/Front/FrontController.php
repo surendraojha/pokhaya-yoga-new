@@ -309,7 +309,7 @@ class FrontController extends Controller
     }
     public function postBook(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
 
             'name' => 'required',
             'email' => 'required',

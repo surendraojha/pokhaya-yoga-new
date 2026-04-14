@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notice;
-use File;
+use Illuminate\Support\Facades\File;
 class NoticeController extends Controller
 {
     /**
@@ -38,7 +38,7 @@ class NoticeController extends Controller
     public function store(Request $request)
     {
         $information = new \App\Notice;
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 
@@ -100,7 +100,7 @@ class NoticeController extends Controller
     public function update(Request $request, $id)
     {
          $information = \App\Notice::find($id);
-        $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
 

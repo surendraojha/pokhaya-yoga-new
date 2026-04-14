@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use Auth;
 use App\User;
-use File;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller
 {

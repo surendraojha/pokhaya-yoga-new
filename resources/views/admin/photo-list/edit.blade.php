@@ -22,7 +22,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\PhotoListController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['photo-list.update', $information->id],'files' => true]) }}
                 @csrf
             @include('admin.photo-list.form')
 

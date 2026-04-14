@@ -6,7 +6,7 @@ use App\Models\BlogUsers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
-use File;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class BlogUsersController extends Controller
@@ -44,7 +44,7 @@ class BlogUsersController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required',
             'image' => 'mimes:jpeg,png,jpg,webp'
         ]);
@@ -108,7 +108,7 @@ class BlogUsersController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required',
             'image' => 'mimes:jpeg,png,jpg,webp'
         ]);

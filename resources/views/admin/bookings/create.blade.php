@@ -23,7 +23,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\BookingsController@store', 'files' => true ]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'bookings.store', 'files' => true ]) }}
                         @include('admin.bookings.form')
                         {{ Form::close() }}
                 </div>

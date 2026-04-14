@@ -15,7 +15,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\OurTeamController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['our-team.update', $information->id],'files' => true]) }}
                         @include('admin.our-team.form')
                        
                         {{ Form::close() }}

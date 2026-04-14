@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\BlogUsers;
+use App\Models\BlogUsers;
 use App\Helpers\Helper;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Image;
@@ -48,7 +48,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-               $this->validate($request, [
+        $request->validate([
            'title' => 'required',
            'content' => 'required',
            'image'=>'mimes:jpeg,png,jpg,webp'
@@ -129,7 +129,7 @@ class BlogController extends Controller
      */
      public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required',
             'content' => 'required',
             'image' => 'mimes:jpeg,png,jpg,webp'

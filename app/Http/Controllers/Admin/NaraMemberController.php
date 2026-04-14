@@ -38,7 +38,7 @@ class NaraMemberController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
 
             'name_of_company' => 'required',
             'address' => 'required',

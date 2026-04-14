@@ -20,7 +20,7 @@
                     <div class="panel-title">
 
             </div>
-            {{ Form::open(['method' => 'post', 'action' => 'Admin\FaqController@store', 'files' => true]) }}
+            {{ Form::open(['method' => 'post', 'route' => 'faq.store', 'files' => true]) }}
                         {{-- @include('admin.faq.form') --}}
                         <div class="form-group">
                             {{ Form::label('slug', 'Slug of page') }}

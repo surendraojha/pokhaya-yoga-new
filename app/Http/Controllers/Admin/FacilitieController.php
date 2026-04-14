@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facilitie;
-use File;
+use Illuminate\Support\Facades\File;
 use Str;
 
 class FacilitieController extends Controller

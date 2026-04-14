@@ -22,7 +22,7 @@
                     <div class="panel-title">
                        
             </div>
-            {{ Form::model($information, ['method' => 'patch', 'action' => ['Admin\QrCodeController@update', $information->id],'files' => true]) }}
+            {{ Form::model($information, ['method' => 'patch', 'route' => ['qr.update', $information->id],'files' => true]) }}
                         @include('admin.qr-code.form')
                        
                         {{ Form::close() }}

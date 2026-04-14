@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\OurTeam;
-use App\TeamCategory;
-use File;
+use App\Models\TeamCategory;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class OurTeamController extends Controller
@@ -43,7 +43,7 @@ class OurTeamController extends Controller
     public function store(Request $request)
     {
         $information = new OurTeam;
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|',
         ]);
         $information->image = '';
@@ -120,7 +120,7 @@ class OurTeamController extends Controller
     public function update(Request $request, $id)
     {
         $information = OurTeam::find($id);
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|',
         ]);
         $oldfile = $information->image;

@@ -27,7 +27,6 @@ class FeeCategoryController extends Controller
     public function create()
     {
         return view('admin.fee-category.create');
-        
     }
 
     /**
@@ -38,8 +37,8 @@ class FeeCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-                   'title' => 'required|unique:fee_categories'
+        $request->validate([
+            'title' => 'required|unique:fee_categories'
         ]);
         $information = new FeeCategory;
         $information->title = $request->title;
@@ -68,7 +67,6 @@ class FeeCategoryController extends Controller
     {
         $information = FeeCategory::find($id);
         return view('admin.fee-category.edit', compact('information'));
-
     }
 
     /**
@@ -80,8 +78,8 @@ class FeeCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-                   'title' => 'required'
+        $request->validate([
+            'title' => 'required'
         ]);
         $information = FeeCategory::find($id);
         $information->title = $request->title;
@@ -100,6 +98,5 @@ class FeeCategoryController extends Controller
         $information = FeeCategory::find($id);
         $information->delete();
         return redirect('admin/fee-category')->with('msg', 'Information Updated');
-        
     }
 }

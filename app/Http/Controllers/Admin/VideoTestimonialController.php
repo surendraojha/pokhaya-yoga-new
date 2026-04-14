@@ -44,7 +44,7 @@ class VideoTestimonialController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required|',
             'url' => 'required|',
         ]);
@@ -98,7 +98,7 @@ class VideoTestimonialController extends Controller
         //
         $information = VideoTestimonial::find($id);
 
-        $this->validate($request, [
+        $request->validate([
             'title' => 'required|',
             'url' => 'required|',
         ]);
