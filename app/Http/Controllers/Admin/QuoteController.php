@@ -13,7 +13,7 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        $informations = Quote::latest()->get();
+        $informations = Quote::all();
         return view('admin.quote.index', compact('informations'));
      
     }

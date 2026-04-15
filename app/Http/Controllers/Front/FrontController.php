@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
@@ -42,7 +43,7 @@ use App\Models\ContactUs;
 use App\Models\Welcome;
 use app\Models\FeeList;
 use App\Models\BookRoom;
-
+use App\Models\Quote;
 class FrontController extends Controller
 {
 
@@ -87,6 +88,8 @@ class FrontController extends Controller
             'seoMeta'        => SeoMeta::where('name', 'index')->first(),
             'announcements'  => Announcement::orderBy('id', 'desc')->get(),
             'faqs'           => Faq::where('page_slug', 'index')->get(),
+            'quotes'         => Quote::all(),
+            'offers'         => Offer::where('is_active', true)->get(),
         ];
 
 
