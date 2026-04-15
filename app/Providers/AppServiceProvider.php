@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Paginator::useBootstrap();
+
     }
 
     /**
@@ -24,50 +25,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('*', function ($view) {
+        view()->composer('front.layouts.main', function ($view) {
             $setting = Setting::first();
             $yogaClass = YogaClass::select('title', 'slug')->orderBy('id', 'asc')->take(6)->get();
             $allPages = AllPage::select('title', 'slug')->orderBy('order', 'asc')->get();
             $faqs = Faq::all();
 
             $schemaList = [];
-
             foreach ($faqs as $faq) {
-                $contents = $faq->faq_content ?? [];
-
-                if (!is_array($contents)) {
-                    $contents = json_decode($contents, true) ?? [];
-                }
-
-                foreach ($contents as $list) {
-                    if (!isset($list['question'], $list['answer'])) {
-                        continue;
-                    }
-
+                foreach ($faq->faq_content as $list) {
                     $schemaList[] = [
                         "@type" => "Question",
-                        "name" => $list['question'],
+                        "name" => $list['question'], // Assuming $list['question'] holds the question text
                         "acceptedAnswer" => [
                             "@type" => "Answer",
-                            "text" => strip_tags($list['answer'])
+                            "text" => strip_tags($list['answer']) // Assuming $list['answer'] holds the answer text
                         ]
                     ];
                 }
             }
-
             $faqSchema = [
                 '@context' => 'https://schema.org',
                 '@type' => 'FAQPage',
                 'mainEntity' => $schemaList,
             ];
 
-            $view->with(compact(
-                'setting',
-                'yogaClass',
-                'allPages',
-                'faqs',
-                'faqSchema'
-            ));
+
+            $view->with(compact('setting', 'yogaClass', 'allPages', 'faqs', 'faqSchema'));
         });
     }
 }

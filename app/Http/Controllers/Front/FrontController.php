@@ -430,19 +430,21 @@ class FrontController extends Controller
         return view('front.blog-user', compact('blogs', 'blogUser'));
     }
 
-    public function yogaClass(string $slug)
+    public function yogaClass(string $slug) // Type hint $slug for clarity
     {
         $yogaClassCacheKey = 'yoga_class_info_' . $slug;
+
         $cacheDuration = 120;
 
-        // Only cache the DATA, not the rendered view
-        $data = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
+        $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
             $information = YogaClass::where('slug', $slug)->firstOrFail();
             $faqs = Faq::where('page_slug', $slug)->get();
-            return compact('information', 'faqs');
+            return view('front.class-new', compact('information', 'faqs'))->render();
+
+            return view('front.class', compact('information', 'faqs'))->render();
         });
 
-        return view('front.class-new', $data);
+        return $renderedView;
     }
 
     public function faq()
