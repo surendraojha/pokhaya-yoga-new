@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\Offer;
+use App\Models\WhyComeToPokhara;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
@@ -90,6 +91,7 @@ class FrontController extends Controller
             'faqs'           => Faq::where('page_slug', 'index')->get(),
             'quotes'         => Quote::all(),
             'offers'         => Offer::where('is_active', true)->get(),
+            'whyComeToPokhara' => WhyComeToPokhara::first(),
         ];
 
 

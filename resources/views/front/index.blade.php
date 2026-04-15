@@ -91,18 +91,18 @@ WELCOME SECTION
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">
                     @php
-                        preg_match(
-                            '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
-                            $welcome->video,
-                            $matches,
-                        );
-                        $videoId = $matches[1] ?? null;
-                        $thumbnail = $videoId
-                            ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
-                            : asset('images/train4.jpg');
-                        $embedUrl = $videoId
-                            ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
-                            : $welcome->video;
+    preg_match(
+        '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+        $welcome->video,
+        $matches,
+    );
+    $videoId = $matches[1] ?? null;
+    $thumbnail = $videoId
+        ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
+        : asset('images/train4.jpg');
+    $embedUrl = $videoId
+        ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
+        : $welcome->video;
                     @endphp
                     <div class="play yt-thumb-wrap" data-embed="{{ $welcome->video }}" onclick="openYtLightbox(this)">
                         <img src="{{ $thumbnail }}" alt="{{ $welcome->title }}"
@@ -313,61 +313,53 @@ WHY CHOOSE US
 ══════════════════════════════════════ --}}
 <div class="choose-section">
     <div class="container">
+
+        <!-- Title -->
         <div class="row">
-            <div class="col-12 col-sm-12">
-                <h4>Why choose us?</h4>
-                @if ($whyChooseUs)
-                    <p>{{ $whyChooseUs->description }}</p>
-                @else
-                    <p>Power of Now Oasis provides high standards of education, clinical expertise, and holistic healing
-                        treatments, all together in a safe environment, conducive to personal growth and transformation.
-                    </p>
-                @endif
+            <div class="col-12">
+                <h4>{{ $whyChooseUs->title ?? '' }}</h4>
+                <p>{{ $whyChooseUs->subtitle ?? '' }}</p>
+            </div>
+        </div>
+
+        <!-- Lists -->
+        <div class="row align-items-start">
+            <div class="col-md-6">
+                <ul>
+                    @if(!empty($whyChooseUs->left_list))
+                        @foreach($whyChooseUs->left_list as $item)
+                            <li>
+                                <i class="fa-solid fa-circle-arrow-right"></i> {{ $item }}
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
             </div>
 
-            @if ($features->count())
-                @foreach ($features->take(6) as $feature)
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                        <ul>
-                            <li><i class="fa-solid fa-circle-arrow-right"></i> {{ $feature->title }}</li>
-                        </ul>
+            <div class="col-md-6">
+                <ul>
+                    @if(!empty($whyChooseUs->right_list))
+                        @foreach($whyChooseUs->right_list as $item)
+                            <li>
+                                <i class="fa-solid fa-circle-arrow-right"></i> {{ $item }}
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
+
+        <!-- Images (always last row) -->
+        <div class="row flex-nowrap mt-4">
+            @if(!empty($whyChooseUs->images))
+                @foreach($whyChooseUs->images as $img)
+                    <div class="col-3">
+                        <img src="{{ asset($img) }}" class="img-fluid w-100" alt="">
                     </div>
                 @endforeach
-            @else
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <ul>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Yoga Alliance accredited school.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Peaceful beachfront location.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Professional experienced team of expert
-                            teachers.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Highly regarded school, est 2010.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> 20 students maximum for personalized
-                            attention.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Individually customized Health Retreats.
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <ul>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Ayurvedic and Chinese medicine available.
-                        </li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Mental health and counselling available.
-                        </li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Zero-tolerance harassment policy.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Karma yoga charitable foundation.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Accommodation packages available.</li>
-                        <li><i class="fa-solid fa-circle-arrow-right"></i> Honesty, integrity, authenticity in
-                            everything we do.</li>
-                    </ul>
-                </div>
             @endif
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3"><img src="{{ asset('images/train7.png') }}" alt=""></div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3"><img src="{{ asset('images/train3.jpg') }}" alt=""></div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3"><img src="{{ asset('images/img.jpg') }}" alt="">
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3"><img src="{{ asset('images/train4.jpg') }}" alt=""></div>
         </div>
+
     </div>
 </div>
 
@@ -426,10 +418,10 @@ WHY COME TO POKHARA
         <div class="row">
             <div class="col-12 col-sm-12">
                 <h4>
-                    {{ $whyChooseUs->title ?? 'Why Coming To Pokhara, Nepal?' }}
+                    {{ $whyComeToPokhara->title ?? 'Why Coming To Pokhara, Nepal?' }}
                 </h4>
-                @if(!empty($whyChooseUs?->content))
-                    {!! $whyChooseUs->content !!}
+                @if(!empty($whyComeToPokhara?->content))
+                    {!! $whyComeToPokhara->content !!}
                 @else
                     <p>
                         Nepal is an ancient land where yogis and sages have made their mark for thousands of years.
@@ -707,18 +699,18 @@ TESTIMONIALS
                 <div class="owl-three owl-carousel owl-theme">
                     @foreach ($videoTestimonials as $testimonial)
                         @php
-                            preg_match(
-                                '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
-                                $testimonial->url,
-                                $matches,
-                            );
-                            $videoId = $matches[1] ?? null;
-                            $thumbnail = $videoId
-                                ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
-                                : asset('images/train4.jpg');
-                            $embedUrl = $videoId
-                                ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
-                                : $testimonial->url;
+    preg_match(
+        '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+        $testimonial->url,
+        $matches,
+    );
+    $videoId = $matches[1] ?? null;
+    $thumbnail = $videoId
+        ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
+        : asset('images/train4.jpg');
+    $embedUrl = $videoId
+        ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
+        : $testimonial->url;
                         @endphp
                         <div class="item">
                             <div class="yt-thumb-wrap" data-embed="{{ $embedUrl }}" onclick="openYtLightbox(this)"

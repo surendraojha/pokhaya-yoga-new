@@ -240,6 +240,7 @@
             {{ 'admin/quote' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/testimonial' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/why-choose-us' == request()->path() ? 'menu-open' : '' }}
+            {{ 'admin/why-come-to-pokhara' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/feature' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/facilitie' == request()->path() ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
@@ -279,6 +280,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('why-choose-us.index') }}"
+                                        class="nav-link {{ 'admin/why-choose-us' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Why Choose Us</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('quote.index') }}"
                                         class="nav-link {{ 'quote/offer' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
@@ -293,10 +301,10 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('why-choose-us.index') }}"
-                                        class="nav-link {{ 'admin/why-choose-us' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('why-come-to-pokhara.index') }}"
+                                        class="nav-link {{ 'admin/why-come-to-pokhara' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Why Pokhara yoga</p>
+                                        <p>Why Come to Pokhara</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

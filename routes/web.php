@@ -57,6 +57,7 @@ use App\Http\Controllers\LandingCourseController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\QuoteController;
+use App\Http\Controllers\Admin\WhyComeToPokharaController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 // header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -143,6 +144,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->name('admin.blog.uploadImage');
     Route::resource('blog-users', BlogUsersController::class);
     Route::resource('why-choose-us', WhyChooseUsController::class);
+    Route::resource('why-come-to-pokhara', WhyComeToPokharaController::class);
     Route::resource('curriculam', CurriculamController::class);
     Route::resource('curriculam-category', CurriculamCategoryController::class);
     Route::resource('curriculam-list', CurriculamListController::class);
