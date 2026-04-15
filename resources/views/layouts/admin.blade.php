@@ -236,6 +236,8 @@
             {{ 'admin/about-us' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/slider' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/welcome' == request()->path() ? 'menu-open' : '' }}
+            {{ 'admin/offer' == request()->path() ? 'menu-open' : '' }}
+            {{ 'admin/quote' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/testimonial' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/why-choose-us' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/feature' == request()->path() ? 'menu-open' : '' }}
@@ -267,6 +269,20 @@
                                     <a href="{{ route('welcome.index') }}" class="nav-link {{ 'admin/welcome' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Welcome</p>
+                                    </a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a href="{{ route('offer.index') }}"
+                                        class="nav-link {{ 'admin/offer' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Offer</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('quote.index') }}"
+                                        class="nav-link {{ 'quote/offer' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Quote</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

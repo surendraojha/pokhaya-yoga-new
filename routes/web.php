@@ -55,6 +55,8 @@ use App\Http\Controllers\KeyPointsController;
 use App\Http\Controllers\LandingWhyChooseController;
 use App\Http\Controllers\LandingCourseController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\QuoteController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 // header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -70,6 +72,7 @@ use App\Http\Controllers\WelcomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/foo', function () {
     \Artisan::call('config:clear');
@@ -122,6 +125,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::resource('aboutus', AboutUsController::class);
     Route::resource('welcome', WelcomeController::class);
+    Route::resource('offer', OfferController::class);
+    Route::resource('quote', QuoteController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('video-testimonial', VideoTestimonialController::class);
     Route::resource('slider', SliderController::class);
