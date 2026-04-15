@@ -57,6 +57,7 @@ use App\Http\Controllers\LandingCourseController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\QuoteController;
+use App\Http\Controllers\Admin\CommunitySupportController;
 use App\Http\Controllers\Admin\WhyComeToPokharaController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
@@ -128,6 +129,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('welcome', WelcomeController::class);
     Route::resource('offer', OfferController::class);
     Route::resource('quote', QuoteController::class);
+    Route::resource('community_support', CommunitySupportController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('video-testimonial', VideoTestimonialController::class);
     Route::resource('slider', SliderController::class);
@@ -221,7 +223,7 @@ Route::get('/load-gallery', [FrontController::class, 'loadGallery'])->name('load
 
 
 Route::get('/',  [FrontController::class, 'index'])->name('front.index');
-Route::get('/about-us', [FrontController::class,'aboutUs'])->name('front.about');
+Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('front.about');
 Route::get('/room', [FrontController::class, 'room']);
 Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('front.contact');
 Route::post('/contact-us', [FrontController::class, 'contactUsPost'])->name('contact-us.post')->middleware('throttle:10,1');
@@ -240,12 +242,12 @@ Route::get('/single-page/{slug}', [FrontController::class, 'singlePage'])->name(
 Route::get('/single-course/{slug}', [FrontController::class, 'singleCourse']);
 Route::get('/single-event/{slug}', [FrontController::class, 'singleEvent']);
 Route::get('/single-blog/{slug}', [FrontController::class, 'singleBlog'])->name('blog.detail');
-Route::get('/blog', [FrontController::class,'blogs'])->name('front.blog');
+Route::get('/blog', [FrontController::class, 'blogs'])->name('front.blog');
 Route::get('/blog/author/{name}', [FrontController::class, 'blogUser'])->name('blog.author');
-Route::get('/class/{slug}', [FrontController::class,'yogaClass'])->name('yoga-class.single-page');
+Route::get('/class/{slug}', [FrontController::class, 'yogaClass'])->name('yoga-class.single-page');
 Route::get('/popular-courses', [FrontController::class, 'popularCourse'])->name('popular-courses');
 Route::get('faq', [FrontController::class, 'faq'])->name('front.faq');
-Route::get('curriculam', [FrontController::class,'curriculam'])->name('front.curriculum');
+Route::get('curriculam', [FrontController::class, 'curriculam'])->name('front.curriculum');
 Route::get('teacher/{id}', [FrontController::class, 'teacher'])->name('front.teacher-detail');
 Route::get('teacher-all', [FrontController::class, 'teacherAll'])->name('front.teacher');
 Route::get('training/{slug}', [FrontController::class, 'training'])->name('training.single-page');

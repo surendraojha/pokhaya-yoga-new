@@ -135,7 +135,7 @@ class AboutUsController extends Controller
     public function destroy($id)
     {
         $information = AboutUs::find($id);
-        $path = public_path() . 'uploads/' . $information->image;
+        $path = public_path('uploads/') . $information->image;
         if (File::exists($path)) {
             File::delete($path);
         }
