@@ -159,17 +159,17 @@ UPCOMING TRAININGS
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                     <div class="card">
                         <div class="card-banner">
-                            <a href="{{ route('yoga-class.single-page', $training->slug) }}">
+                            <a href="{{ route('training.single-page', $training->slug) }}">
                                 <img class="banner-img" src="{{ asset('/uploads/course/' . $training->image) }}"
                                     alt="{{ $training->title }}">
                             </a>
                         </div>
                         <div class="card-body">
                             <h2 class="blog-title">
-                                <a href="{{ route('yoga-class.single-page', $training->slug) }}">{{ $training->title }}</a>
+                                <a href="{{ route('training.single-page', $training->slug) }}">{{ $training->title }}</a>
                             </h2>
                             <p>{{ Str::limit(strip_tags($training->content), 80) }}</p>
-                            <a href="{{ route('yoga-class.single-page', $training->slug) }}" class="btn btn-views">Apply
+                            <a href="{{ route('training.single-page', $training->slug) }}" class="btn btn-views">Apply
                                 Now</a>
                         </div>
                     </div>

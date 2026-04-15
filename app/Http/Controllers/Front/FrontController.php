@@ -42,6 +42,7 @@ use App\Models\ContactUs;
 use App\Models\Welcome;
 use app\Models\FeeList;
 use App\Models\BookRoom;
+
 class FrontController extends Controller
 {
 
@@ -69,24 +70,24 @@ class FrontController extends Controller
         // });
 
 
-           $data =  [
-                'sliders'        => Slider::all(),
-                'welcome'        => Welcome::first(),
-                'aboutUs'        => AboutUs::first(),
-                'testimonials'   => Testimonial::latest()->take(3)->get(),
-                'videoTestimonials' => VideoTestimonial::latest()->take(3)->get(), // ADD THIS
-                'photoList'      => PhotoList::latest()->take(8)->get(),
-                'trainings'      => Course::latest()->get(),
-                'teachers'       => OurTeam::orderBy('order', 'asc')->take(3)->get(),
-                'popularCourses' => YogaClass::latest()->take(3)->get(),
-                'blogs'          => Blog::latest()->take(3)->get(),
-                'whyChooseUs'    => WhyChooseUs::first(),
-                'features'       => Feature::orderBy('order', 'asc')->get(),
-                'feeCategory'    => FeeCategory::orderBy('created_at', 'asc')->with('feeList')->get(),
-                'seoMeta'        => SeoMeta::where('name', 'index')->first(),
-                'announcements'  => Announcement::orderBy('id', 'desc')->get(),
-                'faqs'           => Faq::where('page_slug', 'index')->get(),
-            ];
+        $data =  [
+            'sliders'        => Slider::all(),
+            'welcome'        => Welcome::first(),
+            'aboutUs'        => AboutUs::first(),
+            'testimonials'   => Testimonial::latest()->take(3)->get(),
+            'videoTestimonials' => VideoTestimonial::latest()->take(3)->get(), // ADD THIS
+            'photoList'      => PhotoList::latest()->take(8)->get(),
+            'trainings'      => Course::latest()->get(),
+            'teachers'       => OurTeam::orderBy('order', 'asc')->take(3)->get(),
+            'popularCourses' => YogaClass::latest()->take(3)->get(),
+            'blogs'          => Blog::latest()->take(3)->get(),
+            'whyChooseUs'    => WhyChooseUs::first(),
+            'features'       => Feature::orderBy('order', 'asc')->get(),
+            'feeCategory'    => FeeCategory::orderBy('created_at', 'asc')->with('feeList')->get(),
+            'seoMeta'        => SeoMeta::where('name', 'index')->first(),
+            'announcements'  => Announcement::orderBy('id', 'desc')->get(),
+            'faqs'           => Faq::where('page_slug', 'index')->get(),
+        ];
 
 
 
@@ -429,22 +430,19 @@ class FrontController extends Controller
         return view('front.blog-user', compact('blogs', 'blogUser'));
     }
 
-
-    public function yogaClass(string $slug) // Type hint $slug for clarity
+    public function yogaClass(string $slug)
     {
         $yogaClassCacheKey = 'yoga_class_info_' . $slug;
-
         $cacheDuration = 120;
 
-        $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
+        // Only cache the DATA, not the rendered view
+        $data = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
             $information = YogaClass::where('slug', $slug)->firstOrFail();
             $faqs = Faq::where('page_slug', $slug)->get();
-            return view('front.class-new', compact('information', 'faqs'))->render();
-
-            return view('front.class', compact('information', 'faqs'))->render();
+            return compact('information', 'faqs');
         });
 
-        return $renderedView;
+        return view('front.class-new', $data);
     }
 
     public function faq()

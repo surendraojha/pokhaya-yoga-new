@@ -241,7 +241,7 @@ Route::get('faq', [FrontController::class, 'faq'])->name('front.faq');
 Route::get('curriculam', [FrontController::class,'curriculam'])->name('front.curriculum');
 Route::get('teacher/{id}', [FrontController::class, 'teacher'])->name('front.teacher-detail');
 Route::get('teacher-all', [FrontController::class, 'teacherAll'])->name('front.teacher');
-Route::get('training/{slug}', [FrontController::class, 'training']);
+Route::get('training/{slug}', [FrontController::class, 'training'])->name('training.single-page');
 
 Route::get('/single-page/privacy-policy', [FrontController::class, 'privacyPolicy'])->name('single-privacy-policy');
 Route::get('our-testimonials', [FrontController::class, 'testimonial'])->name('front.testimonial');
