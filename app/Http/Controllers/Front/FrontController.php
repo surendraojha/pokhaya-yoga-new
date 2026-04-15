@@ -2,53 +2,53 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Offer;
-use App\Models\WhyComeToPokhara;
-use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\AboutUs;
-use App\Models\OurTeam;
-use App\Models\Course;
-use App\Models\Notice;
+use App\Models\AccommodationAndFood;
 use App\Models\AllPage;
+use App\Models\Announcement;
 use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\BlogUsers;
 use App\Models\Booking;
-use App\Models\WhyChooseUs;
-use App\Models\Facilitie;
-use App\Models\Feature;
-use App\Models\Setting;
-use App\Models\FeeCategory;
-use App\Models\YogaClass;
-use App\Models\Faq;
+use App\Models\BookRoom;
+use App\Models\CommunitySupport;
+use App\Models\ContactUs;
+use App\Models\Course;
 use App\Models\Curriculam;
 use App\Models\CurriculamCategory;
 use App\Models\Customer;
-use App\Models\SeoMeta;
-use App\Mail\SendMail;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Faq;
+use App\Models\Feature;
+use App\Models\FeeCategory;
+use app\Models\FeeList;
+use App\Models\Notice;
+use App\Models\Offer;
+use App\Models\OurTeam;
+use App\Models\PhotoList;
+use App\Models\Quote;
 use App\Models\ReferSetting;
 use App\Models\Retreats;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Validator;
+use App\Models\SeoMeta;
+use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Models\VideoTestimonial;
-use App\Models\PhotoList;
-use App\Models\Announcement;
-use App\Helpers\Helper;
-use App\Models\ContactUs;
 use App\Models\Welcome;
-use app\Models\FeeList;
-use App\Models\BookRoom;
-use App\Models\Quote;
-use App\Models\CommunitySupport;
+use App\Models\WhyChooseUs;
+use App\Models\WhyComeToPokhara;
+use App\Models\YogaClass;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 class FrontController extends Controller
 {
-
     public function index(Request $request)
     {
         $minutes = 10;
@@ -72,35 +72,32 @@ class FrontController extends Controller
         //     ];
         // });
 
-
-        $data =  [
-            'sliders'        => Slider::all(),
-            'welcome'        => Welcome::first(),
-            'aboutUs'        => AboutUs::first(),
-            'testimonials'   => Testimonial::latest()->take(3)->get(),
+        $data = [
+            'sliders' => Slider::all(),
+            'welcome' => Welcome::first(),
+            'aboutUs' => AboutUs::first(),
+            'testimonials' => Testimonial::latest()->take(3)->get(),
             'videoTestimonials' => VideoTestimonial::latest()->take(3)->get(), // ADD THIS
-            'photoList'      => PhotoList::latest()->take(8)->get(),
-            'trainings'      => Course::latest()->get(),
-            'teachers'       => OurTeam::orderBy('order', 'asc')->take(3)->get(),
+            'photoList' => PhotoList::latest()->take(8)->get(),
+            'trainings' => Course::latest()->get(),
+            'teachers' => OurTeam::orderBy('order', 'asc')->take(3)->get(),
             'popularCourses' => YogaClass::latest()->take(3)->get(),
-            'blogs'          => Blog::latest()->take(3)->get(),
-            'whyChooseUs'    => WhyChooseUs::first(),
-            'features'       => Feature::orderBy('order', 'asc')->get(),
-            'feeCategory'    => FeeCategory::orderBy('created_at', 'asc')->with('feeList')->get(),
-            'seoMeta'        => SeoMeta::where('name', 'index')->first(),
-            'announcements'  => Announcement::orderBy('id', 'desc')->get(),
-            'faqs'           => Faq::where('page_slug', 'index')->get(),
-            'quotes'         => Quote::all(),
-            'offers'         => Offer::where('is_active', true)->get(),
+            'blogs' => Blog::latest()->take(3)->get(),
+            'whyChooseUs' => WhyChooseUs::first(),
+            'features' => Feature::orderBy('order', 'asc')->get(),
+            'feeCategory' => FeeCategory::orderBy('created_at', 'asc')->with('feeList')->get(),
+            'seoMeta' => SeoMeta::where('name', 'index')->first(),
+            'announcements' => Announcement::orderBy('id', 'desc')->get(),
+            'faqs' => Faq::where('page_slug', 'index')->get(),
+            'quotes' => Quote::all(),
+            'offers' => Offer::where('is_active', true)->get(),
             'communitySupport' => CommunitySupport::first(),
             'whyComeToPokhara' => WhyComeToPokhara::first(),
+            'accommodationAndFoods' => AccommodationAndFood::active()->get(),
         ];
-
-
 
         return view('front.index', $data);
     }
-
 
     public function loadGallery()
     {
@@ -114,6 +111,7 @@ class FrontController extends Controller
         return $view;
         // return $view;
     }
+
     public function aboutUs()
     {
         $aboutUs = AboutUs::all();
@@ -151,8 +149,6 @@ class FrontController extends Controller
         return view('front.courses', compact('popularCourses', 'seoMeta', 'banner'));
     }
 
-
-
     public function testimonial()
     {
         $seoMeta = SeoMeta::where('name', 'testimonials')->first();
@@ -187,7 +183,6 @@ class FrontController extends Controller
         return view('front.video-testimonial-detail', compact('videoTestimonial'));
     }
 
-
     public function photoList()
     {
         $seoMeta = SeoMeta::where('name', 'gallery')->first();
@@ -197,15 +192,18 @@ class FrontController extends Controller
 
         return view('front.photo-list', compact('photoList', 'seoMeta'));
     }
+
     public function thankYou()
     {
 
         return view('front.thankyou');
     }
+
     public function room()
     {
         return view('front.room');
     }
+
     public function contactUs()
     {
         $seoMeta = SeoMeta::where('name', 'contact-us')->first();
@@ -213,6 +211,7 @@ class FrontController extends Controller
         $setting = Setting::first();
         $aboutUs = AboutUs::first();
         $banner = Banner::where('title', 'contact-banner')->first();
+
         return view('front.contact-us-new', compact('setting', 'aboutUs', 'seoMeta', 'banner'));
 
         return view('front.contact-us', compact('setting', 'aboutUs', 'seoMeta', 'banner'));
@@ -220,7 +219,6 @@ class FrontController extends Controller
 
     public function contactUsPost(Request $request)
     {
-
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -250,14 +248,13 @@ class FrontController extends Controller
         //         ->withErrors(['message' => 'Your message appears to be spam and was not sent.']);
         // }
 
-
         if (env('APP_ENV') == 'production') {
             $isSpam = Helper::isSpamSubmission(
                 $request,
-                ['message', 'subject'], //freeTextFields:
+                ['message', 'subject'], // freeTextFields:
                 ['number'], //    phoneFields:
-                'name', //nameField:
-                'email' //emailField:
+                'name', // nameField:
+                'email' // emailField:
             );
             // spam detection manually
             if ($isSpam) {
@@ -267,7 +264,6 @@ class FrontController extends Controller
             }
         }
 
-
         $information = new ContactUs;
         $information->name = $request->name;
         $information->email = $request->email;
@@ -275,28 +271,21 @@ class FrontController extends Controller
         $information->subject = $request->subject;
         $information->message = $request->message;
 
-
         $information->save();
 
-
-        $data = array(
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'number' => $request->number,
             'subject' => $request->subject,
             'message' => $request->message,
 
-
-
-        );
+        ];
         $email = 'info@pokharayogaschoolandretreatcenter.com';
-
 
         Mail::to($email)->send(new SendMail($data));
 
-
         return redirect()->route('thankyou');
-
 
         // return redirect()->back()->with('msg', 'Thank you For your messaging us , we will contact you as soon as possible');
     }
@@ -313,10 +302,9 @@ class FrontController extends Controller
         $request->session()->put('room', $request->input('room'));
         $room = $request->session()->get('room');
 
-
-
         return view('front.get-book', compact('checkIn', 'checkOut', 'children', 'room'));
     }
+
     public function postBook(Request $request)
     {
         $request->validate([
@@ -341,7 +329,6 @@ class FrontController extends Controller
         $information->check_in = $request->check_in;
         $information->check_out = $request->check_out;
         $information->save();
-
 
         return redirect('/')->with('msg', 'Room Is Booked. For More Information Please Contact Us');
     }
@@ -376,7 +363,8 @@ class FrontController extends Controller
     {
         return view('front.rafting-kayaking');
     }
-    //single page
+
+    // single page
     public function singlePage($slug)
     {
         $information = AllPage::where('slug', '=', $slug)->firstOrFail();
@@ -393,12 +381,14 @@ class FrontController extends Controller
     public function singleCourse($slug)
     {
         $singlePage = Course::where('slug', '=', $slug)->firstOrFail();
+
         return view('front.single-page', compact('singlePage'));
     }
 
     public function singleEvent($slug)
     {
         $singlePage = Notice::where('slug', '=', $slug)->firstOrFail();
+
         return view('front.single-page', compact('singlePage'));
     }
 
@@ -408,11 +398,12 @@ class FrontController extends Controller
         $blog_views = session()->get('blog_views');
         $faqs = Faq::where('page_slug', $slug)->get();
         $popularBlogs = Blog::orderBy('views', 'DESC')->take(8)->get();
-        if ($information->id ==  $blog_views) {
+        if ($information->id == $blog_views) {
         } else {
             $information->incrementViewsCount();
             session()->put('blog_views', $information->id);
         }
+
         return view('front.single-page-new', compact('information', 'faqs', 'popularBlogs'));
 
         return view('front.single-page', compact('information', 'faqs'));
@@ -424,7 +415,9 @@ class FrontController extends Controller
         // 		$blogs = Blog::orderBy('id', 'DESC')->get();
         $blogs = Blog::latest()->paginate(15);
         $banner = Banner::where('title', 'blog-banner')->first();
+
         return view('front.blog-new', compact('blogs', 'seoMeta', 'banner'));
+
         return view('front.blog', compact('blogs', 'seoMeta', 'banner'));
     }
 
@@ -439,13 +432,14 @@ class FrontController extends Controller
 
     public function yogaClass(string $slug) // Type hint $slug for clarity
     {
-        $yogaClassCacheKey = 'yoga_class_info_' . $slug;
+        $yogaClassCacheKey = 'yoga_class_info_'.$slug;
 
         $cacheDuration = 120;
 
         $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
             $information = YogaClass::where('slug', $slug)->firstOrFail();
             $faqs = Faq::where('page_slug', $slug)->get();
+
             return view('front.class-new', compact('information', 'faqs'))->render();
 
             return view('front.class', compact('information', 'faqs'))->render();
@@ -465,12 +459,11 @@ class FrontController extends Controller
         return view('front.faq', compact('faqs', 'seoMeta'));
     }
 
-
-
     public function curriculam()
     {
         $information = Curriculam::first();
         $categories = CurriculamCategory::with('curriculamList')->get();
+
         return view('front.curriculam-new', compact('information', 'categories'));
 
         return view('front.curriculam', compact('information', 'categories'));
@@ -479,6 +472,7 @@ class FrontController extends Controller
     public function teacher($id)
     {
         $information = OurTeam::find($id);
+
         return view('front.teacher-new', compact('information'));
 
         return view('front.teacher', compact('information'));
@@ -501,7 +495,6 @@ class FrontController extends Controller
         return view('front.training', compact('information'));
     }
 
-
     // public function login()
     // {
     // 	return view('front/login');
@@ -523,18 +516,17 @@ class FrontController extends Controller
                 $request->session()->put('User', true);
                 $request->session()->put('User_id', $result->id);
                 $request->session()->put('name', $result->name);
+
                 return redirect('userprofile_dashboard')->with('msg', 'Success');
             } else {
-                //$request->session()->flash('error', 'Please enter correct password');
-                return redirect('login')->with('msg', 'Please enter correct password');;
+                // $request->session()->flash('error', 'Please enter correct password');
+                return redirect('login')->with('msg', 'Please enter correct password');
             }
         } else {
-            //$request->session()->flash('error', 'Please enter valid details');
+            // $request->session()->flash('error', 'Please enter valid details');
             return redirect('login')->with('msg', 'Please enter valid Email address');
         }
     }
-
-
 
     // public function logout(Request $request)
     // {
@@ -570,18 +562,18 @@ class FrontController extends Controller
 
             if ($refer_setting->commission_type == 'percentage') {
                 $amount = $result->share_room * $refer_setting->comission_amount / 100;
-                //$discounted = $result->share_room - $amount;
+                // $discounted = $result->share_room - $amount;
             } else {
-                $amount =  $refer_setting->comission_amount;
+                $amount = $refer_setting->comission_amount;
             }
 
             // calculate disount
 
             if ($refer_setting->discount_type == 'percentage') {
                 $discount_amount = $result->share_room * $refer_setting->discount_amount / 100;
-                //$discounted = $result->share_room - $amount;
+                // $discounted = $result->share_room - $amount;
             } else {
-                $discount_amount =  $refer_setting->discount_amount;
+                $discount_amount = $refer_setting->discount_amount;
             }
         } else {
             $result->private_room = $result->private_room * $numberOfAttendants;
@@ -589,29 +581,27 @@ class FrontController extends Controller
             if ($refer_setting->commission_type == 'percentage') {
                 $amount = $result->private_room * $refer_setting->comission_amount / 100;
             } else {
-                $amount =  $refer_setting->comission_amount;
+                $amount = $refer_setting->comission_amount;
             }
 
             // discount_amount
             if ($refer_setting->discount_type == 'percentage') {
                 $discount_amount = $result->private_room * $refer_setting->discount_amount / 100;
             } else {
-                $discount_amount =  $refer_setting->discount_amount;
+                $discount_amount = $refer_setting->discount_amount;
             }
         }
         $customer->referred_earning = $customer->referred_earning + $amount;
         $customer->save();
 
-        //After disocunt actual price is
+        // After disocunt actual price is
         // credit customer amount
         // settings baata percentage or amount tannne
         $result->private_room = $result->private_room - $discount_amount;
         $result->share_room = $result->share_room - $discount_amount;
 
-
         return response()->json($result);
     }
-
 
     public function bookings(Request $request)
     {
@@ -625,9 +615,9 @@ class FrontController extends Controller
             'actual_price' => 'required',
 
         ]);
-        //$referral = Customer::select('email', 'status')->first();
-        //$data_referral_one = $referral[0]->email;
-        //$data_referral = $referral[1]->status;
+        // $referral = Customer::select('email', 'status')->first();
+        // $data_referral_one = $referral[0]->email;
+        // $data_referral = $referral[1]->status;
         if (session('User_id')) {
             $result = Booking::create([
                 'name' => trim($request->input('name')),
@@ -639,7 +629,7 @@ class FrontController extends Controller
                 'room_type' => $request->input('room_type'),
                 'actual_price' => $request->input('actual_price'),
                 'status' => 0,
-                'referred_by' => $request->input('referred_by')
+                'referred_by' => $request->input('referred_by'),
 
             ]);
 
@@ -649,7 +639,7 @@ class FrontController extends Controller
         } else {
             $result = Booking::create([
                 'name' => trim($request->input('name')),
-                //'customer_id' => session('User_id'),
+                // 'customer_id' => session('User_id'),
                 'email' => strtolower($request->input('email')),
                 'phone' => $request->input('phone'),
                 'address' => $request->input('address'),
@@ -657,7 +647,7 @@ class FrontController extends Controller
                 'room_type' => $request->input('room_type'),
                 'actual_price' => $request->input('actual_price'),
                 'status' => 0,
-                'referred_by' => $request->input('referred_by')
+                'referred_by' => $request->input('referred_by'),
 
             ]);
 
@@ -681,7 +671,7 @@ class FrontController extends Controller
 
         $results = FeeList::all();
         $valid_token = Customer::where('referral_token', session('refer_id'))->first();
-        //$user = session('User_id');
+        // $user = session('User_id');
 
         if (session('refer_id') == '') {
             return view('front.yoga_package', compact('results'));
@@ -690,22 +680,23 @@ class FrontController extends Controller
                 $referral_name = $valid_token->name;
                 if ($referral_name == session('name')) {
                     session()->flash('msg', 'Self Refer Denied Token');
+
                     return view('front.yoga_package', compact('results'));
                 } else {
                     session()->flash('msg', 'Success Token Received');
+
                     return view('front.yoga_package', compact('results', 'referral_name', 'token'));
                 }
-                //$compare = Customer::find('name')->get();
-
+                // $compare = Customer::find('name')->get();
 
             } else {
                 session()->flash('error', 'Token Invalid Access Denied');
+
                 return view('front.yoga_package', compact('results', 'token'));
             }
         }
 
-
-        //return view('front.yoga_register', compact('results', 'customer', 'token'));
+        // return view('front.yoga_register', compact('results', 'customer', 'token'));
     }
 
     public function generate_token()
@@ -722,13 +713,14 @@ class FrontController extends Controller
         } else {
             session()->flash('msg', 'Token Cannot be Generated... At least One booking Required');
         }
+
         return redirect()->back();
     }
-
 
     public function refer_link($url)
     {
         session()->put('url', $url);
+
         // $result = Booking::create([
         // 	'referred_by' => $referred_by
         // ]);
@@ -789,34 +781,35 @@ class FrontController extends Controller
         $try = Customer::where('referral_token', $token)->first();
         if ($try) {
             $valid_token = Customer::where('referral_token', $token)
-                ->select("referral_token")
+                ->select('referral_token')
                 ->first();
             $check_token = $valid_token->referral_token;
             if ($token = $check_token) {
                 if (empty(session('User_id'))) {
-                    //dd('session error');
+                    // dd('session error');
                     session()->put('refer_id', $token);
+
                     return redirect('login')->with('msg', 'Please Login');
                 }
             }
 
             if ($token = $check_token) {
                 if (session('User_id')) {
-                    //dd('all good');
+                    // dd('all good');
                     session()->put('refer_id', $token);
+
                     return redirect('register_yoga')->with('msg', 'Success Token Received');
                 }
             }
         } else {
 
             if (empty(session('User_id'))) {
-                //dd('error token User_id error');
+                // dd('error token User_id error');
                 return redirect('register')->with('msg', 'Token invalid');
             }
 
-
             if (session('User_id')) {
-                //dd('token error user id success');
+                // dd('token error user id success');
                 return redirect('register_yoga')->with('msg', 'Token Invalid');
             }
         }
@@ -845,7 +838,7 @@ class FrontController extends Controller
 
         // yesma error vao valid token with session validation for redirection in either login or signup[ page]
         // $check_token = $valid_token;
-        //session()->put('refer_id', $token);
+        // session()->put('refer_id', $token);
         // elseif ($token == $valid_token->referral_token  && session('User_id')) {
         // 	//dd($valid_token->referral_token);
         // 	// session()->put('refer_id', $token);
@@ -861,11 +854,11 @@ class FrontController extends Controller
         // 	//session()->flash('error', 'Token Invalid Access Denied');
         // 	return redirect('front.yoga_package')->with('msg', 'Token Invalid Access Denied');
         // }
-        //elseif ($token == !$valid_token && empty(session('User_id'))) {
+        // elseif ($token == !$valid_token && empty(session('User_id'))) {
 
-        //return redirect('login');
-        //session()->flash('errors', 'Token Invalid Access Denied');
-        //return redirect('login');
+        // return redirect('login');
+        // session()->flash('errors', 'Token Invalid Access Denied');
+        // return redirect('login');
         // else {
         // 	//dd($valid_token->referral_token);
         // 	//return $valid_token;
@@ -881,6 +874,7 @@ class FrontController extends Controller
         // $bookings = Booking::find($user);
         // $id = $bookings->customer_id;
         $customer = Customer::find($user);
+
         return view(
             'front.userprofile_dashboard',
             compact('customer', 'token')
@@ -890,6 +884,7 @@ class FrontController extends Controller
     public function privacyPolicy()
     {
         $information = AllPage::where('slug', '=', 'privacy-policy')->first();
+
         return view('front.privacy-policy.privacy-policy', compact('information'));
     }
 }

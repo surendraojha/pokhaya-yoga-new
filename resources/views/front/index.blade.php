@@ -71,7 +71,7 @@ WELCOME SECTION
                     <h1>{{$welcome->title ?? 'Namaste and Welcome to Pokhara Yoga School and Retreat Center'}}</h1>
 
                     @if(!empty($welcome?->content))
-                        {!! $welcome->content !!}
+                        <p>{!! $welcome->content !!}</p>
                     @else
                         <p>
                             Yoga is a way of life. Whether you aspire to be a certified Yoga teacher or desire to learn Yoga
@@ -91,18 +91,18 @@ WELCOME SECTION
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 welcome-right">
                     @php
-    preg_match(
-        '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
-        $welcome->video,
-        $matches,
-    );
-    $videoId = $matches[1] ?? null;
-    $thumbnail = $videoId
-        ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
-        : asset('images/train4.jpg');
-    $embedUrl = $videoId
-        ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
-        : $welcome->video;
+                        preg_match(
+                            '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+                            $welcome->video,
+                            $matches,
+                        );
+                        $videoId = $matches[1] ?? null;
+                        $thumbnail = $videoId
+                            ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
+                            : asset('images/train4.jpg');
+                        $embedUrl = $videoId
+                            ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
+                            : $welcome->video;
                     @endphp
                     <div class="play yt-thumb-wrap" data-embed="{{ $welcome->video }}" onclick="openYtLightbox(this)">
                         <img src="{{ $thumbnail }}" alt="{{ $welcome->title }}"
@@ -282,7 +282,8 @@ COMMUNITY SUPPORT
             <div class="donation-tiers">
                 {{-- Dynamic image from CommunitySupport --}}
                 @if ($communitySupport && $communitySupport->image)
-                    <img src="{{ asset('uploads/community/' . $communitySupport->image) }}" alt="{{ $communitySupport->title ?? 'Community Support' }}">
+                    <img src="{{ asset('uploads/community/' . $communitySupport->image) }}"
+                        alt="{{ $communitySupport->title ?? 'Community Support' }}">
                 @else
                     <img src="{{ asset('images/img.jpg') }}" alt="Community Support">
                 @endif
@@ -308,8 +309,10 @@ SPECIAL OFFERS / SCHOLARSHIPS
                     <div class="scholarship-cards">
                         @foreach ($offers as $offer)
                             <div class="scholarship-card">
-                                <a href="#"><img src="{{ asset('uploads/offers/' . $offer->image) }}" alt="{{ $offer->title }}"></a>
-                                <div class="discount-badge"><span class="percent">{{ $offer->discount }}%</span><span class="off">OFF</span>
+                                <a href="#"><img src="{{ asset('uploads/offers/' . $offer->image) }}"
+                                        alt="{{ $offer->title }}"></a>
+                                <div class="discount-badge"><span class="percent">{{ $offer->discount }}%</span><span
+                                        class="off">OFF</span>
                                 </div>
                                 <div class="card-content">
                                     <h3 class="card-title"><a href="#">{{ $offer->title }}</a></h3>
@@ -596,18 +599,31 @@ ACCOMMODATION & FOOD (static — make dynamic later)
             <div class="col-12 col-sm-12">
                 <h4>Accommodation & Food</h4>
             </div>
-            @foreach ([['Student Life', 'food1.jpg', 'During the course, classes are held 5 days a week, for approximately 8 hours a day.'], ['Room & Facilities', 'food2.jpg', 'Our private rooms come fitted with king sized double beds with carefully selected mattresses.'], ['Food', 'food3.jpg', 'Infinity Resort is proud to serve guests wholesome vegetarian meals.']] as $item)
+            @forelse($accommodationAndFoods as $item)
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="image-box">
-                        <img src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
+                        <img src="{{ asset($item->image) }}" alt="{{ $item->title }}">
                         <div class="text-overlay">
-                            <h2><a href="#">{{ $item[0] }}</a></h2>
-                            <p>{{ $item[2] }}</p>
-                            <a href="#" class="btn btn-views">Read More</a>
+                            <h2><a href="{{ $item->link ?? '#' }}">{{ $item->title }}</a></h2>
+                            <p>{{ $item->description }}</p>
+                            <a href="{{ $item->link ?? '#' }}" class="btn btn-views">Read More</a>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                    @foreach ([['Student Life', 'food1.jpg', 'During the course, classes are held 5 days a week, for approximately 8 hours a day.'], ['Room & Facilities', 'food2.jpg', 'Our private rooms come fitted with king sized double beds with carefully selected mattresses.'], ['Food', 'food3.jpg', 'Infinity Resort is proud to serve guests wholesome vegetarian meals.']] as $item)
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="image-box">
+                                <img src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
+                                <div class="text-overlay">
+                                    <h2><a href="#">{{ $item[0] }}</a></h2>
+                                    <p>{{ $item[2] }}</p>
+                                    <a href="#" class="btn btn-views">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+            @endforelse
         </div>
     </div>
 </div>
@@ -716,18 +732,18 @@ TESTIMONIALS
                 <div class="owl-three owl-carousel owl-theme">
                     @foreach ($videoTestimonials as $testimonial)
                         @php
-    preg_match(
-        '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
-        $testimonial->url,
-        $matches,
-    );
-    $videoId = $matches[1] ?? null;
-    $thumbnail = $videoId
-        ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
-        : asset('images/train4.jpg');
-    $embedUrl = $videoId
-        ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
-        : $testimonial->url;
+                            preg_match(
+                                '/(?:youtube\.com\/(?:embed\/|watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+                                $testimonial->url,
+                                $matches,
+                            );
+                            $videoId = $matches[1] ?? null;
+                            $thumbnail = $videoId
+                                ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg"
+                                : asset('images/train4.jpg');
+                            $embedUrl = $videoId
+                                ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0"
+                                : $testimonial->url;
                         @endphp
                         <div class="item">
                             <div class="yt-thumb-wrap" data-embed="{{ $embedUrl }}" onclick="openYtLightbox(this)"

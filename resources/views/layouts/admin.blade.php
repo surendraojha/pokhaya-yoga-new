@@ -322,6 +322,12 @@
                                         <p>Yoga Training In Nepal</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('accommodation-and-foods.index') }}" class="nav-link {{ 'admin/accommodation-and-foods' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Accommodation and Food</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

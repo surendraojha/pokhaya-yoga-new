@@ -5,7 +5,10 @@
 
 <div class="form-group">
     <label>Content</label>
-    {{ Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) }}
+    {{ Form::textarea('content', null, [
+    'class' => 'form-control',
+    'id' => 'summernote'
+]) }}
 </div>
 
 <div class="form-group">
