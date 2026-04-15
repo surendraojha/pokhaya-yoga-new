@@ -45,6 +45,7 @@ use App\Models\Welcome;
 use app\Models\FeeList;
 use App\Models\BookRoom;
 use App\Models\Quote;
+use App\Models\CommunitySupport;
 class FrontController extends Controller
 {
 
@@ -91,6 +92,7 @@ class FrontController extends Controller
             'faqs'           => Faq::where('page_slug', 'index')->get(),
             'quotes'         => Quote::all(),
             'offers'         => Offer::where('is_active', true)->get(),
+            'communitySupport' => CommunitySupport::first(),
             'whyComeToPokhara' => WhyComeToPokhara::first(),
         ];
 

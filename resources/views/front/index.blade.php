@@ -253,19 +253,36 @@ COMMUNITY SUPPORT
     <div class="container">
         <div class="campaign-content">
             <div class="campaign-info">
-                <h2>Community Supports</h2>
-                <p>We believe yoga is for everyone. This year, we're raising funds to provide free classes, mats, and
-                    teacher training scholarships to underserved communities, spreading healing and mindfulness far and
-                    wide.</p>
+                {{-- Dynamic title --}}
+                <h2>{{ $communitySupport->title ?? 'Community Supports' }}</h2>
+
+                {{-- Dynamic description (can serve as the "why" section) --}}
+                <p>{{ $communitySupport->description ?? 'We believe yoga is for everyone...' }}</p>
+
+                {{-- Optional: explicit "Why" section if you add a 'why' column --}}
+                @if(isset($communitySupport->why) && $communitySupport->why)
+                    <div class="why-section">
+                        <h3>Why This Matters</h3>
+                        <p>{{ $communitySupport->why }}</p>
+                    </div>
+                @endif
+
+                {{-- Dynamic stats list (assuming stats is an array of strings) --}}
                 <ul class="stats-list">
-                    <li><i class="fas fa-check-circle"></i> 500+ Free Yoga Mats Distributed</li>
-                    <li><i class="fas fa-check-circle"></i> 20 Teacher Scholarships Funded</li>
-                    <li><i class="fas fa-check-circle"></i> 10 Community Centers Supported</li>
+                    @forelse($communitySupport->stats ?? [] as $stat)
+                        <li><i class="fas fa-check-circle"></i> {{ $stat }}</li>
+                    @empty
+                        <li><i class="fas fa-check-circle"></i> 500+ Free Yoga Mats Distributed</li>
+                        <li><i class="fas fa-check-circle"></i> 20 Teacher Scholarships Funded</li>
+                        <li><i class="fas fa-check-circle"></i> 10 Community Centers Supported</li>
+                    @endforelse
                 </ul>
             </div>
+
             <div class="donation-tiers">
-                @if ($aboutUs && $aboutUs->image)
-                    <img src="{{ asset('uploads/' . $aboutUs->image) }}" alt="Community Support">
+                {{-- Dynamic image from CommunitySupport --}}
+                @if ($communitySupport && $communitySupport->image)
+                    <img src="{{ asset('uploads/community/' . $communitySupport->image) }}" alt="{{ $communitySupport->title ?? 'Community Support' }}">
                 @else
                     <img src="{{ asset('images/img.jpg') }}" alt="Community Support">
                 @endif
