@@ -591,6 +591,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('room.index') }}"
+                                class="nav-link {{ 'admin/room' == request()->path() ? 'bg-white' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rooms</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('referral.setting') }}"
                                 class="nav-link {{ 'admin/referral-setting' == request()->path() ? 'bg-white' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>

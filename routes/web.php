@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\ReferralsController;
 use App\Http\Controllers\Admin\ReferralSettingController;
 use App\Http\Controllers\Admin\RetreatPageController;
 use App\Http\Controllers\Admin\RoomBookController;
+use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SeoMetaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -130,6 +131,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('gallery', GalleryController::class);
     Route::resource('photo-list', PhotoListController::class);
     Route::resource('contact', ContactController::class);
+    Route::resource('room', RoomController::class);
+    Route::delete('room/delete-image/{imageId}', [RoomController::class, 'deleteImage'])->name('room.delete-image');
     Route::resource('room-book', RoomBookController::class);
     Route::resource('course', CourseController::class);
     Route::resource('team-category', TeamCategoryController::class);
@@ -217,11 +220,13 @@ Route::get('/load-gallery', [FrontController::class, 'loadGallery'])->name('load
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('front.about');
+Route::get('/room-list', [FrontController::class, 'roomList'])->name('front.room-list');
+Route::get('/room/{id}', [FrontController::class, 'roomDetail'])->name('front.room-detail');
 Route::get('/room', [FrontController::class, 'room']);
 Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('front.contact');
 Route::post('/contact-us', [FrontController::class, 'contactUsPost'])->name('contact-us.post')->middleware('throttle:10,1');
 Route::post('/check-book', [FrontController::class, 'checkBook']);
-Route::post('/post-book', [FrontController::class, 'postBook']);
+Route::post('/post-book', [FrontController::class, 'postBook'])->name('post-book');
 Route::get('/photo-list', [FrontController::class, 'photoList'])->name('front.photo-list');
 Route::get('/single-post/{id}', [FrontController::class, 'singlePost']);
 Route::get('/news-event', [FrontController::class, 'newsEvent']);

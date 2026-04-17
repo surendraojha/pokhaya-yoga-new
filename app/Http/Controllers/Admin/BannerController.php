@@ -47,7 +47,7 @@ class BannerController extends Controller
                 if($request->hasFile('image'))
       {
          $file = $request->file('image');
-         $path = public_path().'uploads';
+         $path = public_path().'/uploads/';
          $filename = date('ymdhis').$file->getClientOriginalName();
          $file->move($path, $filename);
          $information->image = $filename;
@@ -96,10 +96,10 @@ class BannerController extends Controller
       if($request->hasFile('image'))
       {
          $file = $request->file('image');
-         $path = public_path().'uploads/';
+         $path = public_path().'/uploads/';
          $filename = date('ymdhis').$file->getClientOriginalName();
          $file->move($path, $filename);
-         $oldfile = public_path().'uploads/'.$oldfile;
+         $oldfile = public_path().'/uploads/'.$oldfile;
          if(File::exists($oldfile))
          {
             File::delete($oldfile);

@@ -28,10 +28,11 @@ use App\Models\Notice;
 use App\Models\Offer;
 use App\Models\OurTeam;
 use App\Models\PhotoList;
-use App\Models\Quote;
 use App\Models\Question;
+use App\Models\Quote;
 use App\Models\ReferSetting;
 use App\Models\Retreats;
+use App\Models\Room;
 use App\Models\SeoMeta;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -199,6 +200,21 @@ class FrontController extends Controller
     {
 
         return view('front.thankyou');
+    }
+
+    public function roomList()
+    {
+        $informations = Room::where('is_active', true)->paginate(9);
+        $banner = Banner::where('title', 'room-banner')->first();
+
+        return view('front.room-list', compact('informations', 'banner'));
+    }
+
+    public function roomDetail($id)
+    {
+        $room = Room::find($id);
+        $banner = Banner::where('title', 'room-banner')->first();
+        return view('front.room-details', compact('room', 'banner'));
     }
 
     public function room()
