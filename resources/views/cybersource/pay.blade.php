@@ -1,6 +1,5 @@
-@include('front.includes.header')
-
-<section id="payment-form" class="payment-form" style="margin-top: 170px;">
+@extends('front.layouts.main')
+@section('content')
     <div class="container">
 
         <div class="row justify-content-center py-5">
@@ -33,5 +32,4 @@
             </div>
         </div>
     </div>
-</section>
-@include('front.includes.footer')
+@endsection
