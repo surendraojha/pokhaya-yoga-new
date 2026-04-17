@@ -41,13 +41,13 @@ BANNER / SLIDER
         <div class="carousel-inner">
             @foreach ($sliders as $index => $slider)
                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                    <img src="{{ asset('uploads/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->title }}">
+                    <img loading="lazy" src="{{ asset('uploads/' . $slider->image) }}" class="d-block w-100" alt="{{ $slider->title }}">
                     <div class="carousel-overlay"></div>
                     <div class="carousel-caption">
                         <h1 class="bounceInUp wow">{{ $slider->title }}</h1>
                         <p class="bounceInUp wow">{!! $slider->content !!}</p>
                         <a href="{{ $slider->link ?? '#' }}" class="btn btn-join">View Details</a>
-                        <img class="logo-images" src="{{ asset('images/YTTC-11.png') }}" alt="">
+                        <img loading="lazy" class="logo-images" src="{{ asset('images/YTTC-11.png') }}" alt="">
                     </div>
                 </div>
             @endforeach
@@ -113,7 +113,7 @@ WELCOME SECTION
                             : $welcome->video;
                     @endphp
                     <div class="play yt-thumb-wrap" data-embed="{{ $welcome->video }}" onclick="openYtLightbox(this)">
-                        <img src="{{ $thumbnail }}" alt="{{ $welcome->title }}"
+                        <img loading="lazy" src="{{ $thumbnail }}" alt="{{ $welcome->title }}"
                             style="width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s;"
                             onmouseover="this.style.opacity='.6'" onmouseout="this.style.opacity='.85'"
                             onerror="this.src='{{ asset('images/train4.jpg') }}'">
@@ -168,7 +168,7 @@ UPCOMING TRAININGS
                     <div class="card">
                         <div class="card-banner">
                             <a href="{{ route('training.single-page', $training->slug) }}">
-                                <img class="banner-img" src="{{ asset('/uploads/course/' . $training->image) }}"
+                                <img loading="lazy" class="banner-img" src="{{ asset('/uploads/course/' . $training->image) }}"
                                     alt="{{ $training->title }}">
                             </a>
                         </div>
@@ -200,7 +200,7 @@ POPULAR COURSES
             @foreach ($popularCourses as $course)
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="image-box">
-                        <img src="{{ asset('uploads/' . $course->image) }}" alt="{{ $course->title }}">
+                        <img loading="lazy" src="{{ asset('uploads/' . $course->image) }}" alt="{{ $course->title }}">
                         <div class="text-overlay">
                             <h2><a href="{{ route('yoga-class.single-page', $course->slug) }}">{{ $course->title }}</a>
                             </h2>
@@ -290,10 +290,10 @@ COMMUNITY SUPPORT
             <div class="donation-tiers">
                 {{-- Dynamic image from CommunitySupport --}}
                 @if ($communitySupport && $communitySupport->image)
-                    <img src="{{ asset('uploads/community/' . $communitySupport->image) }}"
+                    <img loading="lazy" src="{{ asset('uploads/community/' . $communitySupport->image) }}"
                         alt="{{ $communitySupport->title ?? 'Community Support' }}">
                 @else
-                    <img src="{{ asset('images/img.jpg') }}" alt="Community Support">
+                    <img loading="lazy" src="{{ asset('images/img.jpg') }}" alt="Community Support">
                 @endif
             </div>
         </div>
@@ -317,7 +317,7 @@ SPECIAL OFFERS / SCHOLARSHIPS
                     <div class="scholarship-cards">
                         @foreach ($offers as $offer)
                             <div class="scholarship-card">
-                                <a href="#"><img src="{{ asset('uploads/offers/' . $offer->image) }}"
+                                <a href="#"><img loading="lazy" src="{{ asset('uploads/offers/' . $offer->image) }}"
                                         alt="{{ $offer->title }}"></a>
                                 <div class="discount-badge"><span class="percent">{{ $offer->discount }}%</span><span
                                         class="off">OFF</span>
@@ -382,7 +382,7 @@ WHY CHOOSE US
             @if(!empty($whyChooseUs->images))
                 @foreach($whyChooseUs->images as $img)
                     <div class="col-3">
-                        <img src="{{ asset($img) }}" class="img-fluid w-100" alt="">
+                        <img loading="lazy" src="{{ asset($img) }}" class="img-fluid w-100" alt="">
                     </div>
                 @endforeach
             @endif
@@ -591,7 +591,7 @@ FEE & SCHEDULE (TABS)
                                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                                             @if (!empty($list->image))
                                                 <a href="{{ route('customer.register') }}">
-                                                    <img src="{{ asset('uploads/' . $list->image) }}" alt="{{ $category->title }}">
+                                                    <img loading="lazy" src="{{ asset('uploads/' . $list->image) }}" alt="{{ $category->title }}">
                                                 </a>
                                             @endif
                                             <div class="training-content">
@@ -634,7 +634,7 @@ ACCOMMODATION & FOOD (static — make dynamic later)
             @forelse($accommodationAndFoods as $item)
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="image-box">
-                        <img src="{{ asset($item->image) }}" alt="{{ $item->title }}">
+                        <img loading="lazy" src="{{ asset($item->image) }}" alt="{{ $item->title }}">
                         <div class="text-overlay">
                             <h2><a href="{{ $item->link ?? '#' }}">{{ $item->title }}</a></h2>
                             <p>{{ $item->description }}</p>
@@ -646,7 +646,7 @@ ACCOMMODATION & FOOD (static — make dynamic later)
                 @foreach ([['Student Life', 'food1.jpg', 'During the course, classes are held 5 days a week, for approximately 8 hours a day.'], ['Room & Facilities', 'food2.jpg', 'Our private rooms come fitted with king sized double beds with carefully selected mattresses.'], ['Food', 'food3.jpg', 'Infinity Resort is proud to serve guests wholesome vegetarian meals.']] as $item)
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="image-box">
-                            <img src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
+                            <img loading="lazy" src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
                             <div class="text-overlay">
                                 <h2><a href="#">{{ $item[0] }}</a></h2>
                                 <p>{{ $item[2] }}</p>
@@ -709,7 +709,7 @@ GALLERY
                     <a href="{{ asset('uploads/galary/' . $photo->image) }}" class="fancylight popup-btn"
                         data-fancybox-group="light">
                         <figure>
-                            <img class="img-fluid" src="{{ asset('uploads/galary/thumbnails/' . $photo->image) }}"
+                            <img loading="lazy" class="img-fluid" src="{{ asset('uploads/galary/thumbnails/' . $photo->image) }}"
                                 alt="Pokhara Yoga School">
                         </figure>
                         @if ($photo->description)
@@ -740,7 +740,7 @@ TESTIMONIALS
                     @forelse ($testimonials as $test)
                     <div class="item">
                         <a href="#">
-                            <img class="lazy" src="{{ asset('uploads/testimonials/thumbnails/' . $test->image) }}"
+                            <img loading="lazy" class="lazy" src="{{ asset('uploads/testimonials/thumbnails/' . $test->image) }}"
                                 alt="Yoga school in Nepal">
                         </a>
                         <div class="student-content">
@@ -780,7 +780,7 @@ TESTIMONIALS
                         <div class="item">
                             <div class="yt-thumb-wrap" data-embed="{{ $embedUrl }}" onclick="openYtLightbox(this)"
                                 style="position:relative;cursor:pointer;border-radius:6px;overflow:hidden;aspect-ratio:16/9;background:#000;">
-                                <img src="{{ $thumbnail }}" alt="{{ $testimonial->title }}"
+                                <img loading="lazy" src="{{ $thumbnail }}" alt="{{ $testimonial->title }}"
                                     style="width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s;"
                                     onmouseover="this.style.opacity='.6'" onmouseout="this.style.opacity='.85'"
                                     onerror="this.src='{{ asset('images/train4.jpg') }}'">

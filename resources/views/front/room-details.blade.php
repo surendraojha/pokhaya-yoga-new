@@ -56,7 +56,7 @@
                                         <h2>Amenities</h2>
                                         <ul>
                                             @foreach($room->amenities as $amenity)
-                                                <li>{!! $amenity->icon !!}{{ $amenity->title }}</li>
+                                               <li> {!! $amenity->icon !!}{{ $amenity->title }}</li>
                                             @endforeach
                                         </ul>
                                     </section>
