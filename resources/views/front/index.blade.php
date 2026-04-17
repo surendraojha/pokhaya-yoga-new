@@ -13,6 +13,14 @@
         .print-tab .print-tab-content>div.view {
             display: block;
         }
+
+        .time-slots {
+            display: none;
+        }
+
+        .time-slots.active {
+            display: block;
+        }
     </style>
 @endpush
 
@@ -468,61 +476,85 @@ WHY COME TO POKHARA
 
 
 {{-- ══════════════════════════════════════
-MEET / CALENDAR (static — make dynamic later)
+MEET / CALENDAR
 ══════════════════════════════════════ --}}
-<div class="question-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-12">
-                <h4>Do you have any questions?</h4>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="calendar-box">
-                    <h5>Meet with house of OM</h5>
-                    <div class="calendar-header">
-                        <button class="nav-button" id="prevMonth">&lt;</button>
-                        <div class="month-year" id="monthYear"></div>
-                        <button class="nav-button" id="nextMonth">&gt;</button>
-                    </div>
-                    <div class="weekdays">
-                        <div class="weekday">Sun</div>
-                        <div class="weekday">Mon</div>
-                        <div class="weekday">Tue</div>
-                        <div class="weekday">Wed</div>
-                        <div class="weekday">Thu</div>
-                        <div class="weekday">Fri</div>
-                        <div class="weekday">Sat</div>
-                    </div>
-                    <div class="days" id="calendarDays"></div>
-                    <div class="footer">
-                        <div class="selected-date" id="selectedDateDisplay">No date selected</div>
-                        <button class="clear-button" id="clearSelection">Clear Selection</button>
+@if($question)
+    <div class="question-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <h4>{{ $question->title }}</h4>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="calendar-box">
+                        <h5>{{ $question->calendar_title }}</h5>
+                        <div class="calendar-header">
+                            <button class="nav-button" id="prevMonth">&lt;</button>
+                            <div class="month-year" id="monthYear"></div>
+                            <button class="nav-button" id="nextMonth">&gt;</button>
+                        </div>
+                        <div class="weekdays">
+                            <div class="weekday">Sun</div>
+                            <div class="weekday">Mon</div>
+                            <div class="weekday">Tue</div>
+                            <div class="weekday">Wed</div>
+                            <div class="weekday">Thu</div>
+                            <div class="weekday">Fri</div>
+                            <div class="weekday">Sat</div>
+                        </div>
+                        <div class="days" id="calendarDays"></div>
+                        <div class="footer">
+                            <div class="selected-date" id="selectedDateDisplay">No date selected</div>
+                            <button class="clear-button" id="clearSelection">Clear Selection</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 question-right">
-                <h5>Meeting location</h5>
-                <p class="meet"><i class="fa fa-map-marker-alt"></i> Google Meet</p>
-                <h5>Meeting Duration</h5>
-                <p class="time">30 mins</p>
-                <h6>What time works best?</h6>
-                <p>Showing times for your selected date</p>
-                <form>
-                    <select>
-                        <option>UTC +05:45 Kathmandu, Kathmandu</option>
-                    </select>
-                </form>
-                <ul>
-                    <li><a href="#">1:00 pm</a></li>
-                    <li><a href="#">2:00 pm</a></li>
-                    <li><a href="#">3:00 pm</a></li>
-                    <li><a href="#">4:00 pm</a></li>
-                    <li><a href="#">5:00 pm</a></li>
-                </ul>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 question-right">
+                    <h5>Meeting location</h5>
+                    <p class="meet"><i class="fa fa-map-marker-alt"></i> {{ $question->meeting_location }}</p>
+                    <h5>Meeting Duration</h5>
+                    <p class="time">
+                        @php
+                            $minutes = $question->meeting_duration;
+                            $hours = floor($minutes / 60);
+                            $remainingMinutes = $minutes % 60;
+                        @endphp
+
+                        @if($hours > 0)
+                            {{ $hours }} hr{{ $hours > 1 ? 's' : '' }}
+                        @endif
+
+                        @if($remainingMinutes > 0)
+                            {{ $remainingMinutes }} min
+                        @endif
+                    </p>
+                    <h6>What time works best?</h6>
+                    <p>Showing times for your selected date</p>
+                    @if($question->timezone_configurations && count($question->timezone_configurations) > 0)
+                        <form class="mb-3">
+                            <select class="mb-2 timezone-selector" id="timezoneSelect">
+                                @foreach($question->timezone_configurations as $index => $config)
+                                    <option value="{{ $index }}" {{ $index == 0 ? 'selected' : '' }}>{{ $config['timezone'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
+                        @foreach($question->timezone_configurations as $index => $config)
+                            <ul class="time-slots {{ $index == 0 ? 'active' : '' }}" data-timezone="{{ $index }}">
+                                @php
+                                    $timeSlots = $config['time_slots'] ?? [];
+                                @endphp
+                                @foreach($timeSlots as $slot)
+                                    <li><a href="#">{{ $slot }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 
 {{-- ══════════════════════════════════════
@@ -611,18 +643,18 @@ ACCOMMODATION & FOOD (static — make dynamic later)
                     </div>
                 </div>
             @empty
-                    @foreach ([['Student Life', 'food1.jpg', 'During the course, classes are held 5 days a week, for approximately 8 hours a day.'], ['Room & Facilities', 'food2.jpg', 'Our private rooms come fitted with king sized double beds with carefully selected mattresses.'], ['Food', 'food3.jpg', 'Infinity Resort is proud to serve guests wholesome vegetarian meals.']] as $item)
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                            <div class="image-box">
-                                <img src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
-                                <div class="text-overlay">
-                                    <h2><a href="#">{{ $item[0] }}</a></h2>
-                                    <p>{{ $item[2] }}</p>
-                                    <a href="#" class="btn btn-views">Read More</a>
-                                </div>
+                @foreach ([['Student Life', 'food1.jpg', 'During the course, classes are held 5 days a week, for approximately 8 hours a day.'], ['Room & Facilities', 'food2.jpg', 'Our private rooms come fitted with king sized double beds with carefully selected mattresses.'], ['Food', 'food3.jpg', 'Infinity Resort is proud to serve guests wholesome vegetarian meals.']] as $item)
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="image-box">
+                            <img src="{{ asset('images/' . $item[1]) }}" alt="{{ $item[0] }}">
+                            <div class="text-overlay">
+                                <h2><a href="#">{{ $item[0] }}</a></h2>
+                                <p>{{ $item[2] }}</p>
+                                <a href="#" class="btn btn-views">Read More</a>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
             @endforelse
         </div>
     </div>
@@ -790,4 +822,18 @@ TESTIMONIALS
     <script src="https://elfsightcdn.com/platform.js" async></script>
 @endpush
 
-@endsection
+@push('page-js')
+    <script>
+        $(document).ready(function () {
+            $('.timezone-selector').change(function () {
+                var selectedTimezone = $(this).val();
+
+                // Hide all time slots
+                $('.time-slots').removeClass('active');
+
+                // Show time slots for selected timezone
+                $('.time-slots[data-timezone="' + selectedTimezone + '"]').addClass('active');
+            });
+        });
+    </script>
+@endpush

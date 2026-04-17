@@ -29,6 +29,7 @@ use App\Models\Offer;
 use App\Models\OurTeam;
 use App\Models\PhotoList;
 use App\Models\Quote;
+use App\Models\Question;
 use App\Models\ReferSetting;
 use App\Models\Retreats;
 use App\Models\SeoMeta;
@@ -94,6 +95,7 @@ class FrontController extends Controller
             'communitySupport' => CommunitySupport::first(),
             'whyComeToPokhara' => WhyComeToPokhara::first(),
             'accommodationAndFoods' => AccommodationAndFood::active()->get(),
+            'question' => Question::first(),
         ];
 
         return view('front.index', $data);

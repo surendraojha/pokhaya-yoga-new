@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\OurTeamController;
 use App\Http\Controllers\Admin\PhotoListController;
 use App\Http\Controllers\Admin\QrCodeController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\ReferralsController;
 use App\Http\Controllers\Admin\ReferralSettingController;
@@ -121,6 +122,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('welcome', WelcomeController::class);
     Route::resource('offer', OfferController::class);
     Route::resource('quote', QuoteController::class);
+    Route::resource('question', QuestionController::class);
     Route::resource('community_support', CommunitySupportController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('video-testimonial', VideoTestimonialController::class);

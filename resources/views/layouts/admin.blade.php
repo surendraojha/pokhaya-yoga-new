@@ -239,6 +239,7 @@
             {{ 'admin/offer' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/quote' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/community_support' == request()->path() ? 'menu-open' : '' }}
+            {{ 'admin/question' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/testimonial' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/why-choose-us' == request()->path() ? 'menu-open' : '' }}
             {{ 'admin/why-come-to-pokhara' == request()->path() ? 'menu-open' : '' }}
@@ -299,6 +300,13 @@
                                         class="nav-link {{ 'admin/community_support' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Community Support</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('question.index') }}"
+                                        class="nav-link {{ 'admin/question' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Questions</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
