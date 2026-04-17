@@ -837,3 +837,4 @@ TESTIMONIALS
         });
     </script>
 @endpush
+@endsection

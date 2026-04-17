@@ -119,11 +119,11 @@
     <!-- schema -->
     <script type="application/ld+json">
         {
-            "@context": "http://schema.org",
-            "@type": "Product",
+            "@@context": "http://schema.org",
+            "@@type": "Product",
             "name": " Pokhara Yoga School and Retreat Center",
             "aggregateRating": {
-                "@type": "AggregateRating",
+                "@@type": "AggregateRating",
                 "ratingValue": "4.9",
                 "reviewCount": "79"
             }
@@ -235,21 +235,21 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 ">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <a class="navbar-brand" href="{{ action('Front\FrontController@index') }}">
+                            <a class="navbar-brand" href="{{ route('front.index') }}">
                                 <img width="180px" height="104px" src="{{ asset('uploads/' . $setting->logo) }}" alt="Yoga school in Nepal"></a>
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item active">
                                         <a class="nav-link"
-                                            href="{{ action('Front\FrontController@index') }}">Home</a>
+                                            href="{{ route('front.index') }}">Home</a>
                                     </li>
                                     <li class="nav-item dropdown ">
                                         <a class="nav-link" href="#">Teacher Trainings </a>
                                         <ul>
                                             @foreach ($yogaClass as $class)
                                             <li><a
-                                                    href="{{ action('Front\FrontController@yogaClass', $class->slug) }}">{{ $class->title }}</a>
+                                                    href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
                                             </li>
                                             @endforeach
 
@@ -269,20 +269,20 @@
                                 @if ($page->slug != 'privacy-policy')
                                 <li class="nav-item ">
                                     <a class="nav-link"
-                                        href="{{ action('Front\FrontController@singlePage', $page->slug) }}">{{ $page->title }}</a>
+                                        href="{{ route('front.single-page', $page->slug) }}">{{ $page->title }}</a>
                                 </li>
                                 @endif
                                 @endforeach
 
                                 <li class="nav-item ">
                                     <a class="nav-link"
-                                        href="{{ action('Front\FrontController@curriculam') }}">Curriculum</a>
+                                        href="{{ route('front.curriculam') }}">Curriculum</a>
                                 </li>
 
 
                                 <li class="nav-item ">
                                     <a class="nav-link"
-                                        href="{{ action('Front\FrontController@blogs') }}">Blog</a>
+                                        href="{{ route('front.blog') }}">Blog</a>
                                 </li>
 
 
@@ -292,11 +292,11 @@
                                 </li> --}}
                                 <li class="nav-item ">
                                     <a class="nav-link"
-                                        href="{{ action('Front\FrontController@aboutUs') }}">About us</a>
+                                        href="{{ route('front.about') }}">About us</a>
                                 </li>
                                 <li class="nav-item ">
                                     <a class="nav-link"
-                                        href="{{ action('Front\FrontController@contactUs') }}">Contact us</a>
+                                        href="{{ route('front.contact') }}">Contact us</a>
                                 </li>
 
                                 @php
@@ -311,11 +311,11 @@
                                             alt=""></a>
                                     <ul>
                                         <li><a
-                                                href="{{ action('Front\FrontController@userprofile_dashboard') }}">{{ session('name') }}
+                                                href="{{ route('front.userprofile_dashboard') }}">{{ session('name') }}
                                                 Dashboard</a></li>
-                                        <li><a href="{{ action('Front\FrontController@register_yoga') }}">Join
+                                        <li><a href="{{ route('booking') }}">Join
                                                 Yoga</a></li>
-                                        <li><a href="{{ action('Front\FrontController@logout') }}">Logout</a>
+                                        <li><a href="{{ route('front.logout') }}">Logout</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -370,10 +370,10 @@
                                                 onclick="closeNav()">&times;</a>
                                             <div class="mobile-menus">
                                                 <ul>
-                                                    <li><a href="{{ action('Front\FrontController@index') }}">Home</a>
+                                                    <li><a href="{{ route('front.index') }}">Home</a>
                                                     </li>
                                                     <li><a
-                                                            href="{{ action('Front\FrontController@curriculam') }}">Curriculum</a>
+                                                            href="{{ route('front.curriculam') }}">Curriculum</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" type="text" data-toggle="collapse"
@@ -385,7 +385,7 @@
                                                                 <ul>
                                                                     @foreach ($yogaClass as $class)
                                                                     <li><a
-                                                                            href="{{ action('Front\FrontController@yogaClass', $class->slug) }}">{{ $class->title }}</a>
+                                                                            href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
                                                                     </li>
                                                                     @endforeach
                                                                 </ul>
@@ -396,16 +396,16 @@
                                                     @foreach ($allPages as $page)
                                                     <li class=" ">
                                                         <a class=""
-                                                            href="{{ action('Front\FrontController@singlePage', $page->slug) }}">{{ $page->title }}</a>
+                                                            href="{{ route('front.single-page', $page->slug) }}">{{ $page->title }}</a>
                                                     </li>
                                                     @endforeach
                                                     <li class=" ">
                                                         <a class=""
-                                                            href="{{ action('Front\FrontController@blogs') }}">Blog</a>
+                                                            href="{{ route('front.blog') }}">Blog</a>
                                                     </li>
                                                     <li class=" ">
                                                         <a class=""
-                                                            href="{{ action('Front\FrontController@photoList') }}">Gallery</a>
+                                                            href="{{ route('front.photo-list') }}">Gallery</a>
                                                     </li>
 
                                                     <!--<li class="">-->
@@ -420,7 +420,7 @@
                                                             <li><a href="https://sp.pokharayogaschoolandretreatcenter.com/">Sp</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="{{action('Front\FrontController@aboutUs')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> About us</a></li>
+                                                    <li><a href="{{route('front.about')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> About us</a></li>
 
                                                     @if (!$user)
                                                     <li>
@@ -464,7 +464,7 @@
                                                         </div>
                                                     </li>
 
-                                                    <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                                    <form id="frm-logout" action="{{ route('front.logout') }}" method="POST" style="display:none;">
                                                         @csrf
                                                     </form>
                                                     @endif
@@ -476,7 +476,6 @@
                                             </div>
                                         </div>
                                         </li>
-                                        @endif
                                         </ul>
                                     </div>
                                 </div>

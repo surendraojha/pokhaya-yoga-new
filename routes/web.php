@@ -97,7 +97,7 @@ Route::get('/logout', function () {
     Auth::logout();
 
     return redirect('admin/login');
-});
+})->name('front.logout');
 
 Route::prefix('admin')->group(function () {
 
@@ -240,7 +240,7 @@ Route::get('/blog/author/{name}', [FrontController::class, 'blogUser'])->name('b
 Route::get('/class/{slug}', [FrontController::class, 'yogaClass'])->name('yoga-class.single-page');
 Route::get('/popular-courses', [FrontController::class, 'popularCourse'])->name('popular-courses');
 Route::get('faq', [FrontController::class, 'faq'])->name('front.faq');
-Route::get('curriculam', [FrontController::class, 'curriculam'])->name('front.curriculum');
+Route::get('curriculam', [FrontController::class, 'curriculam'])->name('front.curriculam');
 Route::get('teacher/{id}', [FrontController::class, 'teacher'])->name('front.teacher-detail');
 Route::get('teacher-all', [FrontController::class, 'teacherAll'])->name('front.teacher');
 Route::get('training/{slug}', [FrontController::class, 'training'])->name('training.single-page');
@@ -290,7 +290,7 @@ Route::post('bookings', [FrontController::class, 'bookings']);
 // Route::get('yoga_package/{token?}', [FrontController::class, 'yoga_package']);
 // Route::post('yoga_package_bookings', [FrontController::class, 'yoga_package_bookings']);
 Route::get('getReferralLink/{token?}', [FrontController::class, 'getReferralLink']);
-Route::get('userprofile_dashboard', [FrontController::class, 'userprofile_dashboard']);
+Route::get('userprofile_dashboard', [FrontController::class, 'userprofile_dashboard'])->name('front.userprofile_dashboard');
 
 // landing page
 Route::get('yoga-school-retreat-centre', [LandingPageController::class, 'landingPage']);

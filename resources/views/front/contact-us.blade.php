@@ -33,7 +33,7 @@
                 <div class="col-12 col-sm-12">
                     <h1 class="text-uppercase">Contact Us</h1>
                     <ul class="breadcrumb">
-                        <li><a href="{{ action('Front\FrontController@index') }}">Home</a></li>
+                        <li><a href="{{ route('front.index') }}">Home</a></li>
                         <li>Contact Us</li>
                     </ul>
                 </div>
@@ -92,7 +92,7 @@
                         <p>{{ \Session::get('msg') }}</p>
                     </div></br>
                 @endif
-                <form action="{{ action('Front\FrontController@contactUsPost') }}" method="POST">
+                <form action="{{ route('contact-us.post') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">

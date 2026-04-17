@@ -18,7 +18,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{action('Front\FrontController@contactUsPost')}}" method="POST">
+        <form action="{{ route('contact-us.post') }}" method="POST">
             @csrf
             <div class="modal-body">
                 <div class="contact-message p-2">
@@ -90,7 +90,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <a href="{{action('Front\FrontController@index')}}">
+          <a href="{{ route('front.index') }}">
           <img style="aspect-ratio:16/9" class="lazy" data-src="{{asset('uploads/'.$setting->logo)}}" alt=""></a>
           <h6>{{ $setting->title }}</h6>
           <p>{{ $setting->address }}</p>
@@ -117,7 +117,7 @@
           <ul>
             @foreach($yogaClass as $class)
             {{-- {{ dd($class) }} --}}
-            <li><a href="{{ action('Front\FrontController@yogaClass',$class->slug) }}">
+            <li><a href="{{ route('yoga-class.single-page', $class->slug) }}">
                 <i class="yoga_icon"><img class="lazy" data-src="{{asset('uploads/yogaicon.png')}}"
                  style="height: 25px;width: 25px;margin-top: 12px;padding-top: 4px;" alt=""></i>
               {{$class->title}}</a>
@@ -129,11 +129,11 @@
           <h4>Other Links</h4>
           <ul>
 
-            <li><a href="{{action('Front\FrontController@aboutUs')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</a></li>
-             <li><a href="{{action('Front\FrontController@faq')}}"><i class="fa fa-question-circle" aria-hidden="true"></i> FAQs</a></li>
-            <li><a href="{{action('Front\FrontController@photoList')}}"><i class="fa fa-picture-o" aria-hidden="true"></i> Photo Gallery</a></li>
-            <li><a href="{{action('Front\FrontController@contactUs')}}"><i class="fa fa-phone-square" aria-hidden="true"></i> Contact Us</a></li>
-            <li><a href="{{action('Front\FrontController@privacyPolicy')}}"><i class="fa fa-user-secret" aria-hidden="true"></i>Privacy Policy</a></li>
+            <li><a href="{{ route('front.about') }}"><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</a></li>
+             <li><a href="{{ route('front.faq') }}"><i class="fa fa-question-circle" aria-hidden="true"></i> FAQs</a></li>
+            <li><a href="{{ route('front.photo-list') }}"><i class="fa fa-picture-o" aria-hidden="true"></i> Photo Gallery</a></li>
+            <li><a href="{{ route('front.contact') }}"><i class="fa fa-phone-square" aria-hidden="true"></i> Contact Us</a></li>
+            <li><a href="{{ route('front.single-page', 'privacy-policy') }}"><i class="fa fa-user-secret" aria-hidden="true"></i>Privacy Policy</a></li>
 
           </ul>
         </div>

@@ -18,7 +18,7 @@
         <div class="col-12 col-sm-12">
           <h1>{{$information->title}}</h1>
           <ul class="breadcrumb">
-            <li><a href="{{action('Front\FrontController@index')}}">Home</a></li>
+            <li><a href="{{route('front.index')}}">Home</a></li>
             <li>{{$information->title}}</li>
 
 

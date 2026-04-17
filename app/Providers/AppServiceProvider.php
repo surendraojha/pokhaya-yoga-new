@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('front.layouts.main', function ($view) {
+        view()->composer(['front.layouts.main', 'front.includes.*'], function ($view) {
             $setting = Setting::first();
             $yogaClass = YogaClass::select('title', 'slug')->orderBy('id', 'asc')->take(6)->get();
             $allPages = AllPage::select('title', 'slug')->orderBy('order', 'asc')->get();
