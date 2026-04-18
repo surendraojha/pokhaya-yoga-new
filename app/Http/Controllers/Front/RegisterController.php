@@ -121,7 +121,7 @@ class RegisterController extends Controller
 
         Mail::to($email)->send(new OrderMail($data));
 
-        return redirect()->route('thankyou')->with('success', 'To confirm your spot, please proceed with the deposit payment of USD 200.');
+        return redirect()->route('thankyou')->with('success', 'To confirm your spot, please proceed with the deposit payment of USD 200.')->with('title', 'Registration Successful');
     }
 
     // public function signup(Request $request)

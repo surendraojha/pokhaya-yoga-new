@@ -591,6 +591,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('room-book.index') }}"
+                                class="nav-link {{ 'admin/room-book' == request()->path() ? 'bg-white' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Room Bookings</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('room.index') }}"
                                 class="nav-link {{ 'admin/room' == request()->path() ? 'bg-white' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>

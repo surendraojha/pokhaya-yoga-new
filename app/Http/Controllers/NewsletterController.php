@@ -22,6 +22,6 @@ class NewsletterController extends Controller
         // Send welcome email
         Mail::to($subscriber->email)->send(new WelcomeUser($subscriber));
 
-        return back()->with('success', 'Subscribed successfully!');
+        return back()->with('success', 'Subscribed successfully!')->with('title', 'Subscribed');
     }
 }

@@ -640,7 +640,7 @@ ACCOMMODATION & FOOD (static — make dynamic later)
                         <img loading="lazy" src="{{ asset($item->image) }}" alt="{{ $item->title }}">
                         <div class="text-overlay">
                             <h2><a href="{{ $item->link ?? '#' }}">{{ $item->title }}</a></h2>
-                            <p>{{ $item->description }}</p>
+                            <!-- <p>{{ $item->description }}</p> -->
                             <a href="{{ $item->link ?? '#' }}" class="btn btn-views">Read More</a>
                         </div>
                     </div>

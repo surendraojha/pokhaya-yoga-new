@@ -416,7 +416,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'success',
-                title: 'Subscribed!',
+                title: @json(session('title')),
                 text: @json(session('success')),
                 confirmButtonColor: '#28a745'
             });

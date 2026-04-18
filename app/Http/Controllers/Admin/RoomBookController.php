@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\BookRoom;
+use App\Models\BookRoom;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RoomBookController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $informations = \App\BookRoom::orderBy('created_at', 'desc')->get();
+        $informations = BookRoom::orderBy('created_at', 'desc')->get();
+
         return view('admin.room-book.index', compact('informations'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -32,8 +34,7 @@ class RoomBookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -44,7 +45,7 @@ class RoomBookController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -55,7 +56,7 @@ class RoomBookController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -65,9 +66,8 @@ class RoomBookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -78,12 +78,13 @@ class RoomBookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
-        $information = \App\BookRoom::find($id);
+        $information = BookRoom::find($id);
         $information->delete();
+
         return redirect('admin/room-book')->with('msg', 'Information Deleted');
     }
 }

@@ -87,25 +87,44 @@
                                     <input type="hidden" name="room_type" value="share">
                                     <div class="form-group">
                                         <label for="check-in">Check-in</label>
-                                        <input type="date" id="check-in" name="check_in" required>
+                                        <input type="date" id="check-in" name="check_in" value="{{ old('check_in') }}" required>
+                                        @error('check_in')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="check-out">Check-out</label>
-                                        <input type="date" id="check-out" name="check_out" required>
+                                        <input type="date" id="check-out" name="check_out" value="{{ old('check_out') }}" required>
+                                        @error('check_out')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="numberOfAttendants">Guests</label>
-                                        <select id="numberOfAttendants" name="numberOfAttendants" required>
+                                        <label for="children">Guests</label>
+                                        <select id="children" name="children" required>
                                             <option value="">Select number of guests</option>
                                             @for ($i = 1; $i <= $room->guests + 2; $i++)
-                                                <option value="{{ $i }}" {{ $i == $room->guests ? 'selected' : '' }}>{{ $i }} Guest{{ $i > 1 ? 's' : '' }}</option>
+                                                <option value="{{ $i }}" {{ old('children', $room->guests) == $i ? 'selected' : '' }}>{{ $i }} Guest{{ $i > 1 ? 's' : '' }}</option>
                                             @endfor
                                         </select>
+                                        @error('children')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
-                                    <input type="hidden" name="name" value="{{ auth('customer')->user()->name ?? '' }}">
-                                    <input type="hidden" name="email" value="{{ auth('customer')->user()->email ?? '' }}">
-                                    <input type="hidden" name="phone" value="{{ auth('customer')->user()->phone ?? '' }}">
-                                    <input type="hidden" name="address" value="{{ auth('customer')->user()->address ?? '' }}">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" name="name" value="{{ old('name', auth('customer')->user()->name ?? '') }}" required>
+                                        @error('name')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" value="{{ old('email', auth('customer')->user()->email ?? '') }}" required>
+                                        @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number">Phone</label>
+                                        <input type="tel" id="number" name="number" value="{{ old('number', auth('customer')->user()->phone ?? '') }}" required>
+                                        @error('number')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" id="address" name="address" value="{{ old('address', auth('customer')->user()->address ?? '') }}" required>
+                                        @error('address')<span class="text-danger">{{ $message }}</span>@enderror
+                                    </div>
                                     <input type="hidden" name="actual_price" id="actual_price" value="{{ $room->price }}">
                                     <button type="submit" class="btn-book-now">Reserve Now</button>
                                 </form>

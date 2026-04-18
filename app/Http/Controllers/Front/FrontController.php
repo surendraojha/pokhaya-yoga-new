@@ -214,6 +214,7 @@ class FrontController extends Controller
     {
         $room = Room::find($id);
         $banner = Banner::where('title', 'room-banner')->first();
+
         return view('front.room-details', compact('room', 'banner'));
     }
 
@@ -326,16 +327,33 @@ class FrontController extends Controller
     public function postBook(Request $request)
     {
         $request->validate([
-
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'address' => 'required',
             'number' => 'required',
             'room' => 'required',
             'room_type' => 'required',
-            'check_in' => 'required',
-            'check_out' => 'required',
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after_or_equal:check_in',
+            'children' => 'required',
         ]);
+
+        $duplicate = BookRoom::where('name', $request->name)
+            ->where('email', $request->email)
+            ->where('number', $request->number)
+            ->where('address', $request->address)
+            ->where('room', $request->room)
+            ->where('room_type', $request->room_type)
+            ->where('check_in', $request->check_in)
+            ->where('check_out', $request->check_out)
+            ->where('children', $request->children)
+            ->exists();
+
+        if ($duplicate) {
+            return redirect()->back()
+                ->with('success', 'Your booking request is already received. We will contact you soon.')
+                ->with('title', 'Booked Already');
+        }
 
         $information = new BookRoom;
         $information->name = $request->name;
@@ -346,9 +364,12 @@ class FrontController extends Controller
         $information->room_type = $request->room_type;
         $information->check_in = $request->check_in;
         $information->check_out = $request->check_out;
+        $information->children = $request->children;
         $information->save();
 
-        return redirect('/')->with('msg', 'Room Is Booked. For More Information Please Contact Us');
+        return redirect()->back()
+            ->with('success', 'Your booking request has been received. We will contact you soon.')
+            ->with('title', 'Booked Successfully');
     }
 
     public function newsEvent()
