@@ -5,8 +5,12 @@
 @endpush
 
 @section('content')
-    <x-page-banner :image="asset('/uploads/' . $banner->image)" title="Room List" />
-
+@if(!empty($banner->image))
+    <x-page-banner 
+        :image="asset('/uploads/' . $banner->image)" 
+        title="Room List" 
+    />
+@endif
     <div class="room-list-section">
         <div class="container">
             <div class="row">

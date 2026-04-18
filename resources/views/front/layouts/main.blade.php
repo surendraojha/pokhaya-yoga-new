@@ -10,7 +10,7 @@
     @stack('seo-meta')
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!--Main CSS-->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -56,6 +56,7 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 header-right">
                         <ul>
                             <li class="language">Language</li>
+                            <li id="google_translate_element"></li>
                             <li><a href="{{ $setting->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="{{ $setting->instragram }}"><i class="fab fa-instagram"></i></a></li>
                             <li><a href="{{ $setting->youtube }}"><i class="fab fa-youtube"></i></a></li>
@@ -91,12 +92,12 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark">
                                             @foreach ($yogaClass as $class)
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('yoga-class.single-page', $class->slug) }}">
-                                                        {{ $class->title }}
-                                                    </a>
-                                                </li>
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('yoga-class.single-page', $class->slug) }}">
+                                                    {{ $class->title }}
+                                                </a>
+                                            </li>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -111,10 +112,10 @@
 
                                     <li class="nav-item">
                                         @if (auth('customer')->check())
-                                            <a class="nav-link"
-                                                href="{{ route('customer.booking.index') }}">Dashboard</a>
+                                        <a class="nav-link"
+                                            href="{{ route('customer.booking.index') }}">Dashboard</a>
                                         @else
-                                            <a class="nav-link" href="{{ route('customer.register') }}">Join Us</a>
+                                        <a class="nav-link" href="{{ route('customer.register') }}">Join Us</a>
                                         @endif
                                     </li>
 
@@ -154,9 +155,9 @@
                                 <div class="card card-body">
                                     <ul>
                                         @foreach ($yogaClass as $class)
-                                            <li><a
-                                                    href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
-                                            </li>
+                                        <li><a
+                                                href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
+                                        </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -166,9 +167,9 @@
                         <li><a href="{{ url('blog') }}">Blog</a></li>
                         <li>
                             @if (auth('customer')->check())
-                                <a href="{{ route('customer.booking.index') }}">Dashboard</a>
+                            <a href="{{ route('customer.booking.index') }}">Dashboard</a>
                             @else
-                                <a href="{{ route('customer.register') }}">Join Us</a>
+                            <a href="{{ route('customer.register') }}">Join Us</a>
                             @endif
                         </li>
                     </ul>
@@ -207,7 +208,7 @@
 
                         <ul>
                             @foreach ($yogaClass as $class)
-                                <li><a href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a></li>
+                            <li><a href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a></li>
                             @endforeach
 
                         </ul>
@@ -392,8 +393,21 @@
         });
     </script>
 
-      @stack('scripts')
+    @stack('scripts')
     @stack('page-js')
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 </body>
