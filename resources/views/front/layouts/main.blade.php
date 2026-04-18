@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 header-right">
                         <ul>
-                            <!-- <li class="language">Language</li> -->
+                            <li class="language" id="language-trigger">Language</li>
                             <li id="google_translate_element"></li>
                             <li><a href="{{ $setting->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="{{ $setting->instragram }}"><i class="fab fa-instagram"></i></a></li>
@@ -398,6 +398,8 @@
     @stack('page-js')
 
     <script type="text/javascript">
+        let googleTranslateLoaded = false;
+        
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                     pageLanguage: 'en',
@@ -406,9 +408,23 @@
                 'google_translate_element'
             );
         }
+        
+        function loadGoogleTranslate() {
+            if (!googleTranslateLoaded) {
+                googleTranslateLoaded = true;
+                const script = document.createElement('script');
+                script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                document.head.appendChild(script);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageTrigger = document.getElementById('language-trigger');
+            if (languageTrigger) {
+                languageTrigger.addEventListener('click', loadGoogleTranslate);
+            }
+        });
     </script>
-
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if(session('success'))

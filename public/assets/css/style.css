@@ -75,6 +75,7 @@ b, strong {
     line-height: 18px;
     color: #000;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .header-right ul li a i{
