@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\ReferralSettingController;
 use App\Http\Controllers\Admin\RetreatPageController;
 use App\Http\Controllers\Admin\RoomBookController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\SeoMetaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -57,12 +58,12 @@ use App\Http\Controllers\KeyPointsController;
 use App\Http\Controllers\LandingCourseController;
 use App\Http\Controllers\LandingOutcomeController;
 use App\Http\Controllers\LandingWhyChooseController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\CacheHeaders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewsletterController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 // header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -134,6 +135,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('contact', ContactController::class);
     Route::resource('room', RoomController::class);
     Route::delete('room/delete-image/{imageId}', [RoomController::class, 'deleteImage'])->name('room.delete-image');
+    Route::resource('schedule', ScheduleController::class);
+    Route::delete('schedule/delete-image/{imageId}', [ScheduleController::class, 'deleteImage'])->name('schedule.delete-image');
     Route::resource('room-book', RoomBookController::class);
     Route::resource('course', CourseController::class);
     Route::resource('team-category', TeamCategoryController::class);
@@ -252,6 +255,7 @@ Route::get('teacher-all', [FrontController::class, 'teacherAll'])->name('front.t
 Route::get('training/{slug}', [FrontController::class, 'training'])->name('training.single-page');
 
 Route::get('/single-page/privacy-policy', [FrontController::class, 'privacyPolicy'])->name('single-privacy-policy');
+Route::get('/schedule', [FrontController::class, 'schedule'])->name('front.schedule');
 Route::get('our-testimonials', [FrontController::class, 'testimonial'])->name('front.testimonial');
 Route::get('video-testimonials', [FrontController::class, 'videoTestimonial'])->name('front.video-testimonial');
 Route::get('video-testimonials/{title}', [FrontController::class, 'videoTestimonialDetail'])->name('front.video-testimonial-detail');

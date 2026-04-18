@@ -33,6 +33,7 @@ use App\Models\Quote;
 use App\Models\ReferSetting;
 use App\Models\Retreats;
 use App\Models\Room;
+use App\Models\Schedule;
 use App\Models\SeoMeta;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -471,7 +472,7 @@ class FrontController extends Controller
 
     public function yogaClass(string $slug) // Type hint $slug for clarity
     {
-        $yogaClassCacheKey = 'yoga_class_info_'.$slug;
+        $yogaClassCacheKey = 'yoga_class_info_' . $slug;
 
         $cacheDuration = 120;
 
@@ -925,5 +926,51 @@ class FrontController extends Controller
         $information = AllPage::where('slug', '=', 'privacy-policy')->first();
 
         return view('front.privacy-policy.privacy-policy', compact('information'));
+    }
+
+    public function schedule()
+    {
+        $dayMap = [
+            '0' => 'Sunday',
+            '1' => 'Monday',
+            '2' => 'Tuesday',
+            '3' => 'Wednesday',
+            '4' => 'Thursday',
+            '5' => 'Friday',
+            '6' => 'Saturday',
+            'Sunday' => 'Sunday',
+            'Monday' => 'Monday',
+            'Tuesday' => 'Tuesday',
+            'Wednesday' => 'Wednesday',
+            'Thursday' => 'Thursday',
+            'Friday' => 'Friday',
+            'Saturday' => 'Saturday',
+        ];
+
+        $dayOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        $schedules = Schedule::all()->map(function ($schedule) use ($dayMap) {
+            $dayValue = (string) $schedule->day;
+
+            if (array_key_exists($dayValue, $dayMap)) {
+                $schedule->day = $dayMap[$dayValue];
+            }
+
+            return $schedule;
+        });
+
+        $timeSlots = $schedules->pluck('time_slot')->unique()->values();
+
+        $scheduleEntries = $schedules
+            ->groupBy('day')
+            ->map(function ($dayGroup) {
+                return $dayGroup->keyBy('time_slot');
+            });
+
+        $days = collect($dayOrder)->values();
+        $banner = Banner::where('title', 'schedule-banner')->first();
+
+
+        return view('front.schedule', compact('scheduleEntries', 'days', 'timeSlots','banner'));
     }
 }

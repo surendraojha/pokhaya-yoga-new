@@ -521,6 +521,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('schedule.index') }}"
+                                class="nav-link {{ 'admin/schedule' == request()->path() ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Schedule</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('video-testimonial.index') }}"
                                 class="nav-link {{ 'admin/video-testimonial' == request()->path() ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
