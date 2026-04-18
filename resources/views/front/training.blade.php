@@ -1,15 +1,10 @@
-
+@extends('front.layouts.main')
 @section("title", "$information->title")
 @section("keyword", "$information->meta_keyword")
 @section("desc", "$information->meta_des")
-
-
-
-
-
- @section("singlepage")
-  @endsection
-@include('front.includes.header')
+@section("singlepage")
+@endsection
+@section('content')
 
 <div class="page-banner">
   <div class="overlay">
@@ -29,7 +24,7 @@
   </div>
 </div>
 
- <div class="about-body text-justify">
+<div class="about-body text-justify">
   <div class="container">
 
 
@@ -47,34 +42,33 @@
 
 
 
-      </div>
-      </div>
+          </div>
+        </div>
       </div>
 
 
-   <div class="col-sm-4">
-    <div class="card py-2 px-2">
-    <h3 class="py-2" style="color: #026B2F">Service Hightlight</h3>
-    <p> <div class="fb-page" data-href="https://www.facebook.com/pokharayogaschool/" data-tabs="timeline" data-width="" data-height="320px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/pokharayogaschool/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/pokharayogaschool/">Pokhra Yoga School</a></blockquote></div></p>
-  </div>
+      <div class="col-sm-4">
+        <div class="card py-2 px-2">
+          <h3 class="py-2" style="color: #026B2F">Service Hightlight</h3>
+          <p>
+          <div class="fb-page" data-href="https://www.facebook.com/pokharayogaschool/" data-tabs="timeline"
+            data-width="" data-height="320px" data-small-header="false" data-adapt-container-width="true"
+            data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/pokharayogaschool/" class="fb-xfbml-parse-ignore"><a
+                href="https://www.facebook.com/pokharayogaschool/">Pokhra Yoga School</a></blockquote>
+          </div>
+          </p>
+        </div>
 
-   </div>
+      </div>
 
     </div>
   </div>
 </div>
 
 <style type="text/css">
-
-.faqs-body{
- padding: 0px;
-}
+  .faqs-body {
+    padding: 0px;
+  }
 </style>
-
-
-
-
-
-
-
-@include('front.includes.footer')
+@endsection

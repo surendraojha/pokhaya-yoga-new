@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 header-right">
                         <ul>
-                            <li class="language">Language</li>
+                            <!-- <li class="language">Language</li> -->
                             <li id="google_translate_element"></li>
                             <li><a href="{{ $setting->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="{{ $setting->instragram }}"><i class="fab fa-instagram"></i></a></li>
