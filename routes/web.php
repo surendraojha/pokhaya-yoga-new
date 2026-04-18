@@ -62,6 +62,7 @@ use App\Http\Middleware\CacheHeaders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsletterController;
 
 // header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 // header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -330,3 +331,5 @@ Route::permanentRedirect('/https://pokharayogaschool.com/registration', '/https:
 // })->where('all', '.*');
 
 // });
+
+Route::resource('subscribe', NewsletterController::class);
