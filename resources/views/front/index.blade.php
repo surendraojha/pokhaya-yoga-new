@@ -395,12 +395,15 @@ WHY CHOOSE US
 {{-- ══════════════════════════════════════
 GOOGLE REVIEWS (static placeholder)
 ══════════════════════════════════════ --}}
-<div class="review">
+{{-- <div class="review">
     <h4>Google reviews</h4>
     <div class="elfsight-app-e22d77ae-3d63-4eee-8623-0174447a3272" data-elfsight-app-lazy></div>
 
-</div>
+</div> --}}
 
+
+<!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<div class="elfsight-app-299725ba-e326-4456-895d-521f3c700f25" data-elfsight-app-lazy></div>
 
 {{-- ══════════════════════════════════════
 QUOTES
@@ -819,7 +822,7 @@ TESTIMONIALS
 
 @push('scripts')
     <!-- Elfsight Google Reviews | Untitled Google Reviews -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
+    {{-- <script src="https://elfsightcdn.com/platform.js" async></script> --}}
 @endpush
 
 @push('page-js')

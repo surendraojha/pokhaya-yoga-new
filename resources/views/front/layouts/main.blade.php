@@ -117,6 +117,15 @@
                                             <a class="nav-link" href="{{ route('customer.register') }}">Join Us</a>
                                         @endif
                                     </li>
+
+                                       <li class="nav-item">
+                                            <a class="nav-link" target="_blank"
+                                                href="https://www.google.com/search?sca_esv=0f7b0b670255fb6d&hl=en-NP&gl=np&sxsrf=ANbL-n4a8Ge5o01obRoR85u93Fu_MRDejA:1776477804323&q=Pokhara+Yoga+School+and+Retreat+Center+%E2%80%93+Yoga+Teacher+Training+in+Nepal,+Pokhara+Yoga+School+Lake+Side+Road+Sedi+hight,+Pokhara+00977&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQ1h9G5MxW9Q58Y-4lnlZJ60T-JRGDFKYOVaObwTAT6IP2CMcQf1XkYrVg1-BhhFNbyJtJz8rCn61WIFB7hUoeQSqDFge-49PXzDJcmZ8lHJ7NppsdFWFsG-qR2RnrgXZ5KOpLVf7oWaIIT2g6e0COMqeXbgSzjhqcjokDzexm1gT58cGA%3D%3D&sa=X&ved=2ahUKEwjukunDp_aTAxWRHBAIHTBdFf4QrrQLegQIIRAA&biw=1536&bih=730&dpr=1.25">Google Reviews</a>
+
+                                    </li>
+
+
+
                                 </ul>
                             </div>
 
