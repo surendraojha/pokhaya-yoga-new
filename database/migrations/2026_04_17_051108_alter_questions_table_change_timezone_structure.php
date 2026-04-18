@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->dropColumn(['timezone', 'time_slots']);
-            $table->json('timezone_configurations')->nullable();
+            if (Schema::hasColumn('questions', 'timezone')) {
+                $table->dropColumn('timezone');
+            }
+
+            if (Schema::hasColumn('questions', 'time_slots')) {
+                $table->dropColumn('time_slots');
+            }
+            if (!Schema::hasColumn('questions', 'timezone_configurations')) {
+
+                $table->json('timezone_configurations')->nullable();
+            }
         });
     }
 
