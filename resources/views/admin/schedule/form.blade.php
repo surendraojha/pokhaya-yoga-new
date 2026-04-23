@@ -13,6 +13,11 @@
     {{ Form::select('day', $days, old('day', isset($schedule) ? $schedule->day : null), ['class' => 'form-control', 'required']) }}
 </div>
 
+<div class="form-group">
+    {{ Form::label('class_id', 'Yoga Class') }}
+    {{ Form::select('class_id', $yogaClasses->pluck('title', 'id'), old('class_id', isset($schedule) ? $schedule->class_id : null), ['class' => 'form-control', 'required']) }}
+</div>
+
 @if (isset($schedule))
     <div class="form-group">
         {{ Form::label('time_slot', 'Time Slot') }}
@@ -33,32 +38,23 @@
 
             @foreach ($oldEntries as $index => $entry)
                 <div class="schedule-entry row mb-3 g-2 align-items-end">
+
+
                     <div class="col-md-5">
                         <label for="entries_{{ $index }}_time_slot" class="form-label">Time Slot</label>
-                        <input
-                            type="text"
-                            name="entries[{{ $index }}][time_slot]"
-                            id="entries_{{ $index }}_time_slot"
-                            value="{{ $entry['time_slot'] ?? '' }}"
-                            class="form-control"
-                            placeholder="e.g., 5:30 - 6:30"
-                            required
-                        >
+                        <input type="text" name="entries[{{ $index }}][time_slot]"
+                            id="entries_{{ $index }}_time_slot" value="{{ $entry['time_slot'] ?? '' }}"
+                            class="form-control" placeholder="e.g., 5:30 - 6:30" required>
                     </div>
                     <div class="col-md-5">
                         <label for="entries_{{ $index }}_activity" class="form-label">Activity</label>
-                        <input
-                            type="text"
-                            name="entries[{{ $index }}][activity]"
-                            id="entries_{{ $index }}_activity"
-                            value="{{ $entry['activity'] ?? '' }}"
-                            class="form-control"
-                            placeholder="e.g., Self-Meditation"
-                            required
-                        >
+                        <input type="text" name="entries[{{ $index }}][activity]"
+                            id="entries_{{ $index }}_activity" value="{{ $entry['activity'] ?? '' }}"
+                            class="form-control" placeholder="e.g., Self-Meditation" required>
                     </div>
                     <div class="col-md-2 d-grid">
-                        <button type="button" class="btn btn-danger remove-entry"{{ $index === 0 ? ' disabled' : '' }}>
+                        <button type="button"
+                            class="btn btn-danger remove-entry"{{ $index === 0 ? ' disabled' : '' }}>
                             Remove
                         </button>
                     </div>

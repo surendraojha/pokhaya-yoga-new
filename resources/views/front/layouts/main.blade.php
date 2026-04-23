@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex, nofollow" />
 
     @stack('seo-meta')
-
+    <link rel="icon" href="{{asset('favicon-small.png')}}?v=20250730" type="image/png" hreflang="en">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -399,7 +399,7 @@
 
     <script type="text/javascript">
         let googleTranslateLoaded = false;
-        
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                     pageLanguage: 'en',
@@ -408,7 +408,7 @@
                 'google_translate_element'
             );
         }
-        
+
         function loadGoogleTranslate() {
             if (!googleTranslateLoaded) {
                 googleTranslateLoaded = true;
@@ -417,7 +417,7 @@
                 document.head.appendChild(script);
             }
         }
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             const languageTrigger = document.getElementById('language-trigger');
             if (languageTrigger) {

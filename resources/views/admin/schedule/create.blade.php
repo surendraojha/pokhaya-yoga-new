@@ -47,6 +47,7 @@
                 const row = document.createElement('div');
                 row.className = 'schedule-entry row mb-3 g-2 align-items-end';
                 row.innerHTML = `
+               
                     <div class="col-md-5">
                         <label for="entries_${index}_time_slot" class="form-label">Time Slot</label>
                         <input type="text" name="entries[${index}][time_slot]" id="entries_${index}_time_slot" class="form-control" placeholder="e.g., 5:30 - 6:30" required>

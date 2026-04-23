@@ -11,6 +11,12 @@ class Schedule extends Model
     protected $fillable = [
         'day',
         'time_slot',
+        'class_id',
         'activity',
     ];
+
+    public function yogaClass()
+    {
+        return $this->belongsTo(YogaClass::class, 'class_id');
+    }
 }

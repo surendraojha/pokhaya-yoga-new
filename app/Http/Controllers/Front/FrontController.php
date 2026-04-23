@@ -470,22 +470,25 @@ class FrontController extends Controller
         return view('front.blog-user', compact('blogs', 'blogUser'));
     }
 
-    public function yogaClass(string $slug) // Type hint $slug for clarity
+    public function yogaClass(string $slug)
     {
         $yogaClassCacheKey = 'yoga_class_info_' . $slug;
-
         $cacheDuration = 120;
 
-        $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
+        // $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
             $information = YogaClass::where('slug', $slug)->firstOrFail();
             $faqs = Faq::where('page_slug', $slug)->get();
+            $popularClasses = YogaClass::where('slug', '!=', $slug)->take(3)->get();
+            $schedules = Schedule::where('class_id', $information->id)
+                ->orderBy('day')
+                ->orderBy('time_slot')
+                ->get()
+                ->groupBy('day');
 
-            return view('front.class-new', compact('information', 'faqs'))->render();
+            return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules'))->render();
+        // });
 
-            return view('front.class', compact('information', 'faqs'))->render();
-        });
-
-        return $renderedView;
+        // return $renderedView;
     }
 
     public function faq()
@@ -971,6 +974,6 @@ class FrontController extends Controller
         $banner = Banner::where('title', 'schedule-banner')->first();
 
 
-        return view('front.schedule', compact('scheduleEntries', 'days', 'timeSlots','banner'));
+        return view('front.schedule', compact('scheduleEntries', 'days', 'timeSlots', 'banner'));
     }
 }

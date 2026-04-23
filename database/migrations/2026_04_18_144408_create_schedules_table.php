@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('day'); // e.g., 'Sunday', 'Monday'
-            $table->string('time_slot'); // e.g., '5:30 - 6:30'
-            $table->string('activity'); // e.g., 'Self-Meditation'
+            $table->unsignedBigInteger('class_id')->nullable();
+            $table->string('day');
+            $table->string('time_slot');
+            $table->string('activity');
             $table->timestamps();
         });
     }

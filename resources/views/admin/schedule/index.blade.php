@@ -11,8 +11,7 @@
                 <ul class="breadcrumb-elements">
                     <a href="{{ route('schedule.create') }}" class="btn btn-success">Add Schedule Entry</a>
                 </ul>
-                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a><a
-                    class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
             </div>
         </div>
 
@@ -20,6 +19,28 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
+
+                        {{-- Filter Form --}}
+                        <div class="panel-body" style="border-bottom: 1px solid #ddd;">
+                            <form method="GET" action="{{ route('schedule.index') }}" class="form-inline">
+                                <div class="form-group">
+                                    <label for="course_id" class="mr-2">Filter by Course:</label>
+                                    <select name="course_id" id="course_id" class="form-control">
+                                        <option value="">-- All Courses --</option>
+                                        @foreach($yogaClasses as $class)
+                                            <option value="{{ $class->id }}" {{ request('course_id') == $class->id ? 'selected' : '' }}>
+                                                {{ $class->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary ml-2">Filter</button>
+                                @if(request('course_id'))
+                                    <a href="{{ route('schedule.index') }}" class="btn btn-default ml-2">Clear</a>
+                                @endif
+                            </form>
+                        </div>
+
                         <div class="panel-heading">
                             <div class="panel-title">
                                 @if($schedules->isNotEmpty())
@@ -57,6 +78,7 @@
                                 @endif
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

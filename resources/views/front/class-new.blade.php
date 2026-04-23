@@ -1,6 +1,13 @@
 @extends('front.layouts.main')
 
+
 @section('content')
+
+    @push('seo-meta')
+        <x-seo-meta :title="$information->meta_title" :keywords="$information->meta_keywords" :description="$information->meta_description" />
+    @endpush
+
+
     <div class="training-details-section">
         <div class="container">
             <div class="row">
@@ -21,30 +28,55 @@
                     <aside class="sidebar">
                         <a href="register.html" class="register">Register here</a>
                         <ul class="popular-lists">
-                            <li><a href="200-hour-yoga.html"><img src="./images/train1.jpeg" alt="">
-                                    <h5>100 Hour Yoga Teacher Training</h5>
-                                </a>
-                                <p>Pokhara Yoga School and Retreat Center offers</p>
-                            </li>
-                            <li><a href="200-hour-yoga.html"><img src="./images/train2.jpg" alt="">
-                                    <h5>400 Hour Yoga Teacher Training</h5>
-                                </a>
-                                <p>Pokhara Yoga School and Retreat Center offers</p>
-                            </li>
-                            <li><a href="200-hour-yoga.html"><img src="./images/train3.jpg" alt="">
-                                    <h5>500 Hour Yoga Teacher Training</h5>
-                                </a>
-                                <p>Pokhara Yoga School and Retreat Center offers</p>
-                            </li>
+                            @foreach ($popularClasses as $class)
+                                <li>
+                                    <a href="{{ route('yoga-class.single-page', $class->slug) }}">
+                                        <img src="{{ $class->image_url }}" alt="{{ $class->title }}">
+                                        <h5>{{ $class->title }}</h5>
+                                    </a>
+                                    <p>{{ Str::limit(strip_tags($class->content), 80) }}</p>
+                                </li>
+                            @endforeach
                         </ul>
-                        <a href="schedule.html" class="btn btn-download"><i class="fa-solid fa-user-clock"></i> Daily
-                            Schedule</a>
-                        <h5>Instagram News Feed Here</h5>
+                        @if ($schedules->isNotEmpty())
+                            <a href="#schedule-section" class="btn btn-download">
+                                <i class="fa-solid fa-user-clock"></i> Daily Schedule
+                            </a>
+                        @endif
                     </aside>
                 </div>
             </div>
         </div>
     </div>
+
+
+    {{-- Inside training-details-left, after the content paragraph --}}
+    @if ($schedules->isNotEmpty())
+        <div class="schedule-section mt-4">
+            <h3>Daily Schedule</h3>
+            @foreach ($schedules as $day => $daySchedules)
+                <div class="schedule-day mb-3">
+                    <h5 class="schedule-day-title">{{ $day }}</h5>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($daySchedules as $schedule)
+                                <tr>
+                                    <td>{{ $schedule->time_slot }}</td>
+                                    <td>{{ $schedule->activity }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endforeach
+        </div>
+    @endif
 
     <div class="accommod-section">
         <div class="container">

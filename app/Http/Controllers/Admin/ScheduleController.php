@@ -5,17 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use App\Models\YogaClass;
 
 class ScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = Schedule::orderBy('day')->orderBy('time_slot')->get()->groupBy('day');
+        $query = Schedule::orderBy('day')->orderBy('time_slot');
 
-        return view('admin.schedule.index', compact('schedules'));
+        if ($request->filled('course_id')) {
+            $query->where('class_id', $request->course_id);
+        }
+
+        $schedules = $query->get()->groupBy('day');
+        $yogaClasses = YogaClass::all();
+
+        return view('admin.schedule.index', compact('schedules', 'yogaClasses'));
     }
 
     /**
@@ -24,21 +32,22 @@ class ScheduleController extends Controller
     private function dayOptions(): array
     {
         return [
-            'Sunday' => 'Sunday',
-            'Monday' => 'Monday',
-            'Tuesday' => 'Tuesday',
-            'Wednesday' => 'Wednesday',
-            'Thursday' => 'Thursday',
-            'Friday' => 'Friday',
-            'Saturday' => 'Saturday',
+            'Sunday 7' => 'Sunday 7',
+            'Monday 8' => 'Monday 8',
+            'Tuesday 9' => 'Tuesday 9',
+            'Wednesday 10' => 'Wednesday 10',
+            'Thursday 11' => 'Thursday 11',
+            'Friday 12' => 'Friday 12',
+            'Saturday 13' => 'Saturday 13',
         ];
     }
 
     public function create()
     {
         $days = $this->dayOptions();
+        $yogaClasses = YogaClass::all();
 
-        return view('admin.schedule.create', compact('days'));
+        return view('admin.schedule.create', compact('days', 'yogaClasses'));
     }
 
     /**
@@ -48,6 +57,9 @@ class ScheduleController extends Controller
     {
         $rules = [
             'day' => 'required|string',
+            'time_slot' => 'required_without:entries|string',
+            'activity' => 'required_without:entries|string',
+            'class_id' => 'required|exists:yoga_classes,id',
         ];
 
         if ($request->has('entries')) {
@@ -66,6 +78,7 @@ class ScheduleController extends Controller
                 Schedule::create([
                     'day' => $request->day,
                     'time_slot' => $entry['time_slot'],
+                    'class_id' => $request->class_id,
                     'activity' => $entry['activity'],
                 ]);
             }
@@ -73,6 +86,7 @@ class ScheduleController extends Controller
             Schedule::create([
                 'day' => $request->day,
                 'time_slot' => $request->time_slot,
+                'class_id' => $request->class_id,
                 'activity' => $request->activity,
             ]);
         }
@@ -95,8 +109,9 @@ class ScheduleController extends Controller
     {
         $schedule = Schedule::findOrFail($id);
         $days = $this->dayOptions();
+        $yogaClasses = YogaClass::all();
 
-        return view('admin.schedule.edit', compact('schedule', 'days'));
+        return view('admin.schedule.edit', compact('schedule', 'days', 'yogaClasses'));
     }
 
     /**
@@ -108,13 +123,18 @@ class ScheduleController extends Controller
             'day' => 'required|string',
             'time_slot' => 'required|string',
             'activity' => 'required|string',
+            'time_slot' => 'required_without:entries|string',
+            'activity' => 'required_without:entries|string',
+            'class_id' => 'required|exists:yoga_classes,id',
         ]);
 
         $schedule = Schedule::findOrFail($id);
         $schedule->update([
             'day' => $request->day,
             'time_slot' => $request->time_slot,
+            'class_id' => $request->class_id,
             'activity' => $request->activity,
+            'order' => $request->order,
         ]);
 
         return redirect('admin/schedule')->with('msg', 'Schedule entry updated successfully');
