@@ -810,6 +810,7 @@ TESTIMONIALS
                     @endforeach
                 </div>
             </div>
+<div class="sk-instagram-feed" data-embed-id="25675868"></div>
 
         </div>
     </div>
@@ -819,10 +820,11 @@ TESTIMONIALS
 <x-yt-lite-box />
 
 
-
 @push('scripts')
     <!-- Elfsight Google Reviews | Untitled Google Reviews -->
     {{-- <script src="https://elfsightcdn.com/platform.js" async></script> --}}
+            <script src="https://widgets.sociablekit.com/instagram-feed/widget.js" defer></script>
+
 @endpush
 
 @push('page-js')

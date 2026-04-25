@@ -941,4 +941,13 @@ class FrontController extends Controller
 
         return view('front.schedule', compact('scheduleEntries', 'banner'));
     }
+
+
+     public function instagramFeed()
+    {
+
+
+
+        return view('front.instagram-feed');
+    }
 }

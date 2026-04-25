@@ -225,6 +225,8 @@ Route::get('thank-you', [FrontController::class, 'thankYou'])->name('thankyou');
 Route::get('/load-gallery', [FrontController::class, 'loadGallery'])->name('load-gallery');
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/instagram', [FrontController::class, 'instagramFeed'])->name('front.instagram');
+
 Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('front.about');
 Route::get('/room-list', [FrontController::class, 'roomList'])->name('front.room-list');
 Route::get('/room/{id}', [FrontController::class, 'roomDetail'])->name('front.room-detail');

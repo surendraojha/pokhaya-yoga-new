@@ -13,12 +13,12 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-8 col-lg-9 training-details-left">
                     <h2>{{ $information->title }} </h2>
-                    <ul class="training-lists">
+                    {{-- <ul class="training-lists">
                         <li>Trainer: Clinne John </li>
                         <li>Date: Jul 18, 2026 - Oct 31, 2026 </li>
                         <li>Level: Begin </li>
                         <li>Members: 30 Members </li>
-                    </ul>
+                    </ul> --}}
                     <img class="main-images" src="{{ $information->image_url }}" alt="">
 
                     <p>{!! $information->content !!}</p>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-3 training-details-right">
                     <aside class="sidebar">
-                        <a href="register.html" class="register">Register here</a>
+                        <a href="{{ route('register') }}" class="register">Register here</a>
                         <ul class="popular-lists">
                             @foreach ($popularClasses as $class)
                                 <li>
@@ -63,7 +63,7 @@
                                     <h5 class="date-range">{{ $schedule->title }}</h5>
                                     <div class="schedule-entry mb-3">
                                         <h6 class="date-range">{{ $schedule->subtitle }}</h6>
-                                    
+
                                         {!! $schedule->content !!}
                                     </div>
                                 </div>
