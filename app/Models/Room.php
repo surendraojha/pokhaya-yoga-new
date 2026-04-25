@@ -14,6 +14,7 @@ class Room extends Model
         'bed_type',
         'guests',
         'size',
+        'room_size',
         'badge',
         'is_active',
     ];

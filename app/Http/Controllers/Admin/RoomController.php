@@ -44,6 +44,8 @@ class RoomController extends Controller
             'bed_type' => 'required|string|max:255',
             'guests' => 'required|integer|min:1',
             'size' => 'nullable|string|max:255',
+            'room_size' => 'required|string|max:255',
+
             'badge' => 'nullable|string|max:255',
             'amenity_icon.*' => 'required_with:amenity_title.*|string',
             'amenity_title.*' => 'required_with:amenity_icon.*|string',
@@ -57,6 +59,7 @@ class RoomController extends Controller
             'bed_type' => $request->bed_type,
             'guests' => $request->guests,
             'size' => $request->size,
+            'room_size' => $request->room_size,
             'badge' => $request->badge,
         ]);
 
@@ -124,6 +127,7 @@ class RoomController extends Controller
             'bed_type' => 'required|string|max:255',
             'guests' => 'required|integer|min:1',
             'size' => 'nullable|string|max:255',
+            'room_size' => 'required|string|max:255',
             'badge' => 'nullable|string|max:255',
             'amenity_icon.*' => 'required_with:amenity_title.*|string',
             'amenity_title.*' => 'required_with:amenity_icon.*|string',
@@ -139,6 +143,7 @@ class RoomController extends Controller
             'bed_type' => $request->bed_type,
             'guests' => $request->guests,
             'size' => $request->size,
+            'room_size' => $request->room_size,
             'badge' => $request->badge,
         ]);
 
