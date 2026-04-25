@@ -15,6 +15,10 @@
             </div>
         </div>
 
+        @if(session('msg'))
+            <div class="alert alert-success">{{ session('msg') }}</div>
+        @endif
+
         <div class="content">
             <div class="row">
                 <div class="col-sm-12">
@@ -44,21 +48,23 @@
                         <div class="panel-heading">
                             <div class="panel-title">
                                 @if($schedules->isNotEmpty())
-                                    @foreach($schedules as $day => $daySchedules)
-                                        <h4>{{ $day }}</h4>
+                                    @foreach($schedules as $className => $classSchedules)
+                                        <h4>{{ $className }}</h4>
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Time Slot</th>
-                                                    <th>Activity</th>
+                                                    <th>Title</th>
+                                                    <th>Subtitle</th>
+                                                    <th>Content</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($daySchedules as $schedule)
+                                                @foreach($classSchedules as $schedule)
                                                     <tr>
-                                                        <td>{{ $schedule->time_slot }}</td>
-                                                        <td>{{ $schedule->activity }}</td>
+                                                        <td>{{ $schedule->title }}</td>
+                                                        <td>{{ $schedule->subtitle ?? '—' }}</td>
+                                                        <td>{{ Str::limit(strip_tags($schedule->content), 80) }}</td>
                                                         <td>
                                                             <a href="{{ route('schedule.edit', $schedule->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                                             <form action="{{ route('schedule.destroy', $schedule->id) }}" method="POST" style="display: inline;">

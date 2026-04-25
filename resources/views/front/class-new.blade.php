@@ -52,29 +52,26 @@
 
     {{-- Inside training-details-left, after the content paragraph --}}
     @if ($schedules->isNotEmpty())
-        <div class="schedule-section mt-4">
-            <h3>Daily Schedule</h3>
-            @foreach ($schedules as $day => $daySchedules)
-                <div class="schedule-day mb-3">
-                    <h5 class="schedule-day-title">{{ $day }}</h5>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Time Slot</th>
-                                <th>Activity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($daySchedules as $schedule)
-                                <tr>
-                                    <td>{{ $schedule->time_slot }}</td>
-                                    <td>{{ $schedule->activity }}</td>
-                                </tr>
+        <div class="schedule-sections">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <div class="schedule-section mt-4">
+                            <h2>One Week Schedule</h2>
+                            @foreach ($schedules as $schedule)
+                                <div class="schedule-day mb-3">
+                                    <h5 class="date-range">{{ $schedule->title }}</h5>
+                                    <div class="schedule-entry mb-3">
+                                        <h6 class="date-range">{{ $schedule->subtitle }}</h6>
+                                    
+                                        {!! $schedule->content !!}
+                                    </div>
+                                </div>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     @endif
 
@@ -85,8 +82,10 @@
                     <h3>Accommodation</h3>
                     <p>Pokhara Yoga School and Retreat Center offers the best 200 Hour Yoga Teacher Training in Pokhara
                         Nepal in the lush greenery of the Himalayan forest. We welcome learners from all over the world
-                        aspiring to be certified Yoga teachers. Completing our 200 Hour Yoga Teacher Training Course (YTTC
-                        200 Hour) will make you eligible for the Yoga Alliance 200 RYT Accreditation, letting you become a
+                        aspiring to be certified Yoga teachers. Completing our 200 Hour Yoga Teacher Training Course
+                        (YTTC
+                        200 Hour) will make you eligible for the Yoga Alliance 200 RYT Accreditation, letting you become
+                        a
                         Registered Yoga Teacher (RYT). You can teach Yoga in any school, college, professional sports
                         institute, or Yoga Learning Centre in any part of the globe.</p>
                 </div>
@@ -128,20 +127,22 @@
         </div>
     </div>
 
-    <div class="certificate-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12">
-                    <h4>Certificate</h4>
-                    <p>Learn from our certified and highly experienced Yoga Teachers Trainers and Spiritual Masters. Set for
-                        a soul-enriching and life-transformative journey with a profound understanding of Yoga from learning
-                        core basics and fundamental principles to various Asanas, and philosophical aspects to mastering
-                        Hatha Yoga and Ashtanga Yoga.</p>
-                    <img src="./images/certificate.webp" alt="">
+    {{-- certificates --}}
+    @if ($cetificates->isNotEmpty())
+        <div class="certificate-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <h4>Certificate</h4>
+                        @foreach ($cetificates as $certificate)
+                            <p>{!! $certificate->description !!}</p>
+                            <img src="{{ $certificate->image_url }}" alt="">
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="faqs-section">
         <div class="overlay">

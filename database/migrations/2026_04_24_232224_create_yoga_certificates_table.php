@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('yoga_certificates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('class_id')->nullable();
-            $table->string('title');
-            $table->text('subtitle')->nullable();
-            $table->text('content');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('yoga_class_id')->nullable();
+            // $table->foreign('yoga_class_id')->references('id')->on('yoga_classes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('yoga_certificates');
     }
 };

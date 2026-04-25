@@ -46,6 +46,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\VideoTestimonialController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Admin\WhyComeToPokharaController;
+use App\Http\Controllers\Admin\YogaCertificateController;
 use App\Http\Controllers\Admin\YogaClassController;
 use App\Http\Controllers\Front\Booking\BookingController;
 use App\Http\Controllers\Front\CheckoutController;
@@ -166,6 +167,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('yoga-class', YogaClassController::class);
     Route::resource('accommodation-and-foods', AccommodationAndFoodController::class);
 
+    Route::resource('yoga-certificate', YogaCertificateController::class);
     // Menu custom routes
     Route::get('create-menu/{id}', [MenuController::class, 'createMenu']);
     Route::post('store-menu', [MenuController::class, 'storeMenu']);

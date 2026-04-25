@@ -606,6 +606,15 @@
                             </a>
                         </li>
 
+
+                              <li class="nav-item">
+                            <a href="{{ route('yoga-certificate.index') }}"
+                                class="nav-link {{ 'admin/yoga-certificate' == request()->path() ? 'bg-white' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Yoga Certificates    </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('room.index') }}"
                                 class="nav-link {{ 'admin/room' == request()->path() ? 'bg-white' : '' }}">

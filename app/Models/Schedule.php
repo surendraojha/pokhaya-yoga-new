@@ -9,10 +9,10 @@ class Schedule extends Model
     protected $table = 'schedules';
 
     protected $fillable = [
-        'day',
-        'time_slot',
+        'title',
+        'content',
+        'subtitle',
         'class_id',
-        'activity',
     ];
 
     public function yogaClass()

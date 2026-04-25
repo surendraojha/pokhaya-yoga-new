@@ -16,7 +16,7 @@ use App\Models\JsWorkingExperience;
 use Exception;
 use Illuminate\Http\Request;
 use Intervention\Image\Laravel\Facades\Image;
-
+// use Image;
 class Helper
 {
     public static function slug($slug)
@@ -30,9 +30,9 @@ class Helper
 
         return $slug;
     }
-    
-    
-    
+
+
+
     public static function uploadImage($file, $path, $width,$height,$image_name=null)
     {
 
@@ -51,7 +51,7 @@ class Helper
 
          return $image_name;
     }
-    
+
     public static function isSpamByAI(array $data): bool
 {
     $prompt = "You are a spam detection assistant. Analyze this contact form submission. Respond only with 'Spam' or 'Not Spam'.\n\n";
@@ -210,6 +210,6 @@ public static function isSpamSubmission(
 
 
 
-    
-  
+
+
 }

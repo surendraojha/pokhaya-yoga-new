@@ -139,7 +139,7 @@ class YogaClassController extends Controller
         $information->meta_title = $request->meta_title;
 
         $information->save();
-        
+
         Cache::forget('yoga_class_info_' . $information->slug);
 
         return redirect('admin/yoga-class')->with('msg', 'Information Updated');

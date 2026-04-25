@@ -43,6 +43,7 @@ use App\Models\Welcome;
 use App\Models\WhyChooseUs;
 use App\Models\WhyComeToPokhara;
 use App\Models\YogaClass;
+use App\Models\YogaCertificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -479,13 +480,13 @@ class FrontController extends Controller
             $information = YogaClass::where('slug', $slug)->firstOrFail();
             $faqs = Faq::where('page_slug', $slug)->get();
             $popularClasses = YogaClass::where('slug', '!=', $slug)->take(3)->get();
+            $cetificates = YogaCertificate::where('yoga_class_id', $information->id)->get();
             $schedules = Schedule::where('class_id', $information->id)
-                ->orderBy('day')
-                ->orderBy('time_slot')
-                ->get()
-                ->groupBy('day');
+                ->orderBy('title', 'asc')
+                ->get();
 
-            return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules'))->render();
+
+            return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules', 'cetificates'))->render();
         // });
 
         // return $renderedView;
