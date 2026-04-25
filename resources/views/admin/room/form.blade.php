@@ -27,6 +27,22 @@
             {{ Form::text('size', null, ['class' => 'form-control']) }}
         </div>
     </div>
+
+
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ Form::label('room_size', 'Room Type') }}
+            {{ Form::select(
+                'room_size',
+                [
+                    'single' => 'Single Room',
+                    'double' => 'Double Room',
+                ],
+                null,
+                ['class' => 'form-control', 'placeholder' => 'Select Room Type'],
+            ) }}
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -67,20 +83,21 @@
     <p class="text-muted">Upload at least one image for the room. First image will be featured.</p>
     {{ Form::file('images[]', ['class' => 'form-control', 'multiple' => true, isset($room) ? '' : 'required']) }}
 
-    @if(isset($room) && $room->images->isNotEmpty())
+    @if (isset($room) && $room->images->isNotEmpty())
         <div class="mt-3">
             <h5>Current Images:</h5>
             <div class="row">
-                @foreach($room->images as $image)
+                @foreach ($room->images as $image)
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <img src="{{ asset('uploads/' . $image->image) }}" class="card-img-top" alt="{{ $room->title }}"
-                                height="150">
+                            <img src="{{ asset('uploads/' . $image->image) }}" class="card-img-top"
+                                alt="{{ $room->title }}" height="150">
                             <div class="card-body p-2">
-                                @if($image->is_featured)
+                                @if ($image->is_featured)
                                     <span class="badge badge-primary">Featured</span>
                                 @endif
-                                <a href="{{ route('room.delete-image', $image->id) }}" class="btn btn-sm btn-danger mt-2"
+                                <a href="{{ route('room.delete-image', $image->id) }}"
+                                    class="btn btn-sm btn-danger mt-2"
                                     onclick="return confirm('Delete this image?');">Delete</a>
                             </div>
                         </div>
@@ -98,8 +115,8 @@
 
     <div id="amenities-container">
 
-        @if(isset($room) && $room->amenities->isNotEmpty())
-            @foreach($room->amenities as $amenity)
+        @if (isset($room) && $room->amenities->isNotEmpty())
+            @foreach ($room->amenities as $amenity)
                 <div class="amenity-row row mb-2">
                     <div class="col-md-4">
                         <input type="text" name="amenity_icon[]" class="form-control" value="{{ $amenity->icon }}"
@@ -121,7 +138,8 @@
                         placeholder='e.g., &lt;i class="fas fa-tv"&gt;&lt;/i&gt;'>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="amenity_title[]" class="form-control" placeholder="e.g., 55&quot; Smart TV">
+                    <input type="text" name="amenity_title[]" class="form-control"
+                        placeholder="e.g., 55&quot; Smart TV">
                 </div>
                 <div class="col-md-2">
                     <button type="button" class="btn btn-danger btn-sm remove-amenity">Remove</button>
@@ -154,7 +172,7 @@
 </div>
 
 <script>
-    document.getElementById('add-amenity').addEventListener('click', function () {
+    document.getElementById('add-amenity').addEventListener('click', function() {
         const container = document.getElementById('amenities-container');
 
         const row = document.createElement('div');
@@ -177,7 +195,7 @@
         container.appendChild(row);
     });
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', function(e) {
         if (e.target.classList.contains('remove-amenity')) {
             e.target.closest('.amenity-row').remove();
         }

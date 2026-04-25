@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-3 training-details-right">
                     <aside class="sidebar">
-                        <a href="{{ route('register') }}" class="register">Register here</a>
+                        <a href="{{ route('customer.register') }}" class="register">Register here</a>
                         <ul class="popular-lists">
                             @foreach ($popularClasses as $class)
                                 <li>
@@ -106,6 +106,8 @@
                         </div>
                     </div>
                 </div>
+
+                
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <h4>Private Room</h4>
                     <div class="owl-six owl-carousel owl-theme">
