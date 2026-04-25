@@ -477,16 +477,25 @@ class FrontController extends Controller
         $cacheDuration = 120;
 
         // $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
-            $information = YogaClass::where('slug', $slug)->firstOrFail();
-            $faqs = Faq::where('page_slug', $slug)->get();
-            $popularClasses = YogaClass::where('slug', '!=', $slug)->take(3)->get();
-            $cetificates = YogaCertificate::where('yoga_class_id', $information->id)->get();
-            $schedules = Schedule::where('class_id', $information->id)
-                ->orderBy('title', 'asc')
-                ->get();
+        $information = YogaClass::where('slug', $slug)->firstOrFail();
+        $faqs = Faq::where('page_slug', $slug)->get();
+        $popularClasses = YogaClass::where('slug', '!=', $slug)->take(3)->get();
+        $cetificates = YogaCertificate::where('yoga_class_id', $information->id)->get();
+        $schedules = Schedule::where('class_id', $information->id)
+            ->orderBy('title', 'asc')
+            ->get();
 
+        $singleRooms = Room::where('room_size', 'single')
+            ->orderBy('title', 'asc')
+            ->limit(3)
+            ->get();
+            
+        $doubleRooms = Room::where('room_size', 'double')
+            ->orderBy('title', 'asc')
+            ->limit(3)
+            ->get();
 
-            return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules', 'cetificates'))->render();
+        return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules', 'cetificates','singleRooms', 'doubleRooms'))->render();
         // });
 
         // return $renderedView;
@@ -943,7 +952,7 @@ class FrontController extends Controller
     }
 
 
-     public function instagramFeed()
+    public function instagramFeed()
     {
 
 

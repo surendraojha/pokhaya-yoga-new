@@ -75,6 +75,7 @@
         </div>
     @endif
 
+    {{-- Accommodation Section --}}
     <div class="accommod-section">
         <div class="container">
             <div class="row">
@@ -83,48 +84,67 @@
                     <p>Pokhara Yoga School and Retreat Center offers the best 200 Hour Yoga Teacher Training in Pokhara
                         Nepal in the lush greenery of the Himalayan forest. We welcome learners from all over the world
                         aspiring to be certified Yoga teachers. Completing our 200 Hour Yoga Teacher Training Course
-                        (YTTC
-                        200 Hour) will make you eligible for the Yoga Alliance 200 RYT Accreditation, letting you become
-                        a
-                        Registered Yoga Teacher (RYT). You can teach Yoga in any school, college, professional sports
-                        institute, or Yoga Learning Centre in any part of the globe.</p>
+                        (YTTC 200 Hour) will make you eligible for the Yoga Alliance 200 RYT Accreditation, letting you
+                        become a Registered Yoga Teacher (RYT). You can teach Yoga in any school, college, professional
+                        sports institute, or Yoga Learning Centre in any part of the globe.</p>
                 </div>
+
+                {{-- Shared Rooms (single room_size) --}}
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <h4>Shared Room</h4>
                     <div class="owl-five owl-carousel owl-theme">
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Single Room</a> </h6>
-                        </div>
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Double Room</a> </h6>
-                        </div>
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Triple Room</a> </h6>
-                        </div>
+                        @forelse($doubleRooms as $room)
+                            @php
+                                $featuredImage =
+                                    $room->images->where('is_featured', true)->first() ?? $room->images->first();
+                            @endphp
+                            <div class="item">
+                                <a href="{{ url('room-details/' . $room->id) }}">
+                                    <img src="{{ $featuredImage ? asset('uploads/' . $featuredImage->image) : asset('images/food2.jpg') }}"
+                                        alt="{{ $room->title }}">
+                                </a>
+                                <h6>
+                                    <a href="{{ url('room-details/' . $room->id) }}">
+                                        {{ $room->title }}
+                                    </a>
+                                </h6>
+                            </div>
+                        @empty
+                            <div class="item">
+                                <p>No shared rooms available.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 
-                
+                {{-- Private Rooms (double room_size) --}}
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <h4>Private Room</h4>
                     <div class="owl-six owl-carousel owl-theme">
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Single Room</a> </h6>
-                        </div>
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Double Room</a> </h6>
-                        </div>
-                        <div class="item">
-                            <a href="room-details.html"><img src="./images/food2.jpg" alt=""></a>
-                            <h6><a href="room-details.html">Triple Room</a> </h6>
-                        </div>
+                        @forelse($singleRooms as $room)
+                            @php
+                                $featuredImage =
+                                    $room->images->where('is_featured', true)->first() ?? $room->images->first();
+                            @endphp
+                            <div class="item">
+                                <a href="{{ url('room-details/' . $room->id) }}">
+                                    <img src="{{ $featuredImage ? asset('uploads/' . $featuredImage->image) : asset('images/food2.jpg') }}"
+                                        alt="{{ $room->title }}">
+                                </a>
+                                <h6>
+                                    <a href="{{ url('room-details/' . $room->id) }}">
+                                        {{ $room->title }}
+                                    </a>
+                                </h6>
+                            </div>
+                        @empty
+                            <div class="item">
+                                <p>No private rooms available.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
