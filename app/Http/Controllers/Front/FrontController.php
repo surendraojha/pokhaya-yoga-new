@@ -934,47 +934,11 @@ class FrontController extends Controller
 
     public function schedule()
     {
-        $dayMap = [
-            '0' => 'Sunday',
-            '1' => 'Monday',
-            '2' => 'Tuesday',
-            '3' => 'Wednesday',
-            '4' => 'Thursday',
-            '5' => 'Friday',
-            '6' => 'Saturday',
-            'Sunday' => 'Sunday',
-            'Monday' => 'Monday',
-            'Tuesday' => 'Tuesday',
-            'Wednesday' => 'Wednesday',
-            'Thursday' => 'Thursday',
-            'Friday' => 'Friday',
-            'Saturday' => 'Saturday',
-        ];
 
-        $dayOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        $schedules = Schedule::all()->map(function ($schedule) use ($dayMap) {
-            $dayValue = (string) $schedule->day;
-
-            if (array_key_exists($dayValue, $dayMap)) {
-                $schedule->day = $dayMap[$dayValue];
-            }
-
-            return $schedule;
-        });
-
-        $timeSlots = $schedules->pluck('time_slot')->unique()->values();
-
-        $scheduleEntries = $schedules
-            ->groupBy('day')
-            ->map(function ($dayGroup) {
-                return $dayGroup->keyBy('time_slot');
-            });
-
-        $days = collect($dayOrder)->values();
         $banner = Banner::where('title', 'schedule-banner')->first();
+        $scheduleEntries = Schedule::orderBy('created_at', 'asc')->paginate(10);
 
-
-        return view('front.schedule', compact('scheduleEntries', 'days', 'timeSlots', 'banner'));
+        return view('front.schedule', compact('scheduleEntries', 'banner'));
     }
 }
