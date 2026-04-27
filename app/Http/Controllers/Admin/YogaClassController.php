@@ -41,24 +41,22 @@ class YogaClassController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'title' => 'required',
-           'content' => 'required',
+            'title' => 'required',
+            'content' => 'required',
 
 
         ]);
-          $information = new YogaClass;
+        $information = new YogaClass;
 
-       $information->image = '';
+        $information->image = '';
 
 
-    if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
 
-        $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
-        $information->image = $image_name;
-
-      }
+            $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+            $information->image = $image_name;
+        }
 
 
         $information->title = $request->title;
@@ -68,6 +66,12 @@ class YogaClassController extends Controller
         $information->meta_keyword = $request->meta_keyword;
         $information->meta_des = $request->meta_des;
         $information->meta_title = $request->meta_title;
+
+        $information->trainer = $request->trainer;
+        $information->date = $request->date;
+        $information->level = $request->level;
+        $information->members = $request->members;
+        $information->accomodation_text = $request->accomodation_text;
         $information->save();
         return redirect('admin/yoga-class')->with('msg', 'Information Added');
     }
@@ -105,8 +109,8 @@ class YogaClassController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-           'title' => 'required',
-           'content' => 'required',
+            'title' => 'required',
+            'content' => 'required',
 
 
         ]);
@@ -114,20 +118,18 @@ class YogaClassController extends Controller
 
         $information = YogaClass::find($id);
         $oldfile = $information->image;
-      //file upload
-      $information->image = $oldfile;
-      if($request->hasFile('image'))
-      {
-         $file = $request->file('image');
-         $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
+        //file upload
+        $information->image = $oldfile;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image_name = Helper::uploadImage($file, public_path() . '/uploads/', env("BANNER_WIDTH"), env("BANNER_HEIGHT"));
 
-         $oldfile = public_path().'/uploads/'.$oldfile;
-         if(File::exists($oldfile))
-         {
-            File::delete($oldfile);
-         }
-         $information->image = $image_name;
-      }
+            $oldfile = public_path() . '/uploads/' . $oldfile;
+            if (File::exists($oldfile)) {
+                File::delete($oldfile);
+            }
+            $information->image = $image_name;
+        }
 
 
         $information->title = $request->title;
@@ -137,7 +139,11 @@ class YogaClassController extends Controller
         $information->meta_keyword = $request->meta_keyword;
         $information->meta_des = $request->meta_des;
         $information->meta_title = $request->meta_title;
-
+        $information->trainer = $request->trainer;
+        $information->date = $request->date;
+        $information->level = $request->level;
+        $information->members = $request->members;
+        $information->accomodation_text = $request->accomodation_text;
         $information->save();
 
         Cache::forget('yoga_class_info_' . $information->slug);
@@ -154,11 +160,10 @@ class YogaClassController extends Controller
     public function destroy($id)
     {
         $information = YogaClass::find($id);
-      $path = public_path().'/uploads/'.$information->image;
-      if(File::exists($path))
-      {
-         File::delete($path);
-      }
+        $path = public_path() . '/uploads/' . $information->image;
+        if (File::exists($path)) {
+            File::delete($path);
+        }
         Cache::forget('yoga_class_info_' . $information->slug);
 
         $information->delete();

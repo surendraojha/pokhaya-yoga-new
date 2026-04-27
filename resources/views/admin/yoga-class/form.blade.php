@@ -18,6 +18,36 @@
     {{ Form::label('image', 'Image') }}
     {{ Form::file('image', null, ['class' => 'form-control']) }}
 </div>
+
+
+
+<div class="form-group">
+    {{ Form::label('trainer', 'Trainer') }}
+    {{ Form::text('trainer', null, ['class' => 'form-control']) }}
+</div>
+
+
+<div class="form-group">
+    {{ Form::label('date', 'Date') }}
+    {{ Form::text('date', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('level', 'Level') }}
+    {{ Form::text('level', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('members', 'Members') }}
+    {{ Form::text('members', null, ['class' => 'form-control']) }}
+</div>
+
+
+<div class="form-group">
+    {{ Form::label('accomodation_text', 'Accomodation Text') }}
+    {{ Form::textarea('accomodation_text', null, ['class' => 'form-control', 'rows' => '3']) }}
+</div>
+
 <div class="form-group">
     {{ Form::label('meta_keyword', 'Meta Keyword') }}
     {{ Form::textarea('meta_keyword', null, ['class' => 'form-control', 'rows' => '3']) }}

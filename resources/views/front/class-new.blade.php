@@ -13,12 +13,20 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-8 col-lg-9 training-details-left">
                     <h2>{{ $information->title }} </h2>
-                    {{-- <ul class="training-lists">
-                        <li>Trainer: Clinne John </li>
-                        <li>Date: Jul 18, 2026 - Oct 31, 2026 </li>
-                        <li>Level: Begin </li>
-                        <li>Members: 30 Members </li>
-                    </ul> --}}
+                    <ul class="training-lists">
+                        @if ($information->trainer)
+                            <li>Trainer: {{ $information->trainer }} </li>
+                        @endif
+                        @if ($information->date)
+                            <li>Date: {{ $information->date }} </li>
+                        @endif
+                        @if ($information->level)
+                            <li>Level: {{ $information->level }} </li>
+                        @endif
+                        @if ($information->members)
+                            <li>Members: {{ $information->members }} </li>
+                        @endif
+                    </ul>
                     <img class="main-images" src="{{ $information->image_url }}" alt="">
 
                     <p>{!! $information->content !!}</p>
@@ -52,7 +60,7 @@
 
     {{-- Inside training-details-left, after the content paragraph --}}
     @if ($schedules->isNotEmpty())
-        <div class="schedule-sections">
+        <div class="schedule-sections" id="schedule-section">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-12">
@@ -81,12 +89,11 @@
             <div class="row">
                 <div class="col-12 col-sm-12">
                     <h3>Accommodation</h3>
-                    <p>Pokhara Yoga School and Retreat Center offers the best 200 Hour Yoga Teacher Training in Pokhara
-                        Nepal in the lush greenery of the Himalayan forest. We welcome learners from all over the world
-                        aspiring to be certified Yoga teachers. Completing our 200 Hour Yoga Teacher Training Course
-                        (YTTC 200 Hour) will make you eligible for the Yoga Alliance 200 RYT Accreditation, letting you
-                        become a Registered Yoga Teacher (RYT). You can teach Yoga in any school, college, professional
-                        sports institute, or Yoga Learning Centre in any part of the globe.</p>
+                    @if ($information->accomodation_text)
+                        <p>
+                            {{$information->accomodation_text}}
+                        </p>
+                    @endif
                 </div>
 
                 {{-- Shared Rooms (single room_size) --}}
