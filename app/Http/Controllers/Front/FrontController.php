@@ -42,8 +42,8 @@ use App\Models\VideoTestimonial;
 use App\Models\Welcome;
 use App\Models\WhyChooseUs;
 use App\Models\WhyComeToPokhara;
-use App\Models\YogaClass;
 use App\Models\YogaCertificate;
+use App\Models\YogaClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -102,6 +102,23 @@ class FrontController extends Controller
         ];
 
         return view('front.index', $data);
+    }
+
+    public function offerList()
+    {
+        $offers = Offer::where('is_active', true)->latest()->get();
+        $banner = Banner::where('title', 'offer-banner')->first();
+
+        return view('front.offer-list', compact('offers', 'banner'));
+    }
+
+    public function offerDetail($id)
+    {
+        $offer = Offer::findOrFail($id);
+        $banner = Banner::where('title', 'offer-banner')->first();
+        $seoMeta = SeoMeta::where('name', 'offer-detail')->first();
+
+        return view('front.offer-detail', compact('offer', 'banner', 'seoMeta'));
     }
 
     public function loadGallery()
@@ -473,7 +490,7 @@ class FrontController extends Controller
 
     public function yogaClass(string $slug)
     {
-        $yogaClassCacheKey = 'yoga_class_info_' . $slug;
+        $yogaClassCacheKey = 'yoga_class_info_'.$slug;
         $cacheDuration = 120;
 
         // $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {
@@ -489,13 +506,13 @@ class FrontController extends Controller
             ->orderBy('title', 'asc')
             ->limit(3)
             ->get();
-            
+
         $doubleRooms = Room::where('room_size', 'double')
             ->orderBy('title', 'asc')
             ->limit(3)
             ->get();
 
-        return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules', 'cetificates','singleRooms', 'doubleRooms'))->render();
+        return view('front.class-new', compact('information', 'faqs', 'popularClasses', 'schedules', 'cetificates', 'singleRooms', 'doubleRooms'))->render();
         // });
 
         // return $renderedView;
@@ -944,18 +961,14 @@ class FrontController extends Controller
     public function schedule()
     {
 
-
         $banner = Banner::where('title', 'schedule-banner')->first();
         $scheduleEntries = Schedule::orderBy('created_at', 'asc')->paginate(10);
 
         return view('front.schedule', compact('scheduleEntries', 'banner'));
     }
 
-
     public function instagramFeed()
     {
-
-
 
         return view('front.instagram-feed');
     }

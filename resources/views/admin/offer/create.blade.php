@@ -29,7 +29,7 @@
                         
                         @csrf
                         
-                        @include('admin.offer.form')
+                        @include('admin.offer.form', ['information' => new \App\Models\Offer()])
                         
                         {{ Form::close() }}
                     </div>
