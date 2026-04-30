@@ -9,31 +9,11 @@
         <style type="text/css" media="screen">
             .hero-sections {
 
-                   background:  linear-gradient(135deg, rgba(107, 70, 193, 0.9), rgba(147, 51, 234, 0.9)),
-                url("{{asset('uploads/'.$soundHealing->background_image)}}") center/cover;
+                background: linear-gradient(135deg, rgba(107, 70, 193, 0.9), rgba(147, 51, 234, 0.9)),
+                    url("{{ asset('uploads/' . $soundHealing->background_image) }}") center/cover;
             }
         </style>
     @endpush
-
-    <!-- Page Banner -->
-    {{-- <div class="page-banner">
-        <div class="overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12">
-                        <div class="strokeme">
-                            <h1>{{ $soundHealing->title }}</h1>
-                            <ul class="breadcrumb">
-                                <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="{{ route('front.sound-healing') }}">Sound Healing</a></li>
-                                <li>{{ $soundHealing->title }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <!-- Hero Section -->
     <section class="hero-sections">
@@ -114,9 +94,11 @@
                 <div class="instructor-container">
                     <div class="instructor-image">
                         @if ($soundHealing->teacher->image)
-                            <img src="{{ asset('uploads/ourTeam/thumbnails/' . $soundHealing->teacher->image) }}" alt="{{ $soundHealing->teacher->name }}">
+                            <img src="{{ asset('uploads/ourTeam/thumbnails/' . $soundHealing->teacher->image) }}"
+                                alt="{{ $soundHealing->teacher->name }}">
                         @else
-                            <img src="https://picsum.photos/seed/instructor/400/500" alt="{{ $soundHealing->teacher->name }}">
+                            <img src="https://picsum.photos/seed/instructor/400/500"
+                                alt="{{ $soundHealing->teacher->name }}">
                         @endif
                         <div class="instructor-badge">
                             <h4>{{ $soundHealing->teacher->name }}</h4>
@@ -148,7 +130,7 @@
                                 </div>
                             @endif
                         </div>
-                        <a href="{{ url('teacher/'. $soundHealing->teacher->id) }}" class="btn btn-gradient">
+                        <a href="{{ url('teacher/' . $soundHealing->teacher->id) }}" class="btn btn-gradient">
                             Learn More About {{ $soundHealing->teacher->name }}
                         </a>
                     </div>
@@ -156,6 +138,35 @@
             </div>
         </section>
     @endif
+
+
+    <!-- Schedule Section -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <h2 class="section-title">Upcoming Sessions</h2>
+            <div class="schedule-grid">
+                
+                @foreach ($soundHealingSessions as $value)
+                    <div class="schedule-card" data-time="morning">
+                        <div class="schedule-header">
+                            <div class="schedule-date">{{ date('D, M d', strtotime($value->date)) }} </div>
+                            <div class="schedule-time">{{ $value->time }}</div>
+                        </div>
+                        <h3 class="schedule-title">{{ $value->title }}</h3>
+                        <p class="schedule-instructor">with {{ $value->soundHealing->teacher->name }}</p>
+                        <p class="schedule-description">{{ $value->description }}</p>
+                        <div class="schedule-spots">
+                            <span class="spots-left">{{ $value->spots_left }} spots left</span>
+                            <a href="{{ url('student-register') }}" class="btn btn-gradient">Book</a>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+        </div>
+    </section>
+
 
     <!-- FAQ Section -->
     <div class="faqs-section">
@@ -172,7 +183,9 @@
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 <div class="content" style="display: none;">
-                                    <p>Sound healing is a therapeutic practice that uses sound vibrations from instruments like crystal bowls, gongs, and chimes to promote physical, mental, and emotional well-being.</p>
+                                    <p>Sound healing is a therapeutic practice that uses sound vibrations from instruments
+                                        like crystal bowls, gongs, and chimes to promote physical, mental, and emotional
+                                        well-being.</p>
                                 </div>
                             </div>
                             <div class="set">
@@ -181,7 +194,8 @@
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 <div class="content" style="display: none;">
-                                    <p>No prior experience is needed. Our sessions are open to all levels and backgrounds.</p>
+                                    <p>No prior experience is needed. Our sessions are open to all levels and backgrounds.
+                                    </p>
                                 </div>
                             </div>
                             <div class="set">
@@ -190,7 +204,8 @@
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 <div class="content" style="display: none;">
-                                    <p>We recommend comfortable clothing, a water bottle, and an open mind. All props and equipment are provided.</p>
+                                    <p>We recommend comfortable clothing, a water bottle, and an open mind. All props and
+                                        equipment are provided.</p>
                                 </div>
                             </div>
                             <div class="set">
@@ -199,7 +214,8 @@
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 <div class="content" style="display: none;">
-                                    <p>Sessions typically run 75 minutes, with extended workshop options available on weekends.</p>
+                                    <p>Sessions typically run 75 minutes, with extended workshop options available on
+                                        weekends.</p>
                                 </div>
                             </div>
                         </div>

@@ -509,7 +509,11 @@ class FrontController extends Controller
             ->where('id', $id)
             ->firstOrfail();
 
-        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing'));
+        $soundHealingSessions = \App\Models\SoundHealingSession::with('soundHealing')
+            ->where('sound_healing_id', $id)
+            ->get();
+
+        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing','soundHealingSessions'));
     }
 
     public function yogaClass(string $slug)

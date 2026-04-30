@@ -8,6 +8,11 @@ class SoundHealing extends Model
 {
     public function teacher()
     {
-        return $this->belongsTo(OurTeam::class,'teacher_id');
+        return $this->belongsTo(OurTeam::class, 'teacher_id');
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(SoundHealingSession::class);
     }
 }

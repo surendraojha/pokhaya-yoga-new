@@ -24,7 +24,6 @@ return new class extends Migration
 
             $table->text('what_to_expect_title')->nullable();
             $table->text('what_to_expect_subtitle')->nullable();
-
             $table->text('what_to_expect')->nullable();
 
 

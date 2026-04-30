@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\SeoMetaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SoundHealingController;
+use App\Http\Controllers\Admin\SoundHealingSessionController;
 use App\Http\Controllers\Admin\TeamCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\VideoTestimonialController;
@@ -212,6 +213,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::resource('sound-healing', SoundHealingController::class);
 
+    Route::resource('sound-healing-sessions', SoundHealingSessionController::class);
 
     // Key points
     Route::resource('keypoints', KeyPointsController::class);

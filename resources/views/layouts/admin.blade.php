@@ -610,9 +610,17 @@
 
                         <li class="nav-item">
                             <a href="{{ route('sound-healing.index') }}"
-                                class="nav-link {{ 'admin/yoga-certificate' == request()->path() ? 'bg-white' : '' }}">
+                                class="nav-link {{ 'admin/sound-healing' == request()->path() ? 'bg-white' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sound Healing </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('sound-healing-sessions.index') }}"
+                                class="nav-link {{ 'admin/sound-healing-sessions' == request()->path() ? 'bg-white' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sound Healing Sessions </p>
                             </a>
                         </li>
 
