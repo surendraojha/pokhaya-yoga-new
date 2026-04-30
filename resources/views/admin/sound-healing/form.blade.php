@@ -6,6 +6,11 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('slug', 'Slug') }}
+    {{ Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Leave empty to auto-generate']) }}
+</div>
+
+<div class="form-group">
     {{ Form::label('location', 'Location') }}
     {{ Form::text('location', null, ['class' => 'form-control']) }}
 </div>
@@ -92,4 +97,28 @@
 <div class="form-group">
     {{ Form::label('workshop_lead', 'Workshops Led') }}
     {{ Form::text('workshop_lead', null, ['class' => 'form-control']) }}
+</div>
+
+
+
+<div class="form-group">
+    {{ Form::label('tripe_room', 'Triple Room') }}
+    {{ Form::text('tripe_room', null, ['class' => 'form-control']) }}
+</div>
+
+
+{{-- seo meta  --}}
+<div class="form-group">
+    {{ Form::label('meta_title', 'Meta Title') }}
+    {{ Form::text('meta_title', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('meta_keyword', 'Meta Keywords') }}
+    {{ Form::text('meta_keyword', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('meta_description', 'Meta Description') }}
+    {{ Form::text('meta_description', null, ['class' => 'form-control']) }}
 </div>

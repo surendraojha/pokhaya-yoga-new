@@ -2,7 +2,7 @@
 
 @section('content')
     @push('seo-meta')
-        <x-seo-meta :title="$seoMeta->meta_title" :description="$seoMeta->meta_des" :keywords="$seoMeta->meta_keyword" />
+        <x-seo-meta :title="$soundHealing->meta_title" :description="$soundHealing->meta_keyword" :keywords="$soundHealing->meta_description" />
     @endpush
 
     @push('page-css')
@@ -145,7 +145,7 @@
         <div class="container">
             <h2 class="section-title">Upcoming Sessions</h2>
             <div class="schedule-grid">
-                
+
                 @foreach ($soundHealingSessions as $value)
                     <div class="schedule-card" data-time="morning">
                         <div class="schedule-header">
@@ -176,48 +176,22 @@
                     <div class="col-12 col-sm-12 col-md-1 col-lg-1"></div>
                     <div class="col-12 col-sm-12 col-md-10 col-lg-10">
                         <h4>Frequently Asked Questions</h4>
+
                         <div class="accordion-container">
-                            <div class="set">
-                                <a href="javascript:void(0)">
-                                    What is sound healing?
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="content" style="display: none;">
-                                    <p>Sound healing is a therapeutic practice that uses sound vibrations from instruments
-                                        like crystal bowls, gongs, and chimes to promote physical, mental, and emotional
-                                        well-being.</p>
-                                </div>
-                            </div>
-                            <div class="set">
-                                <a href="javascript:void(0)">
-                                    Do I need prior experience?
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="content" style="display: none;">
-                                    <p>No prior experience is needed. Our sessions are open to all levels and backgrounds.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="set">
-                                <a href="javascript:void(0)">
-                                    What should I bring?
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="content" style="display: none;">
-                                    <p>We recommend comfortable clothing, a water bottle, and an open mind. All props and
-                                        equipment are provided.</p>
-                                </div>
-                            </div>
-                            <div class="set">
-                                <a href="javascript:void(0)">
-                                    How long is each session?
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="content" style="display: none;">
-                                    <p>Sessions typically run 75 minutes, with extended workshop options available on
-                                        weekends.</p>
-                                </div>
-                            </div>
+                            @foreach ($faqs as $faqGroup)
+                                @foreach ($faqGroup->faq_content as $faq)
+                                    <div class="set">
+                                        <a href="javascript:void(0)">
+                                            {{ $faq['question'] }}
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        <div class="content" style="display: none;">
+                                            <p>{!! $faq['answer'] !!}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-1 col-lg-1"></div>

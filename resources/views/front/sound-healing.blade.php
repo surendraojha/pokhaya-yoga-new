@@ -71,7 +71,7 @@
                             @endif
                         </ul>
                         <p>{{ Str::limit(strip_tags($item->content), 200) }}</p>
-                        <a href="{{ route('front.sound-healing.show', $item->id) }}" class="btn btn-view">
+                        <a href="{{ route('front.sound-healing.show', $item->slug) }}" class="btn btn-view">
                             Load More <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>

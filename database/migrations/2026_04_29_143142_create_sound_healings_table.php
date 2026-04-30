@@ -40,6 +40,7 @@ return new class extends Migration
 
             $table->string('background_image')->nullable();
 
+
             $table->timestamps();
         });
     }

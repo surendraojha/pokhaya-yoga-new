@@ -76,6 +76,8 @@ class FrontController extends Controller
         //     ];
         // });
 
+
+
         $data = [
             'sliders' => Slider::all(),
             'welcome' => Welcome::first(),
@@ -92,7 +94,7 @@ class FrontController extends Controller
             'feeCategory' => FeeCategory::orderBy('created_at', 'asc')->with('feeList')->get(),
             'seoMeta' => SeoMeta::where('name', 'index')->first(),
             'announcements' => Announcement::orderBy('id', 'desc')->get(),
-            'faqs' => Faq::where('page_slug', 'index')->get(),
+            'faqs' => Faq::where('page_slug', 'index')->limit(5)->get(),
             'quotes' => Quote::all(),
             'offers' => Offer::where('is_active', true)->get(),
             'communitySupport' => CommunitySupport::first(),
@@ -506,14 +508,17 @@ class FrontController extends Controller
         $banner = Banner::first();
         $seoMeta = SeoMeta::first();
         $soundHealing = \App\Models\SoundHealing::with('teacher')
-            ->where('id', $id)
+            ->where('slug', $id)
             ->firstOrfail();
 
         $soundHealingSessions = \App\Models\SoundHealingSession::with('soundHealing')
-            ->where('sound_healing_id', $id)
+            ->where('sound_healing_id', $soundHealing->id)
             ->get();
 
-        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing','soundHealingSessions'));
+        $faqs = Faq::where('page_slug', 'sound-healing-course')->get();
+
+
+        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing', 'soundHealingSessions','faqs'));
     }
 
     public function yogaClass(string $slug)

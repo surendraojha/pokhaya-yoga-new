@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SoundHealing;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use App\Models\OurTeam;
 
@@ -42,6 +43,8 @@ class SoundHealingController extends Controller
             'content' => 'required',
             'location' => 'required',
             'teacher_id' => 'required|integer',
+            'slug'       => 'nullable|string|unique:sound_healings,slug',
+
         ]);
 
         $information = new SoundHealing;
@@ -68,6 +71,9 @@ class SoundHealingController extends Controller
         }
 
         $information->title                  = $request->title;
+        $information->slug                    = $request->slug
+            ? Str::slug($request->slug)
+            : $this->generateUniqueSlug($request->title);
         $information->location               = $request->location;
         $information->tripe_room             = $request->tripe_room;
         $information->shared_room            = $request->shared_room;
@@ -80,6 +86,11 @@ class SoundHealingController extends Controller
         $information->student_taught         = $request->student_taught;
         $information->experience_year        = $request->experience_year;
         $information->workshop_lead          = $request->workshop_lead;
+
+
+        $information->meta_title        = $request->meta_title;
+        $information->meta_description          = $request->meta_description;
+        $information->meta_keyword          = $request->meta_keyword;
         $information->save();
 
         return redirect('admin/sound-healing')->with('msg', 'Sound Healing Added');
@@ -114,6 +125,8 @@ class SoundHealingController extends Controller
             'content'    => 'required',
             'location'   => 'required',
             'teacher_id' => 'required|integer',
+            'slug'       => 'nullable|string|unique:sound_healings,slug,' . $id,
+
         ]);
 
         $information = SoundHealing::findOrFail($id);
@@ -145,6 +158,7 @@ class SoundHealingController extends Controller
         }
 
         $information->title                   = $request->title;
+        $information->slug                    = $request->slug? Str::slug($request->slug): $information->slug;
         $information->location                = $request->location;
         $information->tripe_room              = $request->tripe_room;
         $information->shared_room             = $request->shared_room;
@@ -157,6 +171,11 @@ class SoundHealingController extends Controller
         $information->student_taught          = $request->student_taught;
         $information->experience_year         = $request->experience_year;
         $information->workshop_lead           = $request->workshop_lead;
+
+        $information->meta_title        = $request->meta_title;
+        $information->meta_description          = $request->meta_description;
+        $information->meta_keyword          = $request->meta_keyword;
+
         $information->save();
 
         Cache::forget('sound_healing_' . $information->id);
@@ -182,5 +201,24 @@ class SoundHealingController extends Controller
         $information->delete();
 
         return redirect('admin/sound-healing')->with('msg', 'Sound Healing Deleted');
+    }
+
+
+    private function generateUniqueSlug(string $title, int $excludeId = null): string
+    {
+
+        $baseSlug = Str::slug($title);
+        $slug     = $baseSlug;
+        $counter  = 1;
+
+        while (
+            SoundHealing::where('slug', $slug)
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+
+        return $slug;
     }
 }
