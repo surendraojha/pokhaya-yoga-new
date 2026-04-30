@@ -505,7 +505,6 @@ class FrontController extends Controller
 
 
 
-        $banner = Banner::first();
         $seoMeta = SeoMeta::first();
         $soundHealing = \App\Models\SoundHealing::with('teacher')
             ->where('slug', $id)
@@ -518,7 +517,7 @@ class FrontController extends Controller
         $faqs = Faq::where('page_slug', 'sound-healing-course')->get();
 
 
-        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing', 'soundHealingSessions','faqs'));
+        return view('front.sound-healing-detail', compact('seoMeta', 'soundHealing', 'soundHealingSessions', 'faqs'));
     }
 
     public function yogaClass(string $slug)

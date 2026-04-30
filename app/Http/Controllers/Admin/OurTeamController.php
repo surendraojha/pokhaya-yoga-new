@@ -81,6 +81,11 @@ class OurTeamController extends Controller
         $information->meta_title = $request->meta_title;
         $information->meta_keyword = $request->meta_keyword;
         $information->meta_des = $request->meta_des;
+
+        $information->instagram = $request->instagram;
+        $information->facebook  = $request->facebook;
+        $information->youtube   = $request->youtube;
+        $information->whatsapp  = $request->whatsapp;
         $information->save();
 
         return redirect('admin/our-team')->with('msg', 'Information Added');
@@ -182,6 +187,10 @@ class OurTeamController extends Controller
         $information->meta_keyword = $request->meta_keyword;
         $information->meta_des = $request->meta_des;
 
+        $information->instagram = $request->instagram;
+        $information->facebook  = $request->facebook;
+        $information->youtube   = $request->youtube;
+        $information->whatsapp  = $request->whatsapp;
         $information->save();
 
         return redirect('admin/our-team')->with('msg', 'Information Updated');
