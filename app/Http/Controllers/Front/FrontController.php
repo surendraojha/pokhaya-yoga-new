@@ -488,9 +488,33 @@ class FrontController extends Controller
         return view('front.blog-user', compact('blogs', 'blogUser'));
     }
 
+    public function soundHealing()
+    {
+        $banner = Banner::first();
+        $seoMeta = SeoMeta::first();
+        $soundHealings = \App\Models\SoundHealing::with('teacher')->paginate(5);
+
+        return view('front.sound-healing', compact('banner', 'seoMeta', 'soundHealings'));
+    }
+
+
+    public function soundHealingDetail($id)
+    {
+
+
+
+        $banner = Banner::first();
+        $seoMeta = SeoMeta::first();
+        $soundHealing = \App\Models\SoundHealing::with('teacher')
+            ->where('id', $id)
+            ->firstOrfail();
+
+        return view('front.sound-healing-detail', compact('banner', 'seoMeta', 'soundHealing'));
+    }
+
     public function yogaClass(string $slug)
     {
-        $yogaClassCacheKey = 'yoga_class_info_'.$slug;
+        $yogaClassCacheKey = 'yoga_class_info_' . $slug;
         $cacheDuration = 120;
 
         // $renderedView = Cache::remember($yogaClassCacheKey, $cacheDuration, function () use ($slug) {

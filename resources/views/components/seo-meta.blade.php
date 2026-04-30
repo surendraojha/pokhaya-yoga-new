@@ -10,3 +10,9 @@
  @if ($description)
      <meta name="description" content="{{ $description }}">
  @endif
+
+ <meta property="og:url" content="{{ url()->current() }}">
+
+ <link rel="canonical" href="{{ url()->current() }}" />
+
+ <meta property="og:type" content="Pokhara Yoga School">

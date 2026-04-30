@@ -2,8 +2,11 @@
 
 
 @section('content')
+
+@push('seo-meta')
 <x-seo-meta :title="$seoMeta->meta_title" :description="$seoMeta->meta_des" :keywords="$seoMeta->meta_keyword" />
 
+    @endpush
 @push('page-css')
     <style>
         .print-tab .print-tab-content>div {

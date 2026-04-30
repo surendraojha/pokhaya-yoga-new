@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="Oz-mSFiSV1mePMCUtC3CtHSRN177F0hZpB-zWTZZ9qo">
+    <meta name="baidu-site-verification" content="codeva-X8Yyq0xwxG" />
+    <meta name="yandex-verification" content="1cca56021b243027" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     @stack('seo-meta')
-    <link rel="icon" href="{{asset('favicon-small.png')}}?v=20250730" type="image/png" hreflang="en">
+    <link rel="icon" href="{{ asset('favicon-small.png') }}?v=20250730" type="image/png" hreflang="en">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -92,12 +100,12 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark">
                                             @foreach ($yogaClass as $class)
-                                            <li>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('yoga-class.single-page', $class->slug) }}">
-                                                    {{ $class->title }}
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('yoga-class.single-page', $class->slug) }}">
+                                                        {{ $class->title }}
+                                                    </a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -112,16 +120,17 @@
 
                                     <li class="nav-item">
                                         @if (auth('customer')->check())
-                                        <a class="nav-link"
-                                            href="{{ route('customer.booking.index') }}">Dashboard</a>
+                                            <a class="nav-link"
+                                                href="{{ route('customer.booking.index') }}">Dashboard</a>
                                         @else
-                                        <a class="nav-link" href="{{ route('customer.register') }}">Join Us</a>
+                                            <a class="nav-link" href="{{ route('customer.register') }}">Join Us</a>
                                         @endif
                                     </li>
 
                                     <li class="nav-item">
                                         <a class="nav-link" target="_blank"
-                                            href="https://www.google.com/search?sca_esv=0f7b0b670255fb6d&hl=en-NP&gl=np&sxsrf=ANbL-n4a8Ge5o01obRoR85u93Fu_MRDejA:1776477804323&q=Pokhara+Yoga+School+and+Retreat+Center+%E2%80%93+Yoga+Teacher+Training+in+Nepal,+Pokhara+Yoga+School+Lake+Side+Road+Sedi+hight,+Pokhara+00977&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQ1h9G5MxW9Q58Y-4lnlZJ60T-JRGDFKYOVaObwTAT6IP2CMcQf1XkYrVg1-BhhFNbyJtJz8rCn61WIFB7hUoeQSqDFge-49PXzDJcmZ8lHJ7NppsdFWFsG-qR2RnrgXZ5KOpLVf7oWaIIT2g6e0COMqeXbgSzjhqcjokDzexm1gT58cGA%3D%3D&sa=X&ved=2ahUKEwjukunDp_aTAxWRHBAIHTBdFf4QrrQLegQIIRAA&biw=1536&bih=730&dpr=1.25">Google Reviews</a>
+                                            href="https://www.google.com/search?sca_esv=0f7b0b670255fb6d&hl=en-NP&gl=np&sxsrf=ANbL-n4a8Ge5o01obRoR85u93Fu_MRDejA:1776477804323&q=Pokhara+Yoga+School+and+Retreat+Center+%E2%80%93+Yoga+Teacher+Training+in+Nepal,+Pokhara+Yoga+School+Lake+Side+Road+Sedi+hight,+Pokhara+00977&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOQ1h9G5MxW9Q58Y-4lnlZJ60T-JRGDFKYOVaObwTAT6IP2CMcQf1XkYrVg1-BhhFNbyJtJz8rCn61WIFB7hUoeQSqDFge-49PXzDJcmZ8lHJ7NppsdFWFsG-qR2RnrgXZ5KOpLVf7oWaIIT2g6e0COMqeXbgSzjhqcjokDzexm1gT58cGA%3D%3D&sa=X&ved=2ahUKEwjukunDp_aTAxWRHBAIHTBdFf4QrrQLegQIIRAA&biw=1536&bih=730&dpr=1.25">Google
+                                            Reviews</a>
 
                                     </li>
 
@@ -156,15 +165,15 @@
                     <ul>
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <li>
-                            <a href="#" data-bs-toggle="collapse" data-bs-target="#mobTrain">Teacher Training <i
-                                    class="fa fa-angle-down"></i></a>
+                            <a href="#" data-bs-toggle="collapse" data-bs-target="#mobTrain">Teacher Training
+                                <i class="fa fa-angle-down"></i></a>
                             <div class="collapse" id="mobTrain">
                                 <div class="card card-body">
                                     <ul>
                                         @foreach ($yogaClass as $class)
-                                        <li><a
-                                                href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
-                                        </li>
+                                            <li><a
+                                                    href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -174,9 +183,9 @@
                         <li><a href="{{ url('blog') }}">Blog</a></li>
                         <li>
                             @if (auth('customer')->check())
-                            <a href="{{ route('customer.booking.index') }}">Dashboard</a>
+                                <a href="{{ route('customer.booking.index') }}">Dashboard</a>
                             @else
-                            <a href="{{ route('customer.register') }}">Join Us</a>
+                                <a href="{{ route('customer.register') }}">Join Us</a>
                             @endif
                         </li>
                     </ul>
@@ -206,7 +215,7 @@
                             <li><a href="{{ route('front.faq') }}">FAQs</a> </li>
                             <li><a href="{{ route('front.photo-list') }}">Gallery</a> </li>
                             <li><a href="{{ route('front.teacher') }}">Teachers</a> </li>
-                            <li><a href="{{ route('front.testimonial')}}">Testimonials</a> </li>
+                            <li><a href="{{ route('front.testimonial') }}">Testimonials</a> </li>
                             <li><a href="{{ route('front.contact') }}">Contact Us</a> </li>
                         </ul>
                     </div>
@@ -215,7 +224,9 @@
 
                         <ul>
                             @foreach ($yogaClass as $class)
-                            <li><a href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a></li>
+                                <li><a
+                                        href="{{ route('yoga-class.single-page', $class->slug) }}">{{ $class->title }}</a>
+                                </li>
                             @endforeach
 
                         </ul>
@@ -434,17 +445,17 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if(session('success'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: 'success',
-                title: @json(session('title')),
-                text: @json(session('success')),
-                confirmButtonColor: '#28a745'
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: @json(session('title')),
+                    text: @json(session('success')),
+                    confirmButtonColor: '#28a745'
+                });
             });
-        });
-    </script>
+        </script>
     @endif
 </body>
 

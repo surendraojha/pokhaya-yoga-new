@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\SeoMetaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SoundHealingController;
 use App\Http\Controllers\Admin\TeamCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\VideoTestimonialController;
@@ -208,6 +209,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Landing outcome
     Route::resource('outcome', LandingOutcomeController::class);
 
+
+    Route::resource('sound-healing', SoundHealingController::class);
+
+
     // Key points
     Route::resource('keypoints', KeyPointsController::class);
 
@@ -225,6 +230,10 @@ Route::get('thank-you', [FrontController::class, 'thankYou'])->name('thankyou');
 Route::get('/load-gallery', [FrontController::class, 'loadGallery'])->name('load-gallery');
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/sound-healing', [FrontController::class, 'soundHealing'])->name('front.sound-healing');
+Route::get('/sound-healing-detail/{id}', [FrontController::class, 'soundHealingDetail'])->name('front.sound-healing.show');
+
+
 Route::get('/instagram', [FrontController::class, 'instagramFeed'])->name('front.instagram');
 Route::get('/offer-list', [FrontController::class, 'offerList'])->name('front.offer-list');
 Route::get('/offer/{id}', [FrontController::class, 'offerDetail'])->name('front.offer-detail');

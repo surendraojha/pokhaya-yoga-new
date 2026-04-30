@@ -269,12 +269,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('welcome.index') }}" class="nav-link {{ 'admin/welcome' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('welcome.index') }}"
+                                        class="nav-link {{ 'admin/welcome' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Welcome</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{ route('offer.index') }}"
                                         class="nav-link {{ 'admin/offer' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
@@ -331,7 +332,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('accommodation-and-foods.index') }}" class="nav-link {{ 'admin/accommodation-and-foods' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('accommodation-and-foods.index') }}"
+                                        class="nav-link {{ 'admin/accommodation-and-foods' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Accommodation and Food</p>
                                     </a>
@@ -606,12 +608,19 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('sound-healing.index') }}"
+                                class="nav-link {{ 'admin/yoga-certificate' == request()->path() ? 'bg-white' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sound Healing </p>
+                            </a>
+                        </li>
 
-                              <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('yoga-certificate.index') }}"
                                 class="nav-link {{ 'admin/yoga-certificate' == request()->path() ? 'bg-white' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Yoga Certificates    </p>
+                                <p>Yoga Certificates </p>
                             </a>
                         </li>
 
@@ -746,16 +755,16 @@
                     '<td> {{ Form::textarea('day[]', null, ['class' => 'form-control', 'rows' => '5', 'onkeyup' => 'setId(event)']) }} </td>';
                 html +=
                     '<td>{{ Form::textarea('title[]', null, [
-    'class' => 'form-control rate',
-    'rows' => '5',
-    'onkeyup' => 'getTotal(event)',
-]) }}</td>';
+                        'class' => 'form-control rate',
+                        'rows' => '5',
+                        'onkeyup' => 'getTotal(event)',
+                    ]) }}</td>';
                 html +=
                     '<td> {{ Form::textarea('content[]', null, [
-    'class' => 'form-control qty',
-    'id' => 'summernote',
-    'onkeyup' => 'getTotal(event)',
-]) }} </td>';
+                        'class' => 'form-control qty',
+                        'id' => 'summernote',
+                        'onkeyup' => 'getTotal(event)',
+                    ]) }} </td>';
                 html +=
                     '<td> <button type ="button" name="button" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"> </span> x  </button> </td> </tr>';
                 $('#item_table').append(html);
